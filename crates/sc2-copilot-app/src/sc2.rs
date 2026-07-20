@@ -236,45 +236,161 @@ fn player_fingerprint(players: &[RawPlayer]) -> u64 {
 }
 
 fn identify_map(players: &[RawPlayer]) -> Option<&'static str> {
-    let names = players
+    MAP_SIGNATURES
         .iter()
-        .map(|player| player.name.to_lowercase())
-        .collect::<Vec<_>>()
-        .join(" ");
+        .find(|signature| signature.matches(players))
+        .map(|signature| signature.map_id)
+}
 
-    const TOKEN_SIGNATURES: &[(&str, &[&str])] = &[
-        ("oblivion-express", &["train", "列车"]),
-        ("malwarfare", &["aurana", "奥罗娜"]),
-        ("the-vermillion-problem", &["vermillion", "维米利恩"]),
-        (
-            "chain-of-ascension",
-            &["jinara", "吉娜拉", "malash", "马拉什"],
-        ),
-        ("mist-opportunities", &["terrazine", "地嗪"]),
-        ("void-launch", &["shuttle", "穿梭机"]),
-        ("miner-evacuation", &["evacuation", "撤离", "矿工"]),
-        ("dead-of-night", &["infested", "感染"]),
-        ("part-and-parcel", &["balius", "巴利俄斯", "部件"]),
-        ("cradle-of-death", &["artifact truck", "神器卡车"]),
-        ("lock-and-load", &["celestial lock", "天锁"]),
-        ("temple-of-the-past", &["temple", "神庙"]),
-        ("void-rifts", &["void rift", "虚空撕裂者"]),
-        ("rifts-to-korhal", &["korhal", "克哈"]),
-        ("scythe-of-amon", &["scythe", "黑暗杀星"]),
-    ];
-    if let Some((map_id, _)) = TOKEN_SIGNATURES
-        .iter()
-        .find(|(_, tokens)| tokens.iter().any(|token| names.contains(token)))
-    {
-        return Some(*map_id);
-    }
+struct MapSignature {
+    map_id: &'static str,
+    player_count: usize,
+    checks: &'static [(usize, &'static [&'static str])],
+}
 
-    match players.len() {
-        4 => Some("rifts-to-korhal"),
-        11 => Some("lock-and-load"),
-        _ => None,
+impl MapSignature {
+    fn matches(&self, players: &[RawPlayer]) -> bool {
+        players.len() == self.player_count
+            && self.checks.iter().all(|(index, expected_names)| {
+                players.get(*index).is_some_and(|player| {
+                    let actual = normalized_player_name(&player.name);
+                    expected_names
+                        .iter()
+                        .any(|expected| actual == normalized_player_name(expected))
+                })
+            })
     }
 }
+
+fn normalized_player_name(name: &str) -> String {
+    name.trim().to_lowercase().replace('’', "'")
+}
+
+const MAP_SIGNATURES: &[MapSignature] = &[
+    MapSignature {
+        map_id: "chain-of-ascension",
+        player_count: 9,
+        checks: &[
+            (6, &["Ji'nara", "吉娜拉", "吉娜拉"]),
+            (8, &["Slayn Elemental", "斯雷恩元素生物", "史雷因元素兽"]),
+        ],
+    },
+    MapSignature {
+        map_id: "cradle-of-death",
+        player_count: 6,
+        checks: &[
+            (4, &["Special Amon's Forces", "埃蒙的特战队"]),
+            (5, &["Special Amon's Forces", "埃蒙的特战队"]),
+        ],
+    },
+    MapSignature {
+        map_id: "dead-of-night",
+        player_count: 7,
+        checks: &[
+            (4, &["Infested", "感染体", "受到感染"]),
+            (5, &["Sensor Tower", "感应塔", "感應塔"]),
+        ],
+    },
+    MapSignature {
+        map_id: "lock-and-load",
+        player_count: 4,
+        checks: &[
+            (2, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+            (3, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+        ],
+    },
+    MapSignature {
+        map_id: "malwarfare",
+        player_count: 6,
+        checks: &[
+            (
+                2,
+                &["Purifier Hologram", "净化者全息投影", "淨化者全像部隊"],
+            ),
+            (4, &["Megalith", "麦加利斯", "碩像儀"]),
+        ],
+    },
+    MapSignature {
+        map_id: "miner-evacuation",
+        player_count: 11,
+        checks: &[
+            (7, &["Kel-Morian Miners", "凯莫瑞安矿工", "凱爾莫瑞亞礦工"]),
+            (9, &["Kel-Morian Miners", "凯莫瑞安矿工", "凱爾莫瑞亞礦工"]),
+        ],
+    },
+    MapSignature {
+        map_id: "mist-opportunities",
+        player_count: 6,
+        checks: &[
+            (4, &["Terrazine", "地嗪", "態化氫"]),
+            (5, &["Egon Stetmann", "艾贡·斯台特曼", "伊崗‧斯特曼"]),
+        ],
+    },
+    MapSignature {
+        map_id: "oblivion-express",
+        player_count: 7,
+        checks: &[
+            (5, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+            (6, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+        ],
+    },
+    MapSignature {
+        map_id: "part-and-parcel",
+        player_count: 6,
+        checks: &[
+            (4, &["Balius", "巴利俄斯", "巴流斯"]),
+            (5, &["Moebius Train", "莫比斯列车", "莫比斯列車"]),
+        ],
+    },
+    MapSignature {
+        map_id: "rifts-to-korhal",
+        player_count: 6,
+        checks: &[
+            (4, &["Void Shard", "虚空碎片", "虛空晶體"]),
+            (5, &["Pirates", "海盗", "海盜"]),
+        ],
+    },
+    MapSignature {
+        map_id: "scythe-of-amon",
+        player_count: 8,
+        checks: &[
+            (6, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+            (7, &["Evacuees", "待救者", "待撤離人員"]),
+        ],
+    },
+    MapSignature {
+        map_id: "temple-of-the-past",
+        player_count: 9,
+        checks: &[(6, &["Temple", "神庙", "神殿"]), (8, &["Rocks", "岩石"])],
+    },
+    MapSignature {
+        map_id: "the-vermillion-problem",
+        player_count: 8,
+        checks: &[
+            (6, &["Molten Salamander", "熔岩蜥蜴", "熔岩巨蜥"]),
+            (7, &["Civilians", "平民"]),
+        ],
+    },
+    MapSignature {
+        map_id: "void-launch",
+        player_count: 7,
+        checks: &[
+            (5, &["Warp Conduit", "时空航道", "躍傳中繼站"]),
+            (6, &["Scientific Research Team", "科研队伍", "科學研發隊"]),
+        ],
+    },
+    MapSignature {
+        map_id: "void-rifts",
+        player_count: 6,
+        checks: &[
+            (4, &["Amon's Forces", "埃蒙的部队", "亞蒙的軍隊"]),
+            (
+                5,
+                &["Sgt. Hammer's Forces", "重锤军士的部队", "榔頭中士的部隊"],
+            ),
+        ],
+    },
+];
 
 #[derive(Debug, Deserialize)]
 struct RawGame {

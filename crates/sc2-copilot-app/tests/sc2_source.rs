@@ -33,7 +33,7 @@ fn normalizes_menu_and_in_game_payloads_into_stable_sessions() {
     };
     assert_eq!(map_id.as_deref(), Some("oblivion-express"));
     assert_eq!(game_time_milliseconds, 42_500);
-    assert_eq!(player_count, 9);
+    assert_eq!(player_count, 7);
 
     let later = normalizer
         .normalize(GAME_LATER, IN_GAME_UI)
@@ -85,6 +85,65 @@ fn time_reset_near_game_start_creates_a_new_session_without_a_menu_sample() {
         panic!("expected in-game observations");
     };
     assert_ne!(reset, first);
+}
+
+#[test]
+fn identifies_all_fifteen_maps_from_positional_player_signatures() {
+    let cases = [
+        (
+            "chain-of-ascension",
+            9,
+            [(6, "吉娜拉"), (8, "斯雷恩元素生物")],
+        ),
+        (
+            "cradle-of-death",
+            6,
+            [(4, "埃蒙的特战队"), (5, "埃蒙的特战队")],
+        ),
+        ("dead-of-night", 7, [(4, "感染体"), (5, "感应塔")]),
+        ("lock-and-load", 4, [(2, "埃蒙的部队"), (3, "埃蒙的部队")]),
+        ("malwarfare", 6, [(2, "净化者全息投影"), (4, "麦加利斯")]),
+        (
+            "miner-evacuation",
+            11,
+            [(7, "凯莫瑞安矿工"), (9, "凯莫瑞安矿工")],
+        ),
+        ("mist-opportunities", 6, [(4, "地嗪"), (5, "艾贡·斯台特曼")]),
+        (
+            "oblivion-express",
+            7,
+            [(5, "埃蒙的部队"), (6, "埃蒙的部队")],
+        ),
+        ("part-and-parcel", 6, [(4, "巴利俄斯"), (5, "莫比斯列车")]),
+        ("rifts-to-korhal", 6, [(4, "虚空碎片"), (5, "海盗")]),
+        ("scythe-of-amon", 8, [(6, "埃蒙的部队"), (7, "待救者")]),
+        ("temple-of-the-past", 9, [(6, "神庙"), (8, "岩石")]),
+        ("the-vermillion-problem", 8, [(6, "熔岩蜥蜴"), (7, "平民")]),
+        ("void-launch", 7, [(5, "时空航道"), (6, "科研队伍")]),
+        ("void-rifts", 6, [(4, "埃蒙的部队"), (5, "重锤军士的部队")]),
+    ];
+
+    for (map_id, player_count, checks) in cases {
+        let mut players = (0..player_count)
+            .map(|index| serde_json::json!({ "name": format!("占位 {index}") }))
+            .collect::<Vec<_>>();
+        for (index, name) in checks {
+            players[index] = serde_json::json!({ "name": name });
+        }
+        let payload = serde_json::to_vec(&serde_json::json!({
+            "displayTime": 15.0,
+            "players": players
+        }))
+        .expect("test payload should serialize");
+        let mut normalizer = Sc2Normalizer::default();
+        let observation = normalizer
+            .normalize(&payload, IN_GAME_UI)
+            .expect("test payload should normalize");
+        assert!(matches!(
+            observation,
+            Sc2Observation::InGame { map_id: Some(found), .. } if found == map_id
+        ));
+    }
 }
 
 #[test]

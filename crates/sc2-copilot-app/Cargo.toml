@@ -15,6 +15,11 @@ serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
 reqwest.workspace = true
+eframe.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+global-hotkey.workspace = true
+tray-icon.workspace = true
 
 [build-dependencies]
 sc2-copilot-core = { path = "../sc2-copilot-core" }
