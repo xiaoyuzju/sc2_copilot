@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "maps": [
+    {
+      "map_id": "oblivion-express",
+      "display_name": "湮灭快车",
+      "events": [
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-1",
+          "trigger": { "kind": "at_game_time", "milliseconds": 240000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 1 },
+            { "kind": "location", "value": { "mode": "single", "name": "左" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 1 },
+            { "kind": "tech_level", "value": 1 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 1 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-1",
+          "trigger": { "kind": "at_game_time", "milliseconds": 300000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 1 },
+            { "kind": "location", "value": { "mode": "single", "name": "上" } },
+            { "kind": "health", "value": 4200 },
+            { "kind": "unit_count", "unit": "train_car", "value": 7 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 1 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-2",
+          "trigger": { "kind": "at_game_time", "milliseconds": 360000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 2 },
+            { "kind": "location", "value": { "mode": "single", "name": "右" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 2 },
+            { "kind": "tech_level", "value": 2 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 2 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-3",
+          "trigger": { "kind": "at_game_time", "milliseconds": 420000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 3 },
+            { "kind": "location", "value": { "mode": "single", "name": "左" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 1 },
+            { "kind": "tech_level", "value": 1 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 3 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-2",
+          "trigger": { "kind": "at_game_time", "milliseconds": 480000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 2 },
+            { "kind": "location", "value": { "mode": "single", "name": "中" } },
+            { "kind": "health", "value": 10400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 2 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-4",
+          "trigger": { "kind": "at_game_time", "milliseconds": 600000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 4 },
+            { "kind": "location", "value": { "mode": "single", "name": "右" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 3 },
+            { "kind": "tech_level", "value": 3 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 4 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-3",
+          "trigger": { "kind": "at_game_time", "milliseconds": 660000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 3 },
+            { "kind": "location", "value": { "mode": "single", "name": "上" } },
+            { "kind": "health", "value": 12400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 3 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "bonus-train-1",
+          "trigger": { "kind": "at_game_time", "milliseconds": 720000 },
+          "facts": [
+            { "kind": "event_category", "value": "bonus_objective" },
+            { "kind": "wave", "number": 1 },
+            { "kind": "location", "value": { "mode": "single", "name": "下" } },
+            { "kind": "health", "value": 7750 },
+            { "kind": "unit_count", "unit": "train_car", "value": 7 }
+          ],
+          "source_refs": [
+            { "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 4 },
+            { "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 2, "row_index": 1 }
+          ],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-5",
+          "trigger": { "kind": "at_game_time", "milliseconds": 780000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 5 },
+            { "kind": "location", "value": { "mode": "single", "name": "左" } },
+            { "kind": "target", "value": "二矿" },
+            { "kind": "scale_level", "value": 4 },
+            { "kind": "tech_level", "value": 4 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 5 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-4",
+          "trigger": { "kind": "at_game_time", "milliseconds": 840000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 4 },
+            { "kind": "location", "value": { "mode": "all", "names": ["上", "中"] } },
+            { "kind": "health", "value": 7200 },
+            { "kind": "unit_count", "unit": "train_car", "value": 7 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 5 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-6",
+          "trigger": { "kind": "at_game_time", "milliseconds": 960000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 6 },
+            { "kind": "location", "value": { "mode": "single", "name": "左" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 5 },
+            { "kind": "tech_level", "value": 5 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 6 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-5",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1020000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 5 },
+            { "kind": "location", "value": { "mode": "single", "name": "中" } },
+            { "kind": "health", "value": 16400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 6 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-7",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1140000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 7 },
+            { "kind": "location", "value": { "mode": "single", "name": "右" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 6 },
+            { "kind": "tech_level", "value": 6 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 7 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-6",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1200000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 6 },
+            { "kind": "location", "value": { "mode": "all", "names": ["上", "中"] } },
+            { "kind": "health", "value": 18400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 7 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "bonus-train-2",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1260000 },
+          "facts": [
+            { "kind": "event_category", "value": "bonus_objective" },
+            { "kind": "wave", "number": 2 },
+            { "kind": "location", "value": { "mode": "single", "name": "下" } },
+            { "kind": "health", "value": 11500 },
+            { "kind": "unit_count", "unit": "train_car", "value": 7 }
+          ],
+          "source_refs": [
+            { "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 8 },
+            { "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 2, "row_index": 2 }
+          ],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-8",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1320000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 8 },
+            { "kind": "location", "value": { "mode": "single", "name": "左" } },
+            { "kind": "target", "value": "二矿" },
+            { "kind": "scale_level", "value": 7 },
+            { "kind": "tech_level", "value": 7 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 8 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-7",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1380000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 7 },
+            { "kind": "location", "value": { "mode": "single", "name": "中" } },
+            { "kind": "health", "value": 20400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 9 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "attack-wave-9",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1440000 },
+          "facts": [
+            { "kind": "event_category", "value": "attack_wave" },
+            { "kind": "wave", "number": 9 },
+            { "kind": "location", "value": { "mode": "single", "name": "右" } },
+            { "kind": "target", "value": "主矿" },
+            { "kind": "scale_level", "value": 7 },
+            { "kind": "tech_level", "value": 7 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 3, "row_index": 9 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-8-1",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1500000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 8, "branch": 1 },
+            { "kind": "location", "value": { "mode": "any", "options": [{ "name": "上", "weight_percent": 50 }, { "name": "中", "weight_percent": 50 }] } },
+            { "kind": "health", "value": 20400 },
+            { "kind": "unit_count", "unit": "train_car", "value": 13 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 10 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "oblivion-express",
+          "event_id": "train-wave-8-2",
+          "trigger": { "kind": "at_game_time", "milliseconds": 1500000 },
+          "facts": [
+            { "kind": "event_category", "value": "main_objective" },
+            { "kind": "wave", "number": 8, "branch": 2 },
+            { "kind": "location", "value": { "mode": "all", "names": ["上", "中"] } },
+            { "kind": "health", "value": 10200 },
+            { "kind": "unit_count", "unit": "train_car", "value": 7 }
+          ],
+          "source_refs": [{ "source_url": "https://starcraft.huijiwiki.com/wiki/合作任务/湮灭快车", "snapshot_batch": "2026-07-21", "snapshot_path": "data/sources/huiji/2026-07-21/湮灭快车.json", "table_index": 0, "row_index": 11 }],
+          "runtime_support": "automatic"
+        }
+      ]
+    }
+  ]
+}

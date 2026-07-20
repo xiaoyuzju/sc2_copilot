@@ -1,0 +1,9 @@
+[package]
+name = "schedule-data"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+sc2-copilot-core = { path = "../../crates/sc2-copilot-core" }

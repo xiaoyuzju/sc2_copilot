@@ -1,0 +1,16 @@
+[package]
+name = "sc2-copilot-app"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "sc2-copilot"
+path = "src/main.rs"
+
+[dependencies]
+sc2-copilot-core = { path = "../sc2-copilot-core" }
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[build-dependencies]
+sc2-copilot-core = { path = "../sc2-copilot-core" }
