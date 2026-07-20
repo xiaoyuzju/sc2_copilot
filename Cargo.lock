@@ -96,6 +96,7 @@ dependencies = [
  "sc2-copilot-core",
  "serde",
  "serde_json",
+ "thiserror",
 ]
 
 [[package]]

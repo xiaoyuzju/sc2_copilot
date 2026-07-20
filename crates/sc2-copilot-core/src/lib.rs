@@ -5,6 +5,7 @@ mod model;
 
 pub use catalog::{CatalogError, ScheduleCatalog};
 pub use model::{
-    CompiledEvent, EventCategory, Fact, LocationSpec, MissionSchedule, RuntimeSupport, SourceRef,
-    Trigger, UnitKind, WeightedLocation,
+    CompiledEvent, EventCategory, Fact, LocationSpec, MissionSchedule, RuntimeSupport,
+    ScheduleVariant, SourceRef, TableCoverage, Trigger, UnitKind, UnsupportedReason,
+    UnsupportedRow, WeightedLocation,
 };

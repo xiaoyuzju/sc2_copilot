@@ -9,6 +9,7 @@ const SUPPORTED_SCHEMA_VERSION: u32 = 1;
 
 #[derive(Debug)]
 pub struct ScheduleCatalog {
+    snapshot_batch: String,
     maps: Vec<MissionSchedule>,
 }
 
@@ -57,8 +58,13 @@ impl ScheduleCatalog {
         }
 
         Ok(Self {
+            snapshot_batch: document.snapshot_batch,
             maps: document.maps,
         })
+    }
+
+    pub fn snapshot_batch(&self) -> &str {
+        &self.snapshot_batch
     }
 
     pub fn map_count(&self) -> usize {
@@ -70,11 +76,14 @@ impl ScheduleCatalog {
     }
 
     pub fn schedule_for(&self, map_id: &str, variant_id: Option<&str>) -> Option<&MissionSchedule> {
-        if variant_id.is_some() {
-            return None;
-        }
-
-        self.maps.iter().find(|map| map.id() == map_id)
+        self.maps.iter().find(|map| {
+            map.id() == map_id
+                && variant_id.is_none_or(|variant_id| {
+                    map.variants()
+                        .iter()
+                        .any(|variant| variant.id() == variant_id)
+                })
+        })
     }
 }
 
@@ -82,6 +91,8 @@ impl ScheduleCatalog {
 #[serde(deny_unknown_fields)]
 struct CatalogDocument {
     schema_version: u32,
+    #[serde(default)]
+    snapshot_batch: String,
     maps: Vec<MissionSchedule>,
 }
 

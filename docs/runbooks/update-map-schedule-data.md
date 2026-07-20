@@ -2,6 +2,22 @@
 
 本手册用于重复执行“灰机 Wiki 基线抓取 → Keiframe 差异检查 → 发布版本化快照”。它是开发和发布流程，不会由 SC2 Copilot 在玩家机器上运行。
 
+## 当前 Rust 工具流程
+
+完成浏览器 DOM 抓取后，在仓库根目录按顺序执行：
+
+```powershell
+cargo run -p schedule-data -- validate-snapshots data/sources/huiji/2026-07-21
+cargo run -p schedule-data -- compile data/sources/huiji/2026-07-21 data/maps/catalog.json data/maps/coverage-report.json
+cargo run -p schedule-data -- validate data/maps/catalog.json
+git -C reference-checkout rev-parse HEAD
+cargo run -p schedule-data -- diff-keiframe data/maps/catalog.json reference-checkout data/diffs/keiframe-192bdbce-2026-07-21.json
+```
+
+把日期替换为新批次日期，但 Keiframe commit 未经重新决策不得替换。`compile` 只读取灰机 Wiki 快照；`diff-keiframe` 只读取已经生成的目录和固定数据库，且只生成差异报告。它没有写回目录的接口。
+
+每次运行应检查：快照验证统计、编译后的地图/相关表/事件数量、`unclassified_row_count=0`、目录来源引用校验，以及差异报告中的固定 commit。生成的 `catalog.json` 是唯一构建输入；`coverage-report.json` 和 `data/diffs` 仅供审查。
+
 ## 固定输入
 
 - 灰机 Wiki 总览：<https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1>

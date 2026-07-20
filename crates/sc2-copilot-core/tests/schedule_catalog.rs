@@ -1,6 +1,6 @@
 use sc2_copilot_core::{
     CatalogError, EventCategory, Fact, LocationSpec, RuntimeSupport, ScheduleCatalog, SourceRef,
-    Trigger,
+    Trigger, UnsupportedReason,
 };
 
 const CATALOG_JSON: &[u8] = include_bytes!("../../../data/maps/catalog.json");
@@ -8,7 +8,7 @@ const CATALOG_JSON: &[u8] = include_bytes!("../../../data/maps/catalog.json");
 #[test]
 fn catalog_loads_oblivion_express_without_collapsing_simultaneous_events() {
     let catalog = ScheduleCatalog::from_json(CATALOG_JSON).expect("catalog should be valid");
-    assert_eq!(catalog.map_count(), 1);
+    assert_eq!(catalog.map_count(), 15);
 
     let schedule = catalog
         .schedule_for("oblivion-express", None)
@@ -28,8 +28,15 @@ fn catalog_loads_oblivion_express_without_collapsing_simultaneous_events() {
         .map(|event| event.id())
         .collect::<Vec<_>>();
 
-    assert_eq!(events_at_25_minutes, ["train-wave-8-1", "train-wave-8-2"]);
-    let first_event = &schedule.events()[0];
+    assert_eq!(
+        events_at_25_minutes,
+        ["oblivion-express-t0-r10-c1", "oblivion-express-t0-r11-c1"]
+    );
+    let first_event = schedule
+        .events()
+        .iter()
+        .find(|event| event.id() == "oblivion-express-t3-r1-c1")
+        .expect("first attack wave should exist");
     assert_eq!(first_event.map_id(), "oblivion-express");
     assert_eq!(first_event.variant_id(), None);
     assert!(first_event.facts().iter().any(|fact| matches!(
@@ -52,7 +59,11 @@ fn catalog_loads_oblivion_express_without_collapsing_simultaneous_events() {
         }
     )));
 
-    let first_train = &schedule.events()[1];
+    let first_train = schedule
+        .events()
+        .iter()
+        .find(|event| event.id() == "oblivion-express-t0-r1-c1")
+        .expect("first train should exist");
     assert!(
         first_train
             .facts()
@@ -70,7 +81,7 @@ fn catalog_loads_oblivion_express_without_collapsing_simultaneous_events() {
     let branched_train = schedule
         .events()
         .iter()
-        .find(|event| event.id() == "train-wave-8-1")
+        .find(|event| event.id() == "oblivion-express-t0-r10-c1")
         .expect("branched train should exist");
     assert!(branched_train.facts().iter().any(|fact| matches!(
         fact,
@@ -249,4 +260,70 @@ fn catalog_rejects_an_event_owned_by_another_map() {
             && event_map_id == "another-map"
             && event_id == "misplaced-event"
     ));
+}
+
+#[test]
+fn catalog_exposes_variants_stage_triggers_and_source_coverage() {
+    let catalog = ScheduleCatalog::from_json(
+        br#"
+        {
+          "schema_version": 1,
+          "snapshot_batch": "test",
+          "maps": [{
+            "map_id": "night-map",
+            "display_name": "Night Map",
+            "variants": [{ "variant_id": "route-a", "display_name": "Route A" }],
+            "events": [{
+              "map_id": "night-map",
+              "variant_id": "route-a",
+              "event_id": "night-wave",
+              "trigger": {
+                "kind": "at_stage_elapsed",
+                "stage_id": "night-1",
+                "milliseconds": 30000
+              },
+              "facts": [],
+              "source_refs": [{
+                "source_url": "https://example.invalid/night-map",
+                "snapshot_batch": "test",
+                "snapshot_path": "night-map.json",
+                "table_index": 2,
+                "row_index": 1
+              }],
+              "runtime_support": "manual_context"
+            }],
+            "coverage": [{
+              "source_url": "https://example.invalid/night-map",
+              "snapshot_batch": "test",
+              "snapshot_path": "night-map.json",
+              "table_index": 2,
+              "runtime_support": "manual_context",
+              "unsupported_rows": [{
+                "row_index": 3,
+                "reason": "source_expression_unsupported"
+              }]
+            }]
+          }]
+        }
+        "#,
+    )
+    .expect("extended catalog should be valid");
+
+    assert_eq!(catalog.snapshot_batch(), "test");
+    let schedule = catalog
+        .schedule_for("night-map", Some("route-a"))
+        .expect("known variant should resolve");
+    assert_eq!(schedule.variants()[0].id(), "route-a");
+    assert_eq!(schedule.coverage()[0].table_index(), 2);
+    assert_eq!(
+        schedule.coverage()[0].unsupported_rows()[0].reason(),
+        UnsupportedReason::SourceExpressionUnsupported
+    );
+    assert_eq!(
+        schedule.events()[0].trigger(),
+        &Trigger::AtStageElapsed {
+            stage_id: "night-1".to_owned(),
+            milliseconds: 30_000
+        }
+    );
 }

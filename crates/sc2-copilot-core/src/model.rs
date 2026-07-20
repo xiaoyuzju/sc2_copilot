@@ -5,7 +5,11 @@ use serde::Deserialize;
 pub struct MissionSchedule {
     map_id: String,
     display_name: String,
+    #[serde(default)]
+    variants: Vec<ScheduleVariant>,
     events: Vec<CompiledEvent>,
+    #[serde(default)]
+    coverage: Vec<TableCoverage>,
 }
 
 impl MissionSchedule {
@@ -19,6 +23,31 @@ impl MissionSchedule {
 
     pub fn events(&self) -> &[CompiledEvent] {
         &self.events
+    }
+
+    pub fn variants(&self) -> &[ScheduleVariant] {
+        &self.variants
+    }
+
+    pub fn coverage(&self) -> &[TableCoverage] {
+        &self.coverage
+    }
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ScheduleVariant {
+    variant_id: String,
+    display_name: String,
+}
+
+impl ScheduleVariant {
+    pub fn id(&self) -> &str {
+        &self.variant_id
+    }
+
+    pub fn display_name(&self) -> &str {
+        &self.display_name
     }
 }
 
@@ -68,7 +97,21 @@ impl CompiledEvent {
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Trigger {
-    AtGameTime { milliseconds: u64 },
+    AtGameTime {
+        milliseconds: u64,
+    },
+    AtGameTimeWindow {
+        earliest_milliseconds: u64,
+        latest_milliseconds: u64,
+    },
+    AtStageElapsed {
+        stage_id: String,
+        milliseconds: u64,
+    },
+    AtStageRemaining {
+        stage_id: String,
+        milliseconds: u64,
+    },
 }
 
 #[derive(Debug, Deserialize)]
@@ -148,4 +191,70 @@ pub enum RuntimeSupport {
     Automatic,
     ManualContext,
     Unsupported,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct TableCoverage {
+    source_url: String,
+    snapshot_batch: String,
+    snapshot_path: String,
+    table_index: usize,
+    runtime_support: RuntimeSupport,
+    #[serde(default)]
+    unsupported_rows: Vec<UnsupportedRow>,
+}
+
+impl TableCoverage {
+    pub fn source_url(&self) -> &str {
+        &self.source_url
+    }
+
+    pub fn snapshot_batch(&self) -> &str {
+        &self.snapshot_batch
+    }
+
+    pub fn snapshot_path(&self) -> &str {
+        &self.snapshot_path
+    }
+
+    pub fn table_index(&self) -> usize {
+        self.table_index
+    }
+
+    pub fn runtime_support(&self) -> RuntimeSupport {
+        self.runtime_support
+    }
+
+    pub fn unsupported_rows(&self) -> &[UnsupportedRow] {
+        &self.unsupported_rows
+    }
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct UnsupportedRow {
+    row_index: usize,
+    reason: UnsupportedReason,
+}
+
+impl UnsupportedRow {
+    pub fn row_index(&self) -> usize {
+        self.row_index
+    }
+
+    pub fn reason(&self) -> UnsupportedReason {
+        self.reason
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum UnsupportedReason {
+    AmbiguousClock,
+    ConditionUnavailable,
+    DuplicateSummary,
+    SourceExpressionUnsupported,
+    SupportingTableNoIndependentTrigger,
+    VisualStateRequired,
 }

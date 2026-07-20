@@ -1,12 +1,78 @@
 use std::{collections::HashMap, env, fs, path::Path};
 
 use sc2_copilot_core::ScheduleCatalog;
+use schedule_data::{compile_snapshot_batch, diff_keiframe, validate_snapshot_batch};
 use serde::Deserialize;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let path = env::args_os()
-        .nth(1)
-        .ok_or("usage: schedule-data <catalog.json>")?;
+    let mut args = env::args_os().skip(1);
+    let command = args.next().ok_or(
+        "usage: schedule-data <validate|validate-snapshots|compile|diff-keiframe> <arguments...>",
+    )?;
+
+    if command == "validate-snapshots" {
+        let batch_dir = args
+            .next()
+            .ok_or("usage: schedule-data validate-snapshots <batch-dir>")?;
+        let stats = validate_snapshot_batch(Path::new(&batch_dir))?;
+        println!(
+            "validated {} maps, {} tables, {} rows and {} merged cells",
+            stats.map_count, stats.table_count, stats.row_count, stats.merged_cell_count
+        );
+        return Ok(());
+    }
+
+    if command == "compile" {
+        let batch_dir = args
+            .next()
+            .ok_or("usage: schedule-data compile <batch-dir> <catalog.json> <coverage.json>")?;
+        let catalog_path = args
+            .next()
+            .ok_or("usage: schedule-data compile <batch-dir> <catalog.json> <coverage.json>")?;
+        let coverage_path = args
+            .next()
+            .ok_or("usage: schedule-data compile <batch-dir> <catalog.json> <coverage.json>")?;
+        let output = compile_snapshot_batch(Path::new(&batch_dir))?;
+        fs::write(&catalog_path, output.catalog_json)?;
+        fs::write(&coverage_path, output.coverage_json)?;
+        println!(
+            "compiled {} events from {} related tables across {} maps",
+            output.report.event_count, output.report.relevant_table_count, output.report.map_count
+        );
+        return Ok(());
+    }
+
+    if command == "diff-keiframe" {
+        let catalog_path = args.next().ok_or(
+            "usage: schedule-data diff-keiframe <catalog.json> <keiframe-repo> <report.json>",
+        )?;
+        let keiframe_repo = args.next().ok_or(
+            "usage: schedule-data diff-keiframe <catalog.json> <keiframe-repo> <report.json>",
+        )?;
+        let report_path = args.next().ok_or(
+            "usage: schedule-data diff-keiframe <catalog.json> <keiframe-repo> <report.json>",
+        )?;
+        let bytes = fs::read(&catalog_path)?;
+        let catalog = ScheduleCatalog::from_json(&bytes)?;
+        let report = diff_keiframe(&catalog, Path::new(&keiframe_repo))?;
+        if let Some(parent) = Path::new(&report_path).parent() {
+            fs::create_dir_all(parent)?;
+        }
+        fs::write(&report_path, serde_json::to_vec_pretty(&report)?)?;
+        println!(
+            "compared {} Keiframe configurations at {}",
+            report.configs.len(),
+            report.reference_commit
+        );
+        return Ok(());
+    }
+
+    let path = if command == "validate" {
+        args.next()
+            .ok_or("usage: schedule-data validate <catalog.json>")?
+    } else {
+        command
+    };
     let bytes = fs::read(&path)?;
     let catalog = ScheduleCatalog::from_json(&bytes)?;
     let catalog_path = fs::canonicalize(&path)?;
