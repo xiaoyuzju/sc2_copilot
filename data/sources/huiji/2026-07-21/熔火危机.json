@@ -1,0 +1,1949 @@
+{
+  "index_name": "熔火危机",
+  "page_last_modified": "",
+  "retrieved_at": "2026-07-20T17:06:16.749Z",
+  "schema_version": 1,
+  "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E7%86%94%E7%81%AB%E5%8D%B1%E6%9C%BA",
+  "tables": [
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "岩浆波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "岩浆持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "岩浆爆发间隔"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "氙气水晶位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "氙气水晶数量"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "卫队规模等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "卫队科技等级"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "90秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "45秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(90±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "a"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "b"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(210±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "c+d"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2+2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "e"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "f"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "b+e+f"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(210±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "g+h+i"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(210±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "g+h+j"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "k"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "l"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "k+l+m"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(210±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "n+o+p"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1+"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "q+r"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "l+s"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1+1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(150±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "r"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(120±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "j+q"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9+n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(120±15)秒"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "j+q"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ]
+      ],
+      "table_index": 0
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "当前燃烧等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "效果变化"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单次伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "伤害频率"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "无燃烧debuff"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "添加一级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 4,
+            "text": "每0.25秒一次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "一级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "升至二级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "二级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "升至三级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "25"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "三级燃烧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "刷新持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "25"
+          }
+        ]
+      ],
+      "table_index": 1
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 3,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开熔岩巨蜥数据"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单位名称"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "熔岩巨蜥"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "类型"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "重甲-生物单位-重型单位-英雄单位-地图Boss"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "生命值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6000"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "护甲"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "火焰呼吸"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "见下注"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "见下注"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "见下注"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2秒"
+          }
+        ]
+      ],
+      "table_index": 2
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "刷新时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "刷新位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "进攻目标"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "进攻方式"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空运"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地/空运"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "12:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地/空运"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "12:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地/空运"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地/空运"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "18:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1/玩家2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "21:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "24:00±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8+n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(27:00+2*n:00)±1.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "陆地"
+          }
+        ]
+      ],
+      "table_index": 3
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "概率"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "第一顺位"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "第二顺位"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "第三顺位"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "第四顺位"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "50%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "50%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ]
+      ],
+      "table_index": 4
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "进攻波次所在位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "降落点"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1(50%)/4(50%)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3(50%)/4(50%)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1(50%)/2(50%)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1(25%)/3(25%)/2(25%)/4(25%)"
+          }
+        ]
+      ],
+      "table_index": 5
+    },
+    {
+      "caption": "",
+      "classes": [
+        "wikitable",
+        "glow"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "湮灭快车"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空撕裂"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空降临"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "克哈裂痕"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "往日神庙"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "天界封锁"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "升格之链"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "熔火危机"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "机会渺茫"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "营救矿工"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "亡者之夜"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "黑暗杀星"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "净网行动"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "聚铁成兵"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "死亡摇篮"
+          }
+        ]
+      ],
+      "table_index": 6
+    }
+  ],
+  "title": "熔火危机 The Vermillion Problem < 合作任务 | Shiroumomo 于7个月前修改了此页面。"
+}

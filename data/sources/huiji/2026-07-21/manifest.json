@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "source_index_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1",
+  "capture_method": "browser-dom",
+  "capture_started_at": "2026-07-20T17:00:35.288Z",
+  "capture_finished_at": "2026-07-20T17:11:52.384Z",
+  "map_count": 15,
+  "maps": [
+    {
+      "name": "湮灭快车",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%B9%AE%E7%81%AD%E5%BF%AB%E8%BD%A6",
+      "file": "湮灭快车.json",
+      "table_count": 5,
+      "row_count": 43
+    },
+    {
+      "name": "虚空撕裂",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E6%92%95%E8%A3%82",
+      "file": "虚空撕裂.json",
+      "table_count": 6,
+      "row_count": 78
+    },
+    {
+      "name": "虚空降临",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E9%99%8D%E4%B8%B4",
+      "file": "虚空降临.json",
+      "table_count": 5,
+      "row_count": 53
+    },
+    {
+      "name": "克哈裂痕",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%85%8B%E5%93%88%E8%A3%82%E7%97%95",
+      "file": "克哈裂痕.json",
+      "table_count": 6,
+      "row_count": 64
+    },
+    {
+      "name": "往日神庙",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%BE%80%E6%97%A5%E7%A5%9E%E5%BA%99",
+      "file": "往日神庙.json",
+      "table_count": 9,
+      "row_count": 123
+    },
+    {
+      "name": "天界封锁",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%A4%A9%E7%95%8C%E5%B0%81%E9%94%81",
+      "file": "天界封锁.json",
+      "table_count": 5,
+      "row_count": 59
+    },
+    {
+      "name": "升格之链",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%8D%87%E6%A0%BC%E4%B9%8B%E9%93%BE",
+      "file": "升格之链.json",
+      "table_count": 7,
+      "row_count": 75
+    },
+    {
+      "name": "熔火危机",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E7%86%94%E7%81%AB%E5%8D%B1%E6%9C%BA",
+      "file": "熔火危机.json",
+      "table_count": 7,
+      "row_count": 60
+    },
+    {
+      "name": "机会渺茫",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%9C%BA%E4%BC%9A%E6%B8%BA%E8%8C%AB",
+      "file": "机会渺茫.json",
+      "table_count": 13,
+      "row_count": 118
+    },
+    {
+      "name": "营救矿工",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%90%A5%E6%95%91%E7%9F%BF%E5%B7%A5",
+      "file": "营救矿工.json",
+      "table_count": 23,
+      "row_count": 212
+    },
+    {
+      "name": "亡者之夜",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E4%BA%A1%E8%80%85%E4%B9%8B%E5%A4%9C",
+      "file": "亡者之夜.json",
+      "table_count": 20,
+      "row_count": 277
+    },
+    {
+      "name": "黑暗杀星",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E9%BB%91%E6%9A%97%E6%9D%80%E6%98%9F",
+      "file": "黑暗杀星.json",
+      "table_count": 9,
+      "row_count": 97
+    },
+    {
+      "name": "净网行动",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%87%80%E7%BD%91%E8%A1%8C%E5%8A%A8",
+      "file": "净网行动.json",
+      "table_count": 16,
+      "row_count": 139
+    },
+    {
+      "name": "聚铁成兵",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%81%9A%E9%93%81%E6%88%90%E5%85%B5",
+      "file": "聚铁成兵.json",
+      "table_count": 9,
+      "row_count": 141
+    },
+    {
+      "name": "死亡摇篮",
+      "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%AD%BB%E4%BA%A1%E6%91%87%E7%AF%AE",
+      "file": "死亡摇篮.json",
+      "table_count": 9,
+      "row_count": 70
+    }
+  ],
+  "notes": [
+    "页面未提供稳定可读取的最后修改时间；以每页 retrieved_at 作为本次抓取时间。"
+  ]
+}

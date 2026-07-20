@@ -1,0 +1,4657 @@
+{
+  "index_name": "营救矿工",
+  "page_last_modified": "",
+  "retrieved_at": "2026-07-20T17:07:51.327Z",
+  "schema_version": 1,
+  "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%90%A5%E6%95%91%E7%9F%BF%E5%B7%A5",
+  "tables": [
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable",
+        "mw-collapsible",
+        "mw-collapsed",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 2,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开移民飞船数据"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单位名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "移民飞船"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "类型"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "重甲-机械单位-不能运输"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "生命值"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1500"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "护甲"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ]
+      ],
+      "table_index": 0
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "毁船波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "毁船概率"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "毁船位置"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 3,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2/5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船2[1]"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2/5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船6[1]"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1/5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 3,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1/3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1/3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船7"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1/3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船9"
+          }
+        ]
+      ],
+      "table_index": 1
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "预定发射顺序"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3、4、5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6、7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "飞船位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2、5、6飞船随机排序（见下）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4、9飞船随机排序"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          }
+        ]
+      ],
+      "table_index": 2
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "恐慌发射波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3:45"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "12:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "16:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "23:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "27:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "29:00"
+          }
+        ]
+      ],
+      "table_index": 3
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "白点波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技等级"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15:12"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "19:18"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "26:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ]
+      ],
+      "table_index": 4
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable",
+        "mw-collapsible",
+        "mw-collapsed",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 3,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开疾疫传播体数据"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单位名称"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "疾疫传播体"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "类型"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "轻甲-生物单位-灵能单位-英雄单位-地图Boss"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "生命值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5500/1500（见注）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "能量值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "200/200"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "护甲"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "移动速度"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1.95"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "孵化卵/孵化大型卵"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "与疾疫传播体位置相对应的蛋区域"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "丢出9个生命值120的小型卵和2个生命值180的大型卵"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9秒或4秒/9秒(狂暴状态)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "酸液堆"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "半径为4的圆形区域"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10（+1.5 对重型）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "移动速度降低20%"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "寄生弹"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 3,
+            "kind": "td",
+            "row_span": 1,
+            "text": "与疾疫传播体距离最近的玩家的空中单位"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "总伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "90"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10秒"
+          }
+        ]
+      ],
+      "table_index": 5
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "孵化单位"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "易爆感染体"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "概率"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "50%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20%"
+          }
+        ]
+      ],
+      "table_index": 6
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "孵化单位"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "畸变体"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "概率"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "50%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "50%"
+          }
+        ]
+      ],
+      "table_index": 7
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "两根除者血量百分比之和"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "召唤的警戒机器人数量"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "召唤的飓风数量"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "召唤间隔"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "＜90%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "＜70%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "＜50%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.5秒"
+          }
+        ]
+      ],
+      "table_index": 8
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable",
+        "mw-collapsible",
+        "mw-collapsed",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 3,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开根除者数据"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单位名称"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "根除者"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "类型"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "轻甲-机械单位-英雄单位-地图Boss"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "生命值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3500"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "能量值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "护甲"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "移动速度"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "根除者锁定"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "以根除者为圆心半径为7的圆形区域内的玩家单位"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "总伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "510"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "发射飞弹"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "数个半径为1.6的圆形区域"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "95(单一区域)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "瞬发"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3秒（若另一个根除者未被摧毁）7秒（若另一个根除者被摧毁）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "轨道炮"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "多个根除者与目标单位连线的延长线120°夹角最近的玩家单位的直线距离"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "250"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "瞬发"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "若未瞄准玩家单位，每一发磁轨炮之间会有30°夹角"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1.5秒（若另一个根除者未被摧毁）0.5秒（若另一个根除者被摧毁，且该轮磁轨炮没有瞄准玩家单位1秒（若另一个根除者被摧毁，且该轮磁轨炮正瞄准玩家单位）"
+          }
+        ]
+      ],
+      "table_index": 9
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "红点波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "红点位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "进攻路径"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "左(2/3)/右(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家主矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "13:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "中"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "17:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "右(2/3)/左(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "23:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "左(2/3)/右(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "26:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "右(2/3)/左(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "28:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "左(2/3)/右(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "32:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "左(2/3)/右(1/3)"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "玩家分矿"
+          }
+        ]
+      ],
+      "table_index": 10
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 7,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开第一艘撤离飞船通用骚扰波次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的女妖"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "重复次数"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待5秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "7次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待10秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "10次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待10秒"
+          }
+        ]
+      ],
+      "table_index": 11
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 7,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开第二艘撤离飞船通用骚扰波次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的女妖"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "重复次数"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "7次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待10秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "卡车点1(50%)/卡车点2(50%)"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "规模等级2、科技等级2的卡车"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待7秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "7次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待10秒"
+          }
+        ]
+      ],
+      "table_index": 12
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 7,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开第三/四艘撤离飞船通用骚扰波次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的女妖"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "重复次数"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "6次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待7秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "小型混合体*3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 3,
+            "text": "7次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "卡车点1(50%)/卡车点2(50%)"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "规模等级3、科技等级3的卡车(第1/3/5/7次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待7秒"
+          }
+        ]
+      ],
+      "table_index": 13
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 7,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开第五/六艘撤离飞船通用骚扰波次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的女妖"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "重复次数"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 2,
+            "text": "4次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待7秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "小型混合体*3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 7,
+            "text": "5次"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "小型混合体*3(第1次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "卡车点1(50%)/卡车点2(50%)"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "规模等级3、科技等级3的卡车(第2次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "大型混合体*1(第3次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "卡车点1(50%)/卡车点2(50%)"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2辆规模等级3、科技等级3的卡车(第4次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "小型混合体*3+大型混合体*1(第5次重复时刷新)"
+          }
+        ],
+        [
+          {
+            "column_span": 7,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待14秒"
+          }
+        ]
+      ],
+      "table_index": 14
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的女妖"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "毁船区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ]
+      ],
+      "table_index": 15
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发倒计时"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "第二波单位释放倒计时"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:28"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "坑道虫1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:40"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:13"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "坑道虫2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:31"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:03"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "坑道虫3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:17"
+          }
+        ]
+      ],
+      "table_index": 16
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "刷新位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技等级"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "进攻目标"
+          }
+        ],
+        [
+          {
+            "column_span": 4,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:45"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船4"
+          }
+        ],
+        [
+          {
+            "column_span": 4,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:30"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船4"
+          }
+        ],
+        [
+          {
+            "column_span": 4,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:10"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船4"
+          }
+        ],
+        [
+          {
+            "column_span": 4,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:40"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "撤离飞船4"
+          }
+        ]
+      ],
+      "table_index": 17
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体数量"
+          }
+        ],
+        [
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:57"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "自爆人区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10"
+          }
+        ],
+        [
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:42"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "自爆人区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "14"
+          }
+        ],
+        [
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:27"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "自爆人区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "21"
+          }
+        ]
+      ],
+      "table_index": 18
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "刷新位置"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "空投区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的攻城坦克数量"
+          }
+        ],
+        [
+          {
+            "column_span": 3,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:30"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 3,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:20"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 3,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1:05"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 3,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:50"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投生成区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "空投点3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ]
+      ],
+      "table_index": 19
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待41.125秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋1-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待19.25秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋2-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋2-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待0.125秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋2-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待19.25秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋3-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋3-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待0.125秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋3-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋3-4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待19.25秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋4-1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋4-2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "等待0.125秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋4-3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "蛋4-4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "-"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ]
+      ],
+      "table_index": 20
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的人类"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "易爆感染体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "被感染的陆战队员"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "畸变体"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:57"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "16"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:52"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:42"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:37"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:27"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 5,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:22"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "区域1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ]
+      ],
+      "table_index": 21
+    },
+    {
+      "caption": "",
+      "classes": [
+        "wikitable",
+        "glow"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "湮灭快车"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空撕裂"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空降临"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "克哈裂痕"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "往日神庙"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "天界封锁"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "升格之链"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "熔火危机"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "机会渺茫"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "营救矿工"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "亡者之夜"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "黑暗杀星"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "净网行动"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "聚铁成兵"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "死亡摇篮"
+          }
+        ]
+      ],
+      "table_index": 22
+    }
+  ],
+  "title": "营救矿工 Miner Evacuation < 合作任务 | ImbaHerby 于12天前修改了此页面。"
+}

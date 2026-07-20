@@ -1,0 +1,2306 @@
+{
+  "index_name": "升格之链",
+  "page_last_modified": "",
+  "retrieved_at": "2026-07-20T17:05:19.388Z",
+  "schema_version": 1,
+  "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%8D%87%E6%A0%BC%E4%B9%8B%E9%93%BE",
+  "tables": [
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "速度改变波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "吉娜拉前进速度"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "吉娜拉后退速度"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "默认"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.175"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.25"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "12:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.375"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "16:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.9"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.45"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0.5"
+          }
+        ]
+      ],
+      "table_index": 0
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "触发区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "随机混合体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "大型混合体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "小型混合体1"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "小型混合体2"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "卫队规模"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "卫队科技"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉进入红色区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉进入橘红色区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "23:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉进入橙色区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "0"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉进入黄色区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6/2×2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5+n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(38+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": ""
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6/2×2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          }
+        ]
+      ],
+      "table_index": 1
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "概率"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "大型混合体"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "小型混合体1"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "小型混合体2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "11%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体支配者（大绿）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体掠夺者（小黑）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体掠夺者（小黑）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "11%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体支配者（大绿）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体掠夺者（小黑）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "11%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体支配者（大绿）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体巨兽（大红）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体毁灭者（小白）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体毁灭者（小白）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体巨兽（大红）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体毁灭者（小白）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22%"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体巨兽（大红）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "混合体天罚者（空混）"
+          }
+        ]
+      ],
+      "table_index": 2
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开目标"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "13:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "14:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "19:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "9"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "10"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "11"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "21:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "12"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "13"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "23:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "14"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "26:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "26:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "16"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "27:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "17"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "28:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "18"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "29:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "19"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "30:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "20"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "33:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "21"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "33:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "34:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "23"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "35:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "24+4n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(36+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "25+4n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(37+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "26+4n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(39+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "27+4n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(40+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "吉娜拉"
+          }
+        ]
+      ],
+      "table_index": 3
+    },
+    {
+      "caption": "",
+      "classes": [
+        "mw-collapsible",
+        "mw-collapsed",
+        "themed-border",
+        "wikitable",
+        "mw-made-collapsible"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 3,
+            "kind": "th",
+            "row_span": 1,
+            "text": "展开斯雷恩元素生物数据"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "单位名称"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "斯雷恩元素生物"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "类型"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "重甲-生物单位-重型单位-英雄单位-召唤-地图Boss"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "生命值"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3500(奖励1)/6125(奖励2)"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "护甲"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "移动速度"
+          },
+          {
+            "column_span": 2,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 7,
+            "text": "技能"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "技能名称"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "精华吸取[1]"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "准备时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3秒"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "目标区域"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "半径为3的圆形区域"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "每5秒造成50伤害"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "伤害持续时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "直到太阳能茧被消灭或单位死亡"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "其他效果"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "被太阳能茧包裹"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "冷却时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "15秒/7秒(180秒后)(奖励1)//10秒/3秒(180秒后)(奖励2)"
+          }
+        ]
+      ],
+      "table_index": 4
+    },
+    {
+      "caption": "",
+      "classes": [
+        "themed-border",
+        "wikitable"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "波次"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "时间"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "刷新点"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "目标"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "规模"
+          },
+          {
+            "column_span": 1,
+            "kind": "th",
+            "row_span": 1,
+            "text": "科技"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "1"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "左右随机"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "与上一波红点相反"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "3"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "13:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "与上一波红点相反"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "18:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "与上一波红点相反"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "22:00"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "同时两侧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "4"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "27:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "同时两侧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "5/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "33:30"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "同时两侧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "8+n"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "(41+5n):35"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "同时两侧"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "主矿"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "6/2"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "7"
+          }
+        ]
+      ],
+      "table_index": 5
+    },
+    {
+      "caption": "",
+      "classes": [
+        "wikitable",
+        "glow"
+      ],
+      "rows": [
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "湮灭快车"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空撕裂"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "虚空降临"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "克哈裂痕"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "往日神庙"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "天界封锁"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "升格之链"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "熔火危机"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "机会渺茫"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "营救矿工"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "亡者之夜"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "黑暗杀星"
+          }
+        ],
+        [
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "净网行动"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "聚铁成兵"
+          },
+          {
+            "column_span": 1,
+            "kind": "td",
+            "row_span": 1,
+            "text": "死亡摇篮"
+          }
+        ]
+      ],
+      "table_index": 6
+    }
+  ],
+  "title": "升格之链 Chain of Ascension < 合作任务 | ImbaHerby 于4个月前修改了此页面。"
+}
