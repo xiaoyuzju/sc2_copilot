@@ -183,11 +183,8 @@ impl Sc2Normalizer {
     ) -> Result<Sc2Observation, Sc2NormalizeError> {
         let game: RawGame = serde_json::from_slice(game_payload)?;
         let ui: RawUi = serde_json::from_slice(ui_payload)?;
-        let ui_is_in_game = ui
-            .active_screens
-            .iter()
-            .any(|screen| screen.to_ascii_lowercase().contains("game"));
-        if game.players.is_empty() || (!ui_is_in_game && game.display_time.unwrap_or(0.0) <= 0.0) {
+        let ui_is_in_game = ui.active_screens.is_empty();
+        if game.players.is_empty() || !ui_is_in_game {
             self.in_game = false;
             self.current_fingerprint = None;
             self.last_game_time_milliseconds = None;

@@ -1,3 +1,5 @@
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 fn main() {
     if let Err(error) = tracing_subscriber::fmt().with_target(false).try_init() {
         eprintln!("日志初始化失败：{error}");

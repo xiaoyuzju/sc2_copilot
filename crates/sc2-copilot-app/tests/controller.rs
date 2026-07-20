@@ -1,7 +1,8 @@
 use std::{cell::RefCell, rc::Rc};
 
 use sc2_copilot_app::{
-    AlertPlayer, AppController, AppSettings, Sc2Observation, Sc2Poll, SettingsStore,
+    AlertPlayer, AppController, AppSettings, NoopAlertPlayer, Sc2Observation, Sc2Poll,
+    SettingsStore,
 };
 use sc2_copilot_core::{AlertBatch, ScheduleCatalog};
 
@@ -77,6 +78,18 @@ fn settings_store_round_trips_persistent_settings() {
 
     std::fs::remove_file(store.path()).expect("test settings should be removable");
     std::fs::remove_dir(directory).expect("test directory should be removable");
+}
+
+#[test]
+fn noop_player_accepts_a_batch_without_choosing_a_sound_provider() {
+    let mut player = NoopAlertPlayer;
+    let batch = AlertBatch {
+        event_time_milliseconds: 10_000,
+        event_ids: vec!["example".to_owned()],
+    };
+
+    player.play(&batch).expect("no-op delivery should succeed");
+    assert_eq!(player.status(), "未配置（提醒接口已保留）");
 }
 
 fn controller(player: Box<dyn AlertPlayer>) -> AppController {
