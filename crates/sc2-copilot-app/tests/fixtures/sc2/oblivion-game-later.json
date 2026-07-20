@@ -1,0 +1,41 @@
+{
+  "displayTime": 45.25,
+  "players": [
+    {
+      "name": "Fixture Player 1",
+      "type": "user"
+    },
+    {
+      "name": "Fixture Player 2",
+      "type": "user"
+    },
+    {
+      "name": "Fixture Player 3",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 4",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 5",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 6",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 7",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 8",
+      "type": "computer"
+    },
+    {
+      "name": "Fixture Player 9",
+      "type": "computer"
+    }
+  ]
+}
