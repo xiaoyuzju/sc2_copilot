@@ -133,21 +133,10 @@ impl DesktopApp {
             match action {
                 PlatformAction::ShowSettings => self.settings_visible = true,
                 PlatformAction::ToggleInteraction => {
-                    if overlay_interaction_available(
-                        self.controller.connection(),
-                        self.controller.view().session_id.is_some(),
-                    ) {
-                        self.interactive_overlay = !self.interactive_overlay;
-                    }
+                    self.interactive_overlay = !self.interactive_overlay;
                 }
                 PlatformAction::Quit => self.quitting = true,
             }
-        }
-        if !overlay_interaction_available(
-            self.controller.connection(),
-            self.controller.view().session_id.is_some(),
-        ) {
-            self.interactive_overlay = false;
         }
         self.alerts
             .retain(|alert| alert.expires_at > Instant::now());
@@ -228,23 +217,30 @@ impl DesktopApp {
                     },
                 );
             }
-            let interaction_available = overlay_interaction_available(
-                self.controller.connection(),
-                self.controller.view().session_id.is_some(),
-            );
-            if ui
-                .add_enabled(
-                    interaction_available,
-                    egui::Button::new(if self.interactive_overlay {
-                        "恢复覆盖层鼠标穿透"
+            ui.separator();
+            ui.heading("覆盖层");
+            ui.horizontal(|ui| {
+                if self.interactive_overlay {
+                    ui.colored_label(Color32::from_rgb(40, 150, 80), "正在调整 · 可拖动、可缩放");
+                } else {
+                    ui.label("鼠标穿透 · 不可调整");
+                }
+                if ui
+                    .button(if self.interactive_overlay {
+                        "结束调整"
                     } else {
-                        "临时启用覆盖层交互"
-                    }),
-                )
-                .clicked()
-            {
-                self.interactive_overlay = !self.interactive_overlay;
-            }
+                        "调整位置和大小"
+                    })
+                    .clicked()
+                {
+                    self.interactive_overlay = !self.interactive_overlay;
+                }
+            });
+            ui.small(if self.interactive_overlay {
+                "覆盖层已显示预览；拖动标题栏改变位置，拖动窗口边框改变大小，按 Esc 结束。"
+            } else {
+                "无需进入任务即可调整；启用后覆盖层会显示布局预览。"
+            });
 
             ui.separator();
             ui.heading("设置");
@@ -297,7 +293,6 @@ impl DesktopApp {
                     None => {}
                 }
             }
-            ui.small("进入对局并启用交互模式后，可拖动标题栏和窗口边框调整覆盖层位置与大小。");
             if settings != *self.controller.settings() {
                 let update = self.controller.update_settings(settings);
                 self.push_alerts(update.new_alerts);
@@ -464,33 +459,35 @@ impl DesktopApp {
     }
 
     fn show_overlay(&mut self, ui: &mut egui::Ui) {
-        if self.controller.view().session_id.is_none() {
+        let has_session = self.controller.view().session_id.is_some();
+        if !overlay_should_render(has_session, self.interactive_overlay) {
             return;
         }
-        let view = self.controller.view().clone();
-        let map_name = self.selected_map_name().to_owned();
-        let alerts = self
-            .alerts
-            .iter()
-            .map(|alert| alert.card.clone())
-            .collect::<Vec<_>>();
-        let upcoming = view
-            .upcoming_events
-            .iter()
-            .take(6)
-            .map(|event| {
-                (
-                    event.remaining_milliseconds,
-                    event.timing,
-                    self.controller.event_label(&event.event_id),
-                )
-            })
-            .collect::<Vec<_>>();
-        egui::Frame::new()
+        let frame = egui::Frame::new()
             .fill(Color32::from_rgba_unmultiplied(7, 14, 24, 225))
             .corner_radius(10.0)
-            .inner_margin(14.0)
-            .show(ui, |ui| {
+            .inner_margin(14.0);
+        if has_session {
+            let view = self.controller.view().clone();
+            let map_name = self.selected_map_name().to_owned();
+            let alerts = self
+                .alerts
+                .iter()
+                .map(|alert| alert.card.clone())
+                .collect::<Vec<_>>();
+            let upcoming = view
+                .upcoming_events
+                .iter()
+                .take(6)
+                .map(|event| {
+                    (
+                        event.remaining_milliseconds,
+                        event.timing,
+                        self.controller.event_label(&event.event_id),
+                    )
+                })
+                .collect::<Vec<_>>();
+            frame.show(ui, |ui| {
                 overlay_contents(
                     ui,
                     &map_name,
@@ -506,6 +503,16 @@ impl DesktopApp {
                     self.stage_controls(ui);
                 }
             });
+        } else {
+            frame.show(ui, |ui| {
+                ui.heading(RichText::new("覆盖层布局预览").color(Color32::from_rgb(100, 215, 255)));
+                ui.colored_label(Color32::from_rgb(90, 220, 135), "正在调整位置和大小");
+                ui.separator();
+                ui.label("拖动窗口标题栏改变位置");
+                ui.label("拖动窗口边框改变大小");
+                ui.label("按 Esc 结束并恢复鼠标穿透");
+            });
+        }
         if self.interactive_overlay {
             if ui.input(|input| input.key_pressed(egui::Key::Escape)) {
                 self.interactive_overlay = false;
@@ -644,8 +651,8 @@ fn overlay_contents(
     }
 }
 
-fn overlay_interaction_available(connection: ConnectionState, has_session: bool) -> bool {
-    connection == ConnectionState::InGame && has_session
+fn overlay_should_render(has_session: bool, interactive: bool) -> bool {
+    has_session || interactive
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -791,22 +798,13 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        ConnectionState, HotkeyCapture, capture_hotkey, egui, overlay_interaction_available,
-    };
+    use super::{HotkeyCapture, capture_hotkey, egui, overlay_should_render};
 
     #[test]
-    fn overlay_interaction_requires_an_active_game_session() {
-        assert!(overlay_interaction_available(ConnectionState::InGame, true));
-        assert!(!overlay_interaction_available(
-            ConnectionState::InGame,
-            false
-        ));
-        assert!(!overlay_interaction_available(
-            ConnectionState::Disconnected,
-            true
-        ));
-        assert!(!overlay_interaction_available(ConnectionState::Menu, false));
+    fn overlay_adjustment_renders_a_preview_without_an_active_session() {
+        assert!(overlay_should_render(false, true));
+        assert!(overlay_should_render(true, false));
+        assert!(!overlay_should_render(false, false));
     }
 
     #[test]
