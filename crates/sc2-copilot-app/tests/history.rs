@@ -69,8 +69,12 @@ fn session_history_records_decisions_and_alerts_without_poll_spam() {
     assert_eq!(records.len(), 3);
     assert_eq!(records[0]["state"], "in_game");
     assert_eq!(records[0]["detected_map_id"], "temple-of-the-past");
-    assert_eq!(records[0]["selected_variant_id"], serde_json::Value::Null);
-    assert_eq!(records[0]["upcoming_event_ids"], serde_json::json!([]));
+    assert_eq!(records[0]["selected_variant_id"], "layout-b");
+    assert!(
+        records[0]["upcoming_event_ids"]
+            .as_array()
+            .is_some_and(|events| !events.is_empty())
+    );
     assert_eq!(records[1]["selected_variant_id"], "layout-a");
     assert!(
         records[1]["upcoming_event_ids"]

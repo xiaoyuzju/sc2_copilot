@@ -119,6 +119,34 @@ fn controller_applies_manual_mutator_context_only_for_the_current_session() {
     assert!(!controller.event_label(event_id).contains("可造成伤害玩家"));
 }
 
+#[test]
+fn controller_defaults_temple_of_the_past_to_schedule_b_per_session() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+
+    controller.handle_poll(in_game(
+        "temple-session-1",
+        Some("temple-of-the-past"),
+        1_000,
+    ));
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+    assert!(!controller.view().upcoming_events.is_empty());
+
+    controller.select_variant(Some("layout-a".to_owned()));
+    controller.handle_poll(in_game(
+        "temple-session-1",
+        Some("temple-of-the-past"),
+        2_000,
+    ));
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+
+    controller.handle_poll(in_game(
+        "temple-session-2",
+        Some("temple-of-the-past"),
+        1_000,
+    ));
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+}
+
 fn controller(player: Box<dyn AlertPlayer>) -> AppController {
     let catalog = ScheduleCatalog::from_json(CATALOG).expect("embedded catalog should parse");
     AppController::new(catalog, AppSettings::default(), player)

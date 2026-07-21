@@ -8,6 +8,8 @@ use sc2_copilot_core::{
 use crate::{AlertPlayer, AppSettings, Sc2Observation, Sc2Poll};
 
 const DIAGNOSTIC_LIMIT: usize = 20;
+const TEMPLE_OF_THE_PAST_MAP_ID: &str = "temple-of-the-past";
+const TEMPLE_OF_THE_PAST_DEFAULT_VARIANT_ID: &str = "layout-b";
 type MutatorEventDetails = HashMap<String, BTreeMap<String, Vec<String>>>;
 
 struct CatalogDescription {
@@ -139,11 +141,7 @@ impl AppController {
                     );
                     return ControllerUpdate::default();
                 };
-                self.apply_engine(EngineInput::Observation(GameObservation::InGame {
-                    session_id,
-                    map_id,
-                    game_time_milliseconds,
-                }))
+                self.apply_in_game_observation(session_id, map_id, game_time_milliseconds)
             }
         }
     }
@@ -273,11 +271,31 @@ impl AppController {
         let Some(game_time_milliseconds) = self.current_game_time_milliseconds else {
             return ControllerUpdate::default();
         };
-        self.apply_engine(EngineInput::Observation(GameObservation::InGame {
+        self.apply_in_game_observation(session_id, map_id, game_time_milliseconds)
+    }
+
+    fn apply_in_game_observation(
+        &mut self,
+        session_id: String,
+        map_id: String,
+        game_time_milliseconds: u64,
+    ) -> ControllerUpdate {
+        let should_default_variant = map_id == TEMPLE_OF_THE_PAST_MAP_ID
+            && (self.engine_view.session_id.as_deref() != Some(&session_id)
+                || self.engine_view.map_id.as_deref() != Some(&map_id));
+        let mut update = self.apply_engine(EngineInput::Observation(GameObservation::InGame {
             session_id,
             map_id,
             game_time_milliseconds,
-        }))
+        }));
+        if should_default_variant {
+            let default_update =
+                self.apply_engine(EngineInput::Command(UserCommand::SelectVariant {
+                    variant_id: Some(TEMPLE_OF_THE_PAST_DEFAULT_VARIANT_ID.to_owned()),
+                }));
+            update.new_alerts.extend(default_update.new_alerts);
+        }
+        update
     }
 
     fn apply_engine(&mut self, input: EngineInput) -> ControllerUpdate {
