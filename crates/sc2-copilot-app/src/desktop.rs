@@ -165,7 +165,7 @@ impl DesktopApp {
     }
 
     fn show_settings(&mut self, ui: &mut egui::Ui) {
-        egui::Frame::central_panel(ui.style()).show(ui, |ui| {
+        egui::CentralPanel::default().show(ui, |ui| {
             ui.heading("SC2 Copilot");
             ui.label("只读本机 6119 状态；不截屏、不读取游戏内存、不模拟输入。");
             ui.separator();
