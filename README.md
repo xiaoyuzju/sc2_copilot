@@ -32,6 +32,12 @@ cargo run -p sc2-copilot-app --bin sc2-replay -- `
   crates/sc2-copilot-app/tests/fixtures/sc2/in-game-ui.json
 ```
 
+开发期也可以启动无窗口的实时脱敏监控。它不会保存玩家名称或完整端点响应，只记录连接/菜单/对局状态、内部会话号、识别出的地图 ID、游戏时间、玩家数量与诊断；对局中最多每个游戏秒写一条：
+
+```powershell
+cargo run -p sc2-copilot-app --bin sc2-monitor -- logs/sc2-monitor.jsonl
+```
+
 ## 发布包
 
 ```powershell

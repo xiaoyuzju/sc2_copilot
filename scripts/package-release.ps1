@@ -15,7 +15,7 @@ if (-not $packageDirectory.StartsWith($allowedPrefix, [StringComparison]::Ordina
 
 Push-Location $workspace
 try {
-    cargo build --release --locked -p sc2-copilot-app --bins
+    cargo build --release --locked -p sc2-copilot-app --bin sc2-copilot --bin sc2-replay
     if ($LASTEXITCODE -ne 0) {
         throw "cargo build 失败，退出码 $LASTEXITCODE"
     }
