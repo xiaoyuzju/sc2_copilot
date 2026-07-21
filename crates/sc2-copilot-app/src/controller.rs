@@ -211,6 +211,14 @@ impl AppController {
         self.manual_map_id.as_deref()
     }
 
+    pub(crate) fn observed_session_id(&self) -> Option<&str> {
+        self.current_session_id.as_deref()
+    }
+
+    pub(crate) fn observed_game_time_milliseconds(&self) -> Option<u64> {
+        self.current_game_time_milliseconds
+    }
+
     pub fn connection(&self) -> ConnectionState {
         self.connection
     }

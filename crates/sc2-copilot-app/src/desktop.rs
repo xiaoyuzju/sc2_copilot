@@ -4,8 +4,8 @@ use eframe::egui::{self, Color32, RichText, ViewportBuilder, ViewportId};
 use sc2_copilot_core::{EngineView, EventTiming, ScheduleCatalog};
 
 use crate::{
-    AlertCard, AppController, AppSettings, ConnectionState, LocalSc2HttpClient, NoopAlertPlayer,
-    Sc2PollingHandle, Sc2StateSource, SettingsStore,
+    AlertCard, AppController, AppSettings, ConnectionState, ControllerUpdate, LocalSc2HttpClient,
+    NoopAlertPlayer, Sc2PollingHandle, Sc2StateSource, SessionHistory, SettingsStore,
     platform::{PlatformAction, PlatformIntegration},
 };
 
@@ -91,6 +91,8 @@ struct DesktopApp {
     settings_visible: bool,
     quitting: bool,
     recording_hotkey: bool,
+    history: Option<SessionHistory>,
+    history_status: String,
 }
 
 impl DesktopApp {
@@ -108,6 +110,23 @@ impl DesktopApp {
         for diagnostic in startup_diagnostics.into_iter().chain(platform_diagnostics) {
             controller.record_external_diagnostic(diagnostic);
         }
+        let (history, history_status) = match SessionHistory::for_current_user() {
+            Ok(mut history) => {
+                let status = history.path().display().to_string();
+                match history.record(&controller, &[]) {
+                    Ok(_) => (Some(history), status),
+                    Err(error) => {
+                        controller.record_external_diagnostic(format!("历史日志写入失败：{error}"));
+                        (None, format!("不可用：{error}"))
+                    }
+                }
+            }
+            Err(error) => {
+                let status = format!("不可用：{error}");
+                controller.record_external_diagnostic(format!("历史日志初始化失败：{error}"));
+                (None, status)
+            }
+        };
         Self {
             controller,
             store,
@@ -119,6 +138,8 @@ impl DesktopApp {
             settings_visible: true,
             quitting: false,
             recording_hotkey: false,
+            history,
+            history_status,
         }
     }
 
@@ -127,7 +148,7 @@ impl DesktopApp {
             && let Some(poll) = poller.take_latest()
         {
             let update = self.controller.handle_poll(poll);
-            self.push_alerts(update.new_alerts);
+            self.apply_controller_update(update);
         }
         for action in self.platform.poll_actions() {
             match action {
@@ -149,6 +170,18 @@ impl DesktopApp {
                 .into_iter()
                 .map(|card| DesktopAlert { card, expires_at }),
         );
+    }
+
+    fn apply_controller_update(&mut self, update: ControllerUpdate) {
+        if let Some(history) = &mut self.history
+            && let Err(error) = history.record(&self.controller, &update.new_alerts)
+        {
+            self.history_status = format!("不可用：{error}");
+            self.controller
+                .record_external_diagnostic(format!("历史日志写入失败：{error}"));
+            self.history = None;
+        }
+        self.push_alerts(update.new_alerts);
     }
 
     fn save_settings(&mut self) {
@@ -295,7 +328,7 @@ impl DesktopApp {
             }
             if settings != *self.controller.settings() {
                 let update = self.controller.update_settings(settings);
-                self.push_alerts(update.new_alerts);
+                self.apply_controller_update(update);
                 self.save_settings();
             }
 
@@ -315,6 +348,7 @@ impl DesktopApp {
                 });
             ui.separator();
             ui.small(format!("设置文件：{}", self.store.path().display()));
+            ui.small(format!("历史日志：{}", self.history_status));
             ui.small("关闭本窗口后程序保留在托盘；从托盘菜单可重新打开或退出。");
         });
     }
@@ -348,7 +382,7 @@ impl DesktopApp {
             });
         if requested != current {
             let update = self.controller.select_manual_map(requested);
-            self.push_alerts(update.new_alerts);
+            self.apply_controller_update(update);
         }
     }
 
@@ -380,7 +414,7 @@ impl DesktopApp {
             });
         if requested != current {
             let update = self.controller.select_variant(requested);
-            self.push_alerts(update.new_alerts);
+            self.apply_controller_update(update);
         }
     }
 
@@ -414,11 +448,11 @@ impl DesktopApp {
                     .clicked()
                 {
                     let update = self.controller.set_stage_anchor(stage_id.clone());
-                    self.push_alerts(update.new_alerts);
+                    self.apply_controller_update(update);
                 }
                 if anchored && ui.button("清除").clicked() {
                     let update = self.controller.clear_stage_anchor(stage_id.clone());
-                    self.push_alerts(update.new_alerts);
+                    self.apply_controller_update(update);
                 }
             });
         }
@@ -445,7 +479,7 @@ impl DesktopApp {
                 .any(|id| id == &mutator.id);
             if ui.checkbox(&mut active, &mutator.display_name).changed() {
                 let update = self.controller.set_mutator_active(mutator.id, active);
-                self.push_alerts(update.new_alerts);
+                self.apply_controller_update(update);
             }
         }
     }
