@@ -325,8 +325,8 @@ impl DesktopApp {
                 .strong(),
         );
         ui.add_space(7.0);
-        let (status, _, color) = connection_presentation(self.controller.connection());
-        status_badge(ui, status, color);
+        let connection = connection_presentation(self.controller.connection());
+        status_badge(ui, connection.headline, connection.color);
         ui.add_space(8.0);
         ui.label(
             RichText::new("仅访问本机 127.0.0.1:6119")
@@ -337,21 +337,21 @@ impl DesktopApp {
 
     fn show_overview_page(&mut self, ui: &mut egui::Ui) {
         let connection = self.controller.connection();
-        let (status, detail, color) = connection_presentation(connection);
+        let presentation = connection_presentation(connection);
         card(ui, |ui| {
             ui.horizontal(|ui| {
                 ui.vertical(|ui| {
                     section_label(ui, "SC2 连接");
                     ui.label(
-                        RichText::new(status)
+                        RichText::new(presentation.headline)
                             .size(22.0)
                             .color(TEXT_PRIMARY)
                             .strong(),
                     );
-                    ui.label(RichText::new(detail).color(TEXT_MUTED));
+                    ui.label(RichText::new(presentation.detail).color(TEXT_MUTED));
                 });
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                    status_badge(ui, connection_text(connection), color);
+                    status_badge(ui, presentation.badge, presentation.color);
                 });
             });
         });
@@ -601,28 +601,45 @@ impl DesktopApp {
     }
 
     fn show_diagnostics_page(&mut self, ui: &mut egui::Ui) {
+        let connection = connection_presentation(self.controller.connection());
+        let variant_name = self.selected_variant_name().to_owned();
+        let unsupported = self
+            .controller
+            .selected_map_id()
+            .and_then(|map_id| self.controller.map(map_id))
+            .map(|map| (map.unsupported_row_count, map.unsupported_reasons.clone()));
         card(ui, |ui| {
             section_label(ui, "运行状态");
             egui::Grid::new("diagnostic-status-grid")
                 .num_columns(2)
                 .spacing([24.0, 9.0])
                 .show(ui, |ui| {
-                    diagnostic_row(
-                        ui,
-                        "6119 状态",
-                        connection_text(self.controller.connection()),
-                    );
+                    diagnostic_row(ui, "6119 状态", connection.badge);
                     diagnostic_row(
                         ui,
                         "会话",
                         self.controller.view().session_id.as_deref().unwrap_or("—"),
                     );
                     diagnostic_row(ui, "地图", self.selected_map_name());
+                    diagnostic_row(ui, "地图分支", &variant_name);
                     diagnostic_row(ui, "数据快照", self.controller.snapshot_batch());
                     diagnostic_row(ui, "播放接口", self.controller.player_status());
                     diagnostic_row(ui, "托盘", self.platform.tray_status());
                     diagnostic_row(ui, "全局热键", self.platform.hotkey_status());
                 });
+            ui.add_space(10.0);
+            ui.separator();
+            ui.add_space(8.0);
+            match unsupported {
+                None => service_row(ui, "暂不支持", "未选择地图"),
+                Some((0, _)) => service_row(ui, "暂不支持", "当前地图无暂不支持条目"),
+                Some((count, reasons)) => {
+                    ui.colored_label(WARNING, format!("暂不支持 · {count} 行"));
+                    for reason in reasons {
+                        ui.label(RichText::new(reason).color(TEXT_MUTED));
+                    }
+                }
+            }
         });
 
         ui.add_space(12.0);
@@ -787,6 +804,26 @@ impl DesktopApp {
             .and_then(|id| self.controller.map(id))
             .map(|map| map.display_name.as_str())
             .unwrap_or("—")
+    }
+
+    fn selected_variant_name(&self) -> &str {
+        let Some(map_id) = self.controller.selected_map_id() else {
+            return "—";
+        };
+        let Some(map) = self.controller.map(map_id) else {
+            return "—";
+        };
+        if map.variants.is_empty() {
+            return "不适用";
+        }
+        let Some(variant_id) = self.controller.view().variant_id.as_deref() else {
+            return "未选择";
+        };
+        map.variants
+            .iter()
+            .find(|variant| variant.id == variant_id)
+            .map(|variant| variant.display_name.as_str())
+            .unwrap_or("未选择")
     }
 
     fn show_overlay(&mut self, ui: &mut egui::Ui) {
@@ -979,19 +1016,34 @@ fn diagnostic_row(ui: &mut egui::Ui, label: &str, value: &str) {
     ui.end_row();
 }
 
-fn connection_presentation(connection: ConnectionState) -> (&'static str, &'static str, Color32) {
+#[derive(Clone, Copy)]
+struct ConnectionPresentation {
+    headline: &'static str,
+    detail: &'static str,
+    badge: &'static str,
+    color: Color32,
+}
+
+fn connection_presentation(connection: ConnectionState) -> ConnectionPresentation {
     match connection {
-        ConnectionState::Disconnected => (
-            "等待游戏",
-            "SC2 未启动，或本机 6119 状态暂不可用。",
-            TEXT_MUTED,
-        ),
-        ConnectionState::Menu => (
-            "SC2 已连接",
-            "当前位于菜单；进入合作任务后将自动建立会话。",
-            ACCENT,
-        ),
-        ConnectionState::InGame => ("对局进行中", "时间线与一次性提醒正在运行。", SUCCESS),
+        ConnectionState::Disconnected => ConnectionPresentation {
+            headline: "等待游戏",
+            detail: "SC2 未启动，或本机 6119 状态暂不可用。",
+            badge: "未连接 / 游戏未启动",
+            color: TEXT_MUTED,
+        },
+        ConnectionState::Menu => ConnectionPresentation {
+            headline: "SC2 已连接",
+            detail: "当前位于菜单；进入合作任务后将自动建立会话。",
+            badge: "已连接，位于菜单",
+            color: ACCENT,
+        },
+        ConnectionState::InGame => ConnectionPresentation {
+            headline: "对局进行中",
+            detail: "已建立游戏会话；提醒状态取决于当前地图与运行支持条件。",
+            badge: "对局中",
+            color: SUCCESS,
+        },
     }
 }
 
@@ -1191,14 +1243,6 @@ fn hotkey_key_name(key: egui::Key) -> Option<String> {
         }
         .to_owned(),
     )
-}
-
-fn connection_text(connection: ConnectionState) -> &'static str {
-    match connection {
-        ConnectionState::Disconnected => "未连接 / 游戏未启动",
-        ConnectionState::Menu => "已连接，位于菜单",
-        ConnectionState::InGame => "对局中",
-    }
 }
 
 fn format_time(milliseconds: u64) -> String {
