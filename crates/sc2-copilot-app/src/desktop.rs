@@ -53,7 +53,7 @@ pub fn run() -> Result<(), String> {
             .with_mouse_passthrough(true)
             .with_taskbar(false)
             .with_active(false),
-        renderer: eframe::Renderer::Glow,
+        renderer: eframe::Renderer::Wgpu,
         ..Default::default()
     };
     eframe::run_native(
