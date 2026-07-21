@@ -46,4 +46,11 @@ pwsh -File scripts/package-release.ps1
 
 脚本只把两个已编译的可执行文件、安装/卸载脚本和用户说明复制到 `dist/`。开发期的灰机 Wiki 原始快照、Keiframe 差异报告及数据库不会进入发布包。
 
+验证发布包的精确内容；在确认当前用户没有安装或运行 SC2 Copilot、SC2 未运行后，可追加当前 Windows 环境的安装、启动和卸载冒烟测试。干净 Windows 11 与断网环境仍需单独验收：
+
+```powershell
+pwsh -File scripts/verify-release.ps1
+pwsh -File scripts/verify-release.ps1 -InstallSmokeTest
+```
+
 数据更新流程见 [重复抓取手册](docs/runbooks/update-map-schedule-data.md)，总体实现边界见 [首版范围](.scratch/sc2-copilot/spec.md)。
