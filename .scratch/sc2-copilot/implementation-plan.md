@@ -10,7 +10,7 @@
 - 15 张地图的每张相关表都必须有可追溯处理结果：`automatic`、`manual_context` 或带原因的 `unsupported`，不能静默丢弃。
 - 灰机 Wiki 是发布值基线；Keiframe 固定 commit `192bdbce6868e597b297cf47f485ac5c79eb9baf` 只产生差异报告。
 - 审核后的规范化 JSON 在构建时校验并嵌入可执行文件；运行时不访问灰机 Wiki、不读取外部时间表。
-- 暂不实现任何视觉识别；延期能力完整记录在 [Deferred Features](./deferred-features.md)。
+- 暂不实现任何视觉识别；延期能力完整记录在 [Deferred Features](../../docs/deferred-features.md)。
 
 ## Workspace shape
 
@@ -88,7 +88,7 @@ implementation 内部包含按表头签名匹配的显式 table adapter、合并
 
 ## Data model
 
-运行时采用 [Map Schedule Design](./map-schedule-design.md) 已确认的结构：
+运行时采用 [Map Schedule Design](../../docs/map-schedule-design.md) 已确认的结构：
 
 ```text
 CompiledEvent {
@@ -102,8 +102,8 @@ CompiledEvent {
 }
 ```
 
-- `Trigger`：`AtGameTime`、`AtStageElapsed`、`AtStageRemaining`、`WhenCondition`、`After`、`AnyOf`、`AllOf`、`Repeat`。
-- `Fact`：事件类别、波次、位置、路线、目标、规模、科技、生命/护盾、数量/组成、概率和备选组。
+- 首版 `Trigger`：`AtGameTime`、`AtGameTimeWindow`、`AtStageElapsed`、`AtStageRemaining`。条件、依赖、组合和重复表达式只有在来源关系经过独立建模后才加入；当前对应来源行显式记为 `unsupported`，见 [Deferred Features](../../docs/deferred-features.md)。
+- `Fact`：事件类别、波次、位置、路线、目标、规模、科技、生命/护盾、数量/组成、概率、备选组、经白名单确认的补充字段，以及由用户手动启用的突变上下文。未知事实列会使编译失败，不静默丢弃。
 - `SourceRef`：来源 URL、快照批次、相对路径、表索引及逻辑单元格引用。
 - `runtime_support`：`automatic`、`manual_context`、`unsupported`。
 

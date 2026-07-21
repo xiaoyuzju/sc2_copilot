@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use serde::Deserialize;
 use thiserror::Error;
 
-use crate::MissionSchedule;
+use crate::{MissionSchedule, Trigger};
 
 const SUPPORTED_SCHEMA_VERSION: u32 = 1;
 
@@ -52,6 +52,19 @@ impl ScheduleCatalog {
                     return Err(CatalogError::DuplicateEventId {
                         map_id: map.id().to_owned(),
                         event_id: event.id().to_owned(),
+                    });
+                }
+                if let Trigger::AtGameTimeWindow {
+                    earliest_milliseconds,
+                    latest_milliseconds,
+                } = event.trigger()
+                    && earliest_milliseconds > latest_milliseconds
+                {
+                    return Err(CatalogError::InvalidTimeWindow {
+                        map_id: map.id().to_owned(),
+                        event_id: event.id().to_owned(),
+                        earliest_milliseconds: *earliest_milliseconds,
+                        latest_milliseconds: *latest_milliseconds,
                     });
                 }
             }
@@ -108,6 +121,15 @@ pub enum CatalogError {
     MissingSourceRef { map_id: String, event_id: String },
     #[error("event {event_id} in map {map_id} has an invalid source reference")]
     InvalidSourceRef { map_id: String, event_id: String },
+    #[error(
+        "event {event_id} in map {map_id} has a reversed time window {earliest_milliseconds}..{latest_milliseconds}"
+    )]
+    InvalidTimeWindow {
+        map_id: String,
+        event_id: String,
+        earliest_milliseconds: u64,
+        latest_milliseconds: u64,
+    },
     #[error("event {event_id} belongs to map {event_map_id}, not containing map {schedule_map_id}")]
     EventMapMismatch {
         schedule_map_id: String,

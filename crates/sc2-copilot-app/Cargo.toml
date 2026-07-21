@@ -8,7 +8,7 @@ name = "sc2-copilot"
 path = "src/main.rs"
 
 [[bin]]
-name = "sc2-replay"
+name = "sc2-fixture-replay"
 path = "src/replay.rs"
 
 [[bin]]

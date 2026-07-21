@@ -1,4 +1,7 @@
-use std::collections::{BTreeMap, HashSet};
+use std::{
+    cmp::Ordering,
+    collections::{BTreeMap, BTreeSet, HashSet},
+};
 
 use crate::{CompiledEvent, RuntimeSupport, ScheduleCatalog, Trigger};
 
@@ -34,70 +37,54 @@ impl CopilotEngine {
             EngineInput::Observation(GameObservation::Disconnected) => EngineUpdate::idle(),
             EngineInput::SettingsChanged(settings) => {
                 self.settings = settings;
-                let observation = self.session.as_ref().map(|session| {
-                    (
-                        session.session_id.clone(),
-                        session.map_id.clone(),
-                        session.game_time_milliseconds,
-                    )
-                });
-                match observation {
-                    Some((session_id, map_id, game_time_milliseconds)) => {
-                        self.observe_in_game(session_id, map_id, game_time_milliseconds)
-                    }
-                    None => EngineUpdate::idle(),
-                }
+                self.refresh_current_session()
             }
             EngineInput::Command(UserCommand::SelectVariant { variant_id }) => {
-                let observation = self.session.as_mut().map(|session| {
+                if let Some(session) = &mut self.session {
                     session.variant_id = variant_id;
-                    (
-                        session.session_id.clone(),
-                        session.map_id.clone(),
-                        session.game_time_milliseconds,
-                    )
-                });
-                match observation {
-                    Some((session_id, map_id, game_time_milliseconds)) => {
-                        self.observe_in_game(session_id, map_id, game_time_milliseconds)
-                    }
-                    None => EngineUpdate::idle(),
                 }
+                self.refresh_current_session()
             }
             EngineInput::Command(UserCommand::SetStageAnchor { stage_id }) => {
-                let observation = self.session.as_mut().map(|session| {
+                if let Some(session) = &mut self.session {
                     session
                         .stage_anchors
                         .insert(stage_id, session.game_time_milliseconds);
-                    (
-                        session.session_id.clone(),
-                        session.map_id.clone(),
-                        session.game_time_milliseconds,
-                    )
-                });
-                match observation {
-                    Some((session_id, map_id, game_time_milliseconds)) => {
-                        self.observe_in_game(session_id, map_id, game_time_milliseconds)
-                    }
-                    None => EngineUpdate::idle(),
                 }
+                self.refresh_current_session()
             }
             EngineInput::Command(UserCommand::ClearStageAnchor { stage_id }) => {
-                let observation = self.session.as_mut().map(|session| {
+                if let Some(session) = &mut self.session {
                     session.stage_anchors.remove(&stage_id);
-                    (
-                        session.session_id.clone(),
-                        session.map_id.clone(),
-                        session.game_time_milliseconds,
-                    )
-                });
-                match observation {
-                    Some((session_id, map_id, game_time_milliseconds)) => {
-                        self.observe_in_game(session_id, map_id, game_time_milliseconds)
-                    }
-                    None => EngineUpdate::idle(),
                 }
+                self.refresh_current_session()
             }
+            EngineInput::Command(UserCommand::SetMutatorActive { mutator_id, active }) => {
+                if let Some(session) = &mut self.session {
+                    if active {
+                        session.active_mutator_ids.insert(mutator_id);
+                    } else {
+                        session.active_mutator_ids.remove(&mutator_id);
+                    }
+                }
+                self.refresh_current_session()
+            }
+        }
+    }
+
+    fn refresh_current_session(&mut self) -> EngineUpdate {
+        let observation = self.session.as_ref().map(|session| {
+            (
+                session.session_id.clone(),
+                session.map_id.clone(),
+                session.game_time_milliseconds,
+            )
+        });
+        match observation {
+            Some((session_id, map_id, game_time_milliseconds)) => {
+                self.observe_in_game(session_id, map_id, game_time_milliseconds)
+            }
+            None => EngineUpdate::idle(),
         }
     }
 
@@ -119,32 +106,34 @@ impl CopilotEngine {
         let session = self.session.as_mut().expect("session was initialized");
         session.game_time_milliseconds = game_time_milliseconds;
 
-        let mut batches = BTreeMap::<u64, Vec<String>>::new();
+        let mut batches = BTreeMap::<EventTiming, Vec<String>>::new();
         let mut newly_missed_event_ids = Vec::new();
         let mut upcoming_events = Vec::new();
         if let Some(schedule) = self.catalog.schedule_for(&session.map_id, None) {
             for event in schedule.events() {
-                let resolved_time = resolve_event_time(event.trigger(), session);
+                let resolved_timing = resolve_event_timing(event.trigger(), session);
                 if !event_is_active(event, session)
-                    || resolved_time.is_none()
+                    || resolved_timing.is_none()
                     || session.notified.contains(event.id())
                     || session.missed.contains(event.id())
                 {
                     continue;
                 }
-                let milliseconds = resolved_time.expect("resolved time was checked");
+                let timing = resolved_timing.expect("resolved timing was checked");
 
-                if milliseconds <= game_time_milliseconds {
+                if timing.has_ended(game_time_milliseconds) {
                     session.missed.insert(event.id().to_owned());
                     newly_missed_event_ids.push(event.id().to_owned());
                     continue;
                 }
                 if game_time_milliseconds
-                    >= milliseconds.saturating_sub(self.settings.lead_time_milliseconds)
+                    >= timing
+                        .earliest_milliseconds()
+                        .saturating_sub(self.settings.lead_time_milliseconds)
                 {
                     session.notified.insert(event.id().to_owned());
                     batches
-                        .entry(milliseconds)
+                        .entry(timing)
                         .or_default()
                         .push(event.id().to_owned());
                 }
@@ -154,34 +143,31 @@ impl CopilotEngine {
                 if !event_is_active(event, session) || session.missed.contains(event.id()) {
                     continue;
                 }
-                let Some(event_time_milliseconds) = resolve_event_time(event.trigger(), session)
-                else {
+                let Some(timing) = resolve_event_timing(event.trigger(), session) else {
                     continue;
                 };
-                if event_time_milliseconds > game_time_milliseconds {
+                if !timing.has_ended(game_time_milliseconds) {
                     upcoming_events.push(ScheduledEventView {
                         event_id: event.id().to_owned(),
-                        event_time_milliseconds,
-                        remaining_milliseconds: event_time_milliseconds
+                        timing,
+                        remaining_milliseconds: timing
+                            .earliest_milliseconds()
                             .saturating_sub(game_time_milliseconds),
                     });
                 }
             }
         }
         upcoming_events.sort_by(|left, right| {
-            left.event_time_milliseconds
-                .cmp(&right.event_time_milliseconds)
+            left.timing
+                .cmp(&right.timing)
                 .then_with(|| left.event_id.cmp(&right.event_id))
         });
 
         let alert_batches = batches
             .into_iter()
-            .map(|(event_time_milliseconds, mut event_ids)| {
+            .map(|(timing, mut event_ids)| {
                 event_ids.sort();
-                AlertBatch {
-                    event_time_milliseconds,
-                    event_ids,
-                }
+                AlertBatch { timing, event_ids }
             })
             .collect();
 
@@ -193,6 +179,7 @@ impl CopilotEngine {
                 map_id: Some(session.map_id.clone()),
                 game_time_milliseconds: Some(game_time_milliseconds),
                 variant_id: session.variant_id.clone(),
+                active_mutator_ids: session.active_mutator_ids.iter().cloned().collect(),
                 stage_anchors: session
                     .stage_anchors
                     .iter()
@@ -232,6 +219,7 @@ pub enum UserCommand {
     SelectVariant { variant_id: Option<String> },
     SetStageAnchor { stage_id: String },
     ClearStageAnchor { stage_id: String },
+    SetMutatorActive { mutator_id: String, active: bool },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -247,8 +235,67 @@ pub enum GameObservation {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AlertBatch {
-    pub event_time_milliseconds: u64,
+    pub timing: EventTiming,
     pub event_ids: Vec<String>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum EventTiming {
+    Exact {
+        milliseconds: u64,
+    },
+    Window {
+        earliest_milliseconds: u64,
+        latest_milliseconds: u64,
+    },
+}
+
+impl EventTiming {
+    pub fn earliest_milliseconds(self) -> u64 {
+        match self {
+            Self::Exact { milliseconds } => milliseconds,
+            Self::Window {
+                earliest_milliseconds,
+                ..
+            } => earliest_milliseconds,
+        }
+    }
+
+    pub fn latest_milliseconds(self) -> u64 {
+        match self {
+            Self::Exact { milliseconds } => milliseconds,
+            Self::Window {
+                latest_milliseconds,
+                ..
+            } => latest_milliseconds,
+        }
+    }
+
+    fn has_ended(self, game_time_milliseconds: u64) -> bool {
+        self.latest_milliseconds() <= game_time_milliseconds
+    }
+
+    fn sort_key(self) -> (u64, u64, u8) {
+        match self {
+            Self::Exact { milliseconds } => (milliseconds, milliseconds, 0),
+            Self::Window {
+                earliest_milliseconds,
+                latest_milliseconds,
+            } => (earliest_milliseconds, latest_milliseconds, 1),
+        }
+    }
+}
+
+impl Ord for EventTiming {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.sort_key().cmp(&other.sort_key())
+    }
+}
+
+impl PartialOrd for EventTiming {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -274,6 +321,7 @@ pub struct EngineView {
     pub map_id: Option<String>,
     pub game_time_milliseconds: Option<u64>,
     pub variant_id: Option<String>,
+    pub active_mutator_ids: Vec<String>,
     pub stage_anchors: Vec<StageAnchorView>,
     pub upcoming_events: Vec<ScheduledEventView>,
 }
@@ -287,7 +335,7 @@ pub struct StageAnchorView {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ScheduledEventView {
     pub event_id: String,
-    pub event_time_milliseconds: u64,
+    pub timing: EventTiming,
     pub remaining_milliseconds: u64,
 }
 
@@ -297,6 +345,7 @@ struct SessionState {
     map_id: String,
     game_time_milliseconds: u64,
     variant_id: Option<String>,
+    active_mutator_ids: BTreeSet<String>,
     stage_anchors: BTreeMap<String, u64>,
     notified: HashSet<String>,
     missed: HashSet<String>,
@@ -309,6 +358,7 @@ impl SessionState {
             map_id,
             game_time_milliseconds: 0,
             variant_id: None,
+            active_mutator_ids: BTreeSet::new(),
             stage_anchors: BTreeMap::new(),
             notified: HashSet::new(),
             missed: HashSet::new(),
@@ -316,20 +366,27 @@ impl SessionState {
     }
 }
 
-fn resolve_event_time(trigger: &Trigger, session: &SessionState) -> Option<u64> {
+fn resolve_event_timing(trigger: &Trigger, session: &SessionState) -> Option<EventTiming> {
     match trigger {
-        Trigger::AtGameTime { milliseconds } => Some(*milliseconds),
+        Trigger::AtGameTime { milliseconds } => Some(EventTiming::Exact {
+            milliseconds: *milliseconds,
+        }),
         Trigger::AtGameTimeWindow {
             earliest_milliseconds,
-            ..
-        } => Some(*earliest_milliseconds),
+            latest_milliseconds,
+        } => Some(EventTiming::Window {
+            earliest_milliseconds: *earliest_milliseconds,
+            latest_milliseconds: *latest_milliseconds,
+        }),
         Trigger::AtStageElapsed {
             stage_id,
             milliseconds,
         } => session
             .stage_anchors
             .get(stage_id)
-            .map(|anchor| anchor.saturating_add(*milliseconds)),
+            .map(|anchor| EventTiming::Exact {
+                milliseconds: anchor.saturating_add(*milliseconds),
+            }),
         Trigger::AtStageRemaining { .. } => None,
     }
 }

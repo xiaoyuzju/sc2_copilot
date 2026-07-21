@@ -7,7 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if inputs.is_empty() || !inputs.len().is_multiple_of(2) {
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
-            "用法：sc2-replay <game.json> <ui.json> [<game.json> <ui.json> ...]",
+            "用法：sc2-fixture-replay <game.json> <ui.json> [<game.json> <ui.json> ...]",
         )
         .into());
     }

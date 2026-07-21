@@ -25,7 +25,7 @@
 
 ## Deferred
 
-- 视觉相关能力统一记录在 [Deferred Features](./deferred-features.md) 中。
+- 视觉相关能力统一记录在 [Deferred Features](../../docs/deferred-features.md) 中。
 - “净网行动”依赖已净化节点数和持续倒计时状态，首版只保留数据，不启用动态提醒。
 - 不单独提供敌方种族手动选择；只有出现实际消费该信息的首版能力时才重新评估。
 
@@ -35,4 +35,4 @@
 
 首版只执行“灰机 Wiki 基线录入”和“Keiframe 差异检查”两步，不追踪官方补丁说明，也不安排游戏实测或回放验证。因此数据状态只表示其与两个选定来源的关系，不表示已由官方或当前游戏版本确认。
 
-重复抓取与更新步骤记录在 [Update Map Schedule Data](./runbooks/update-map-schedule-data.md) 中。
+重复抓取与更新步骤记录在 [Update Map Schedule Data](../../docs/runbooks/update-map-schedule-data.md) 中。

@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -125,24 +125,59 @@ pub enum Fact {
         #[serde(default)]
         branch: Option<u16>,
     },
+    WaveExpression {
+        value: String,
+    },
     Location {
         value: LocationSpec,
     },
     Target {
         value: String,
     },
+    Route {
+        value: String,
+    },
     Health {
+        value: u32,
+    },
+    Shield {
         value: u32,
     },
     UnitCount {
         unit: UnitKind,
         value: u16,
     },
+    Count {
+        subject: String,
+        value: String,
+    },
     ScaleLevel {
         value: u8,
     },
+    ScaleExpression {
+        value: String,
+    },
     TechLevel {
         value: u8,
+    },
+    TechExpression {
+        value: String,
+    },
+    Composition {
+        value: String,
+    },
+    Probability {
+        value: String,
+    },
+    Detail {
+        label: String,
+        value: String,
+    },
+    MutatorContext {
+        mutator_id: String,
+        display_name: String,
+        label: String,
+        value: String,
     },
 }
 
@@ -161,13 +196,13 @@ pub struct WeightedLocation {
     pub weight_percent: Option<u8>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum UnitKind {
     TrainCar,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum EventCategory {
     AttackWave,
@@ -185,7 +220,7 @@ pub struct SourceRef {
     pub row_index: usize,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RuntimeSupport {
     Automatic,
@@ -248,7 +283,7 @@ impl UnsupportedRow {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum UnsupportedReason {
     AmbiguousClock,

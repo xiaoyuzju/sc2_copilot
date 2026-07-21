@@ -15,7 +15,7 @@ if (-not $packageDirectory.StartsWith($allowedPrefix, [StringComparison]::Ordina
 
 Push-Location $workspace
 try {
-    cargo build --release --locked -p sc2-copilot-app --bin sc2-copilot --bin sc2-replay
+    cargo build --release --locked -p sc2-copilot-app --bin sc2-copilot --bin sc2-fixture-replay
     if ($LASTEXITCODE -ne 0) {
         throw "cargo build 失败，退出码 $LASTEXITCODE"
     }
@@ -26,7 +26,7 @@ try {
     New-Item -ItemType Directory -Path $packageDirectory -Force | Out-Null
 
     Copy-Item -LiteralPath (Join-Path $workspace 'target\release\sc2-copilot.exe') -Destination $packageDirectory
-    Copy-Item -LiteralPath (Join-Path $workspace 'target\release\sc2-replay.exe') -Destination $packageDirectory
+    Copy-Item -LiteralPath (Join-Path $workspace 'target\release\sc2-fixture-replay.exe') -Destination $packageDirectory
     Copy-Item -LiteralPath (Join-Path $workspace 'packaging\Install.ps1') -Destination $packageDirectory
     Copy-Item -LiteralPath (Join-Path $workspace 'packaging\Uninstall.ps1') -Destination $packageDirectory
     Copy-Item -LiteralPath (Join-Path $workspace 'packaging\README.txt') -Destination $packageDirectory

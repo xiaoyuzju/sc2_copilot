@@ -22,6 +22,7 @@
       ],
       "map_id": "oblivion-express",
       "runtime_support": "automatic",
+      "source_row_count": 11,
       "table_index": 0,
       "unsupported_rows": []
     },
@@ -30,6 +31,7 @@
       "handled_rows": [],
       "map_id": "oblivion-express",
       "runtime_support": "unsupported",
+      "source_row_count": 12,
       "table_index": 1,
       "unsupported_rows": [
         {
@@ -87,6 +89,7 @@
       "handled_rows": [],
       "map_id": "oblivion-express",
       "runtime_support": "unsupported",
+      "source_row_count": 2,
       "table_index": 2,
       "unsupported_rows": [
         {
@@ -114,6 +117,7 @@
       ],
       "map_id": "oblivion-express",
       "runtime_support": "automatic",
+      "source_row_count": 9,
       "table_index": 3,
       "unsupported_rows": []
     },
@@ -127,6 +131,7 @@
       ],
       "map_id": "void-rifts",
       "runtime_support": "automatic",
+      "source_row_count": 4,
       "table_index": 0,
       "unsupported_rows": []
     },
@@ -144,6 +149,7 @@
       ],
       "map_id": "void-rifts",
       "runtime_support": "manual_context",
+      "source_row_count": 10,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -170,6 +176,7 @@
       ],
       "map_id": "void-rifts",
       "runtime_support": "manual_context",
+      "source_row_count": 10,
       "table_index": 4,
       "unsupported_rows": [
         {
@@ -212,6 +219,7 @@
       ],
       "map_id": "void-launch",
       "runtime_support": "automatic",
+      "source_row_count": 24,
       "table_index": 1,
       "unsupported_rows": []
     },
@@ -224,6 +232,7 @@
       ],
       "map_id": "void-launch",
       "runtime_support": "automatic",
+      "source_row_count": 3,
       "table_index": 2,
       "unsupported_rows": []
     },
@@ -243,6 +252,7 @@
       ],
       "map_id": "void-launch",
       "runtime_support": "automatic",
+      "source_row_count": 10,
       "table_index": 3,
       "unsupported_rows": []
     },
@@ -251,6 +261,7 @@
       "handled_rows": [],
       "map_id": "rifts-to-korhal",
       "runtime_support": "unsupported",
+      "source_row_count": 4,
       "table_index": 0,
       "unsupported_rows": [
         {
@@ -288,6 +299,7 @@
       ],
       "map_id": "rifts-to-korhal",
       "runtime_support": "automatic",
+      "source_row_count": 11,
       "table_index": 3,
       "unsupported_rows": []
     },
@@ -296,6 +308,7 @@
       "handled_rows": [],
       "map_id": "rifts-to-korhal",
       "runtime_support": "unsupported",
+      "source_row_count": 4,
       "table_index": 4,
       "unsupported_rows": [
         {
@@ -358,36 +371,9 @@
       ],
       "map_id": "temple-of-the-past",
       "runtime_support": "manual_context",
+      "source_row_count": 44,
       "table_index": 3,
       "unsupported_rows": [
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 6
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 16
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 19
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 20
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 21
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 26
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 27
-        },
         {
           "reason": "source_expression_unsupported",
           "row_index": 28
@@ -418,14 +404,6 @@
         },
         {
           "reason": "source_expression_unsupported",
-          "row_index": 35
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 36
-        },
-        {
-          "reason": "source_expression_unsupported",
           "row_index": 44
         }
       ]
@@ -435,6 +413,7 @@
       "handled_rows": [],
       "map_id": "temple-of-the-past",
       "runtime_support": "unsupported",
+      "source_row_count": 2,
       "table_index": 4,
       "unsupported_rows": [
         {
@@ -490,47 +469,16 @@
       ],
       "map_id": "temple-of-the-past",
       "runtime_support": "manual_context",
+      "source_row_count": 37,
       "table_index": 5,
-      "unsupported_rows": [
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 6
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 16
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 17
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 18
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 19
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 25
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 29
-        },
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 30
-        }
-      ]
+      "unsupported_rows": []
     },
     {
       "display_name": "往日神庙",
       "handled_rows": [],
       "map_id": "temple-of-the-past",
       "runtime_support": "unsupported",
+      "source_row_count": 2,
       "table_index": 6,
       "unsupported_rows": [
         {
@@ -557,6 +505,7 @@
       ],
       "map_id": "lock-and-load",
       "runtime_support": "automatic",
+      "source_row_count": 16,
       "table_index": 2,
       "unsupported_rows": [
         {
@@ -598,6 +547,7 @@
       "handled_rows": [],
       "map_id": "lock-and-load",
       "runtime_support": "unsupported",
+      "source_row_count": 5,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -634,6 +584,7 @@
       ],
       "map_id": "chain-of-ascension",
       "runtime_support": "automatic",
+      "source_row_count": 6,
       "table_index": 0,
       "unsupported_rows": []
     },
@@ -642,6 +593,7 @@
       "handled_rows": [],
       "map_id": "chain-of-ascension",
       "runtime_support": "unsupported",
+      "source_row_count": 5,
       "table_index": 1,
       "unsupported_rows": [
         {
@@ -671,6 +623,7 @@
       "handled_rows": [],
       "map_id": "chain-of-ascension",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 2,
       "unsupported_rows": [
         {
@@ -728,6 +681,7 @@
       ],
       "map_id": "chain-of-ascension",
       "runtime_support": "automatic",
+      "source_row_count": 27,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -761,6 +715,7 @@
       ],
       "map_id": "chain-of-ascension",
       "runtime_support": "automatic",
+      "source_row_count": 8,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -774,6 +729,7 @@
       "handled_rows": [],
       "map_id": "the-vermillion-problem",
       "runtime_support": "unsupported",
+      "source_row_count": 18,
       "table_index": 0,
       "unsupported_rows": [
         {
@@ -865,6 +821,7 @@
       ],
       "map_id": "the-vermillion-problem",
       "runtime_support": "automatic",
+      "source_row_count": 10,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -878,6 +835,7 @@
       "handled_rows": [],
       "map_id": "the-vermillion-problem",
       "runtime_support": "unsupported",
+      "source_row_count": 2,
       "table_index": 4,
       "unsupported_rows": [
         {
@@ -895,6 +853,7 @@
       "handled_rows": [],
       "map_id": "the-vermillion-problem",
       "runtime_support": "unsupported",
+      "source_row_count": 4,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -926,6 +885,7 @@
       ],
       "map_id": "mist-opportunities",
       "runtime_support": "automatic",
+      "source_row_count": 5,
       "table_index": 2,
       "unsupported_rows": []
     },
@@ -934,6 +894,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 3,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -955,6 +916,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 7,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -992,6 +954,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 7,
       "table_index": 6,
       "unsupported_rows": [
         {
@@ -1029,6 +992,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 7,
       "unsupported_rows": [
         {
@@ -1062,6 +1026,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 8,
       "unsupported_rows": [
         {
@@ -1095,6 +1060,7 @@
       "handled_rows": [],
       "map_id": "mist-opportunities",
       "runtime_support": "unsupported",
+      "source_row_count": 9,
       "table_index": 9,
       "unsupported_rows": [
         {
@@ -1146,6 +1112,7 @@
       ],
       "map_id": "mist-opportunities",
       "runtime_support": "automatic",
+      "source_row_count": 5,
       "table_index": 10,
       "unsupported_rows": []
     },
@@ -1187,6 +1154,7 @@
       ],
       "map_id": "mist-opportunities",
       "runtime_support": "manual_context",
+      "source_row_count": 33,
       "table_index": 11,
       "unsupported_rows": [
         {
@@ -1200,6 +1168,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 1,
       "unsupported_rows": [
         {
@@ -1233,6 +1202,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 1,
       "table_index": 2,
       "unsupported_rows": [
         {
@@ -1248,6 +1218,7 @@
       ],
       "map_id": "miner-evacuation",
       "runtime_support": "automatic",
+      "source_row_count": 1,
       "table_index": 3,
       "unsupported_rows": []
     },
@@ -1261,6 +1232,7 @@
       ],
       "map_id": "miner-evacuation",
       "runtime_support": "automatic",
+      "source_row_count": 4,
       "table_index": 4,
       "unsupported_rows": []
     },
@@ -1277,6 +1249,7 @@
       ],
       "map_id": "miner-evacuation",
       "runtime_support": "automatic",
+      "source_row_count": 7,
       "table_index": 10,
       "unsupported_rows": []
     },
@@ -1285,6 +1258,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 8,
       "table_index": 11,
       "unsupported_rows": [
         {
@@ -1326,6 +1300,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 9,
       "table_index": 12,
       "unsupported_rows": [
         {
@@ -1371,6 +1346,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 9,
       "table_index": 13,
       "unsupported_rows": [
         {
@@ -1416,6 +1392,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 13,
       "table_index": 14,
       "unsupported_rows": [
         {
@@ -1477,6 +1454,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 1,
       "table_index": 15,
       "unsupported_rows": [
         {
@@ -1490,6 +1468,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 3,
       "table_index": 16,
       "unsupported_rows": [
         {
@@ -1511,6 +1490,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 8,
       "table_index": 17,
       "unsupported_rows": [
         {
@@ -1552,6 +1532,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 18,
       "unsupported_rows": [
         {
@@ -1585,6 +1566,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 15,
       "table_index": 19,
       "unsupported_rows": [
         {
@@ -1654,6 +1636,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 19,
       "table_index": 20,
       "unsupported_rows": [
         {
@@ -1739,6 +1722,7 @@
       "handled_rows": [],
       "map_id": "miner-evacuation",
       "runtime_support": "unsupported",
+      "source_row_count": 12,
       "table_index": 21,
       "unsupported_rows": [
         {
@@ -1796,6 +1780,7 @@
       "handled_rows": [],
       "map_id": "dead-of-night",
       "runtime_support": "unsupported",
+      "source_row_count": 12,
       "table_index": 0,
       "unsupported_rows": [
         {
@@ -1853,6 +1838,7 @@
       "handled_rows": [],
       "map_id": "dead-of-night",
       "runtime_support": "unsupported",
+      "source_row_count": 42,
       "table_index": 1,
       "unsupported_rows": [
         {
@@ -2030,6 +2016,7 @@
       "handled_rows": [],
       "map_id": "dead-of-night",
       "runtime_support": "unsupported",
+      "source_row_count": 14,
       "table_index": 2,
       "unsupported_rows": [
         {
@@ -2110,6 +2097,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 19,
       "table_index": 3,
       "unsupported_rows": [
         {
@@ -2155,6 +2143,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 18,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -2192,6 +2181,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 19,
       "table_index": 7,
       "unsupported_rows": [
         {
@@ -2233,6 +2223,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 19,
       "table_index": 9,
       "unsupported_rows": [
         {
@@ -2266,6 +2257,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 9,
       "table_index": 11,
       "unsupported_rows": [
         {
@@ -2290,6 +2282,7 @@
       ],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 12,
       "table_index": 14,
       "unsupported_rows": [
         {
@@ -2323,6 +2316,7 @@
       "handled_rows": [],
       "map_id": "dead-of-night",
       "runtime_support": "manual_context",
+      "source_row_count": 5,
       "table_index": 15,
       "unsupported_rows": [
         {
@@ -2352,6 +2346,7 @@
       "handled_rows": [],
       "map_id": "dead-of-night",
       "runtime_support": "unsupported",
+      "source_row_count": 5,
       "table_index": 16,
       "unsupported_rows": [
         {
@@ -2385,6 +2380,7 @@
       ],
       "map_id": "scythe-of-amon",
       "runtime_support": "automatic",
+      "source_row_count": 3,
       "table_index": 5,
       "unsupported_rows": []
     },
@@ -2403,6 +2399,7 @@
       ],
       "map_id": "scythe-of-amon",
       "runtime_support": "automatic",
+      "source_row_count": 9,
       "table_index": 6,
       "unsupported_rows": []
     },
@@ -2411,6 +2408,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 3,
       "table_index": 4,
       "unsupported_rows": [
         {
@@ -2432,6 +2430,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 3,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -2455,12 +2454,9 @@
       ],
       "map_id": "malwarfare",
       "runtime_support": "automatic",
+      "source_row_count": 3,
       "table_index": 6,
       "unsupported_rows": [
-        {
-          "reason": "source_expression_unsupported",
-          "row_index": 1
-        },
         {
           "reason": "source_expression_unsupported",
           "row_index": 2
@@ -2476,6 +2472,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 7,
       "unsupported_rows": [
         {
@@ -2509,6 +2506,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 6,
       "table_index": 8,
       "unsupported_rows": [
         {
@@ -2542,6 +2540,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 9,
       "table_index": 9,
       "unsupported_rows": [
         {
@@ -2587,6 +2586,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 9,
       "table_index": 10,
       "unsupported_rows": [
         {
@@ -2632,6 +2632,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 8,
       "table_index": 11,
       "unsupported_rows": [
         {
@@ -2673,6 +2674,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 8,
       "table_index": 12,
       "unsupported_rows": [
         {
@@ -2714,6 +2716,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 11,
       "table_index": 13,
       "unsupported_rows": [
         {
@@ -2767,6 +2770,7 @@
       "handled_rows": [],
       "map_id": "malwarfare",
       "runtime_support": "unsupported",
+      "source_row_count": 11,
       "table_index": 14,
       "unsupported_rows": [
         {
@@ -2830,6 +2834,7 @@
       ],
       "map_id": "part-and-parcel",
       "runtime_support": "automatic",
+      "source_row_count": 9,
       "table_index": 7,
       "unsupported_rows": []
     },
@@ -2838,6 +2843,7 @@
       "handled_rows": [],
       "map_id": "cradle-of-death",
       "runtime_support": "unsupported",
+      "source_row_count": 4,
       "table_index": 0,
       "unsupported_rows": [
         {
@@ -2874,6 +2880,7 @@
       ],
       "map_id": "cradle-of-death",
       "runtime_support": "automatic",
+      "source_row_count": 10,
       "table_index": 4,
       "unsupported_rows": []
     },
@@ -2882,6 +2889,7 @@
       "handled_rows": [],
       "map_id": "cradle-of-death",
       "runtime_support": "unsupported",
+      "source_row_count": 4,
       "table_index": 5,
       "unsupported_rows": [
         {
@@ -2916,6 +2924,7 @@
       ],
       "map_id": "cradle-of-death",
       "runtime_support": "manual_context",
+      "source_row_count": 8,
       "table_index": 6,
       "unsupported_rows": []
     }

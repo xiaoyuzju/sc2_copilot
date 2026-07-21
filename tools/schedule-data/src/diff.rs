@@ -4,7 +4,7 @@ use std::{
     process::Command,
 };
 
-use sc2_copilot_core::{ScheduleCatalog, Trigger};
+use sc2_copilot_core::{Fact, LocationSpec, ScheduleCatalog, Trigger};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
@@ -14,6 +14,14 @@ pub const FIXED_KEIFRAME_COMMIT: &str = "192bdbce6868e597b297cf47f485ac5c79eb9ba
 pub struct KeiframeTimeRecord {
     map_name: String,
     time_value: i64,
+    #[serde(default)]
+    time_label: Option<String>,
+    #[serde(default)]
+    count_value: Option<i64>,
+    #[serde(default)]
+    event_text: Option<String>,
+    #[serde(default)]
+    army_text: Option<String>,
 }
 
 impl KeiframeTimeRecord {
@@ -21,6 +29,27 @@ impl KeiframeTimeRecord {
         Self {
             map_name: map_name.into(),
             time_value,
+            time_label: None,
+            count_value: None,
+            event_text: None,
+            army_text: None,
+        }
+    }
+
+    pub fn with_comparison_fields(
+        map_name: impl Into<String>,
+        time_label: impl Into<String>,
+        time_value: i64,
+        event_text: Option<&str>,
+        army_text: Option<&str>,
+    ) -> Self {
+        Self {
+            map_name: map_name.into(),
+            time_value,
+            time_label: Some(time_label.into()),
+            count_value: None,
+            event_text: event_text.map(str::to_owned),
+            army_text: army_text.map(str::to_owned),
         }
     }
 }
@@ -46,6 +75,27 @@ pub struct KeiframeConfigDiff {
     pub keiframe_simultaneous_times: Vec<i64>,
     pub wiki_window_event_count: usize,
     pub wiki_subsecond_event_count: usize,
+    pub keiframe_time_label_mismatch_count: usize,
+    pub wiki_structured_fact_count: usize,
+    pub wiki_multi_fact_event_count: usize,
+    pub keiframe_text_attribute_record_count: usize,
+    pub keiframe_compound_record_count: usize,
+    pub keiframe_count_condition_record_count: usize,
+    pub numeric_candidate_review_times: Vec<i64>,
+    pub numeric_candidate_mismatch_times: Vec<i64>,
+    pub category_review_times: Vec<i64>,
+    pub simultaneous_count_mismatches: Vec<SimultaneousCountDiff>,
+    pub shared_vocabulary_token_count: usize,
+    pub wiki_only_vocabulary_token_count: usize,
+    pub keiframe_only_vocabulary_token_count: usize,
+    pub unsupported_runtime_condition: bool,
+}
+
+#[derive(Debug, Serialize)]
+pub struct SimultaneousCountDiff {
+    pub time_value: i64,
+    pub wiki_count: usize,
+    pub keiframe_count: usize,
 }
 
 pub fn compare_keiframe_times(
@@ -88,7 +138,7 @@ pub fn diff_keiframe(
     }
 
     let database_path = keiframe_repo.join("resources/db/maps.db");
-    let query = "SELECT map_name, time_value FROM map_configs ORDER BY map_name, time_value;";
+    let query = "SELECT map_name, time_label, time_value, CASE WHEN typeof(count_value) = 'integer' THEN count_value END AS count_value, event_text, army_text FROM map_configs ORDER BY map_name, time_value;";
     let sqlite = Command::new("sqlite3")
         .arg("-json")
         .arg(&database_path)
@@ -114,16 +164,34 @@ fn compare_config(
     let mut wiki_event_count = 0;
     let mut wiki_window_event_count = 0;
     let mut wiki_subsecond_event_count = 0;
+    let mut wiki_structured_fact_count = 0;
+    let mut wiki_multi_fact_event_count = 0;
+    let mut wiki_vocabulary = BTreeSet::new();
+    let mut wiki_numbers = BTreeMap::<i64, BTreeSet<u64>>::new();
+    let mut wiki_categories = BTreeSet::<i64>::new();
 
     if let Some(schedule) = catalog.schedule_for(mapping.map_id, mapping.variant_id) {
         for event in schedule.events().iter().filter(|event| {
             event.variant_id().is_none() || event.variant_id() == mapping.variant_id
         }) {
+            wiki_structured_fact_count += event.facts().len();
+            if event.facts().len() > 1 {
+                wiki_multi_fact_event_count += 1;
+            }
+            collect_wiki_vocabulary(event.facts(), &mut wiki_vocabulary);
             match event.trigger() {
                 Trigger::AtGameTime { milliseconds } if milliseconds % 1_000 == 0 => {
-                    *wiki_counts
-                        .entry((*milliseconds / 1_000) as i64)
-                        .or_insert(0) += 1;
+                    let seconds = (*milliseconds / 1_000) as i64;
+                    *wiki_counts.entry(seconds).or_insert(0) += 1;
+                    let numbers = wiki_numbers.entry(seconds).or_default();
+                    collect_wiki_numbers(event.facts(), numbers);
+                    if event
+                        .facts()
+                        .iter()
+                        .any(|fact| matches!(fact, Fact::EventCategory { .. }))
+                    {
+                        wiki_categories.insert(seconds);
+                    }
                     wiki_event_count += 1;
                 }
                 Trigger::AtGameTime { .. } => {
@@ -139,16 +207,88 @@ fn compare_config(
         }
     }
 
-    let mut keiframe_counts = BTreeMap::new();
-    for record in records
+    let selected_records = records
         .iter()
         .filter(|record| record.map_name == mapping.keiframe_config)
-    {
+        .collect::<Vec<_>>();
+    let mut keiframe_counts = BTreeMap::new();
+    let mut keiframe_time_label_mismatch_count = 0;
+    let mut keiframe_text_attribute_record_count = 0;
+    let mut keiframe_compound_record_count = 0;
+    let mut keiframe_count_condition_record_count = 0;
+    let mut keiframe_vocabulary = BTreeSet::new();
+    let mut keiframe_numbers = BTreeMap::<i64, BTreeSet<u64>>::new();
+    let mut keiframe_category_candidates = BTreeSet::new();
+    for record in &selected_records {
         *keiframe_counts.entry(record.time_value).or_insert(0) += 1;
+        if record.count_value.is_some() {
+            keiframe_count_condition_record_count += 1;
+        }
+        if record
+            .time_label
+            .as_deref()
+            .and_then(parse_time_label)
+            .is_some_and(|seconds| seconds != record.time_value)
+        {
+            keiframe_time_label_mismatch_count += 1;
+        }
+        let event_text = nonempty(record.event_text.as_deref());
+        let army_text = nonempty(record.army_text.as_deref());
+        if event_text.is_some() || army_text.is_some() {
+            keiframe_text_attribute_record_count += 1;
+        }
+        if (event_text.is_some() && army_text.is_some())
+            || event_text.is_some_and(looks_compound)
+            || army_text.is_some_and(looks_compound)
+        {
+            keiframe_compound_record_count += 1;
+        }
+        if event_text.is_some() {
+            keiframe_category_candidates.insert(record.time_value);
+        }
+        for text in [event_text, army_text].into_iter().flatten() {
+            collect_tokens(text, &mut keiframe_vocabulary);
+            collect_numbers(text, keiframe_numbers.entry(record.time_value).or_default());
+        }
     }
 
     let wiki_times = wiki_counts.keys().copied().collect::<BTreeSet<_>>();
     let keiframe_times = keiframe_counts.keys().copied().collect::<BTreeSet<_>>();
+    let numeric_candidate_review_times = wiki_numbers
+        .iter()
+        .filter_map(|(time, wiki)| {
+            (!wiki.is_empty()
+                && keiframe_numbers
+                    .get(time)
+                    .is_some_and(|values| !values.is_empty()))
+            .then_some(*time)
+        })
+        .collect::<Vec<_>>();
+    let numeric_candidate_mismatch_times = numeric_candidate_review_times
+        .iter()
+        .copied()
+        .filter(|time| wiki_numbers.get(time) != keiframe_numbers.get(time))
+        .collect();
+    let category_review_times = wiki_categories
+        .intersection(&keiframe_category_candidates)
+        .copied()
+        .collect();
+    let simultaneous_count_mismatches = wiki_times
+        .union(&keiframe_times)
+        .filter_map(|time| {
+            let wiki_count = wiki_counts.get(time).copied().unwrap_or_default();
+            let keiframe_count = keiframe_counts.get(time).copied().unwrap_or_default();
+            (wiki_count != keiframe_count).then_some(SimultaneousCountDiff {
+                time_value: *time,
+                wiki_count,
+                keiframe_count,
+            })
+        })
+        .collect();
+    let shared_vocabulary_token_count = wiki_vocabulary.intersection(&keiframe_vocabulary).count();
+    let wiki_only_vocabulary_token_count = wiki_vocabulary.difference(&keiframe_vocabulary).count();
+    let keiframe_only_vocabulary_token_count =
+        keiframe_vocabulary.difference(&wiki_vocabulary).count();
 
     KeiframeConfigDiff {
         keiframe_config: mapping.keiframe_config,
@@ -169,6 +309,137 @@ fn compare_config(
             .collect(),
         wiki_window_event_count,
         wiki_subsecond_event_count,
+        keiframe_time_label_mismatch_count,
+        wiki_structured_fact_count,
+        wiki_multi_fact_event_count,
+        keiframe_text_attribute_record_count,
+        keiframe_compound_record_count,
+        keiframe_count_condition_record_count,
+        numeric_candidate_review_times,
+        numeric_candidate_mismatch_times,
+        category_review_times,
+        simultaneous_count_mismatches,
+        shared_vocabulary_token_count,
+        wiki_only_vocabulary_token_count,
+        keiframe_only_vocabulary_token_count,
+        unsupported_runtime_condition: mapping.map_id == "malwarfare",
+    }
+}
+
+fn nonempty(value: Option<&str>) -> Option<&str> {
+    value.filter(|value| !value.trim().is_empty())
+}
+
+fn looks_compound(value: &str) -> bool {
+    ['+', '/', '&', '→', '、']
+        .iter()
+        .any(|separator| value.contains(*separator))
+}
+
+fn parse_time_label(value: &str) -> Option<i64> {
+    let (minutes, seconds) = value.trim().split_once(':')?;
+    let minutes = minutes.parse::<i64>().ok()?;
+    let seconds = seconds.parse::<i64>().ok()?;
+    (minutes >= 0 && (0..60).contains(&seconds)).then_some(minutes * 60 + seconds)
+}
+
+fn collect_wiki_vocabulary(facts: &[Fact], output: &mut BTreeSet<String>) {
+    for fact in facts {
+        match fact {
+            Fact::EventCategory { value } => collect_tokens(&format!("{value:?}"), output),
+            Fact::Wave { .. } | Fact::WaveExpression { .. } => collect_tokens("波次", output),
+            Fact::Location { value } => match value {
+                LocationSpec::Single { name } => collect_tokens(name, output),
+                LocationSpec::All { names } => {
+                    for name in names {
+                        collect_tokens(name, output);
+                    }
+                }
+                LocationSpec::Any { options } => {
+                    for option in options {
+                        collect_tokens(&option.name, output);
+                    }
+                }
+            },
+            Fact::Target { value }
+            | Fact::Route { value }
+            | Fact::ScaleExpression { value }
+            | Fact::TechExpression { value }
+            | Fact::Composition { value }
+            | Fact::Probability { value } => collect_tokens(value, output),
+            Fact::Health { .. } => collect_tokens("生命值", output),
+            Fact::Shield { .. } => collect_tokens("护盾值", output),
+            Fact::UnitCount { unit, .. } => collect_tokens(&format!("{unit:?}"), output),
+            Fact::Count { subject, value } => {
+                collect_tokens(subject, output);
+                collect_tokens(value, output);
+            }
+            Fact::ScaleLevel { .. } => collect_tokens("规模", output),
+            Fact::TechLevel { .. } => collect_tokens("科技", output),
+            Fact::Detail { label, value } => {
+                collect_tokens(label, output);
+                collect_tokens(value, output);
+            }
+            Fact::MutatorContext {
+                display_name,
+                label,
+                value,
+                ..
+            } => {
+                collect_tokens(display_name, output);
+                collect_tokens(label, output);
+                collect_tokens(value, output);
+            }
+        }
+    }
+}
+
+fn collect_wiki_numbers(facts: &[Fact], output: &mut BTreeSet<u64>) {
+    for fact in facts {
+        match fact {
+            Fact::Health { value } | Fact::Shield { value } => {
+                output.insert(u64::from(*value));
+            }
+            Fact::UnitCount { value, .. } => {
+                output.insert(u64::from(*value));
+            }
+            Fact::ScaleLevel { value } | Fact::TechLevel { value } => {
+                output.insert(u64::from(*value));
+            }
+            Fact::Count { value, .. }
+            | Fact::ScaleExpression { value }
+            | Fact::TechExpression { value }
+            | Fact::Composition { value }
+            | Fact::Probability { value } => collect_numbers(value, output),
+            _ => {}
+        }
+    }
+}
+
+fn collect_tokens(value: &str, output: &mut BTreeSet<String>) {
+    let mut ascii = String::new();
+    for character in value.chars() {
+        if character.is_ascii_alphanumeric() {
+            ascii.push(character.to_ascii_lowercase());
+        } else {
+            if !ascii.is_empty() {
+                output.insert(std::mem::take(&mut ascii));
+            }
+            if character.is_alphanumeric() {
+                output.insert(character.to_string());
+            }
+        }
+    }
+    if !ascii.is_empty() {
+        output.insert(ascii);
+    }
+}
+
+fn collect_numbers(value: &str, output: &mut BTreeSet<u64>) {
+    for token in value.split(|character: char| !character.is_ascii_digit()) {
+        if let Ok(number) = token.parse() {
+            output.insert(number);
+        }
     }
 }
 

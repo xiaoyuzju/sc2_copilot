@@ -1,5 +1,6 @@
 use sc2_copilot_core::{
-    CopilotEngine, EngineInput, EngineSettings, GameObservation, ScheduleCatalog, UserCommand,
+    CopilotEngine, EngineInput, EngineSettings, EventTiming, GameObservation, ScheduleCatalog,
+    UserCommand,
 };
 
 #[test]
@@ -368,6 +369,142 @@ fn overlay_view_keeps_simultaneous_upcoming_events_separate_after_notification()
         30_000
     );
     assert_eq!(update.view.upcoming_events[1].event_id, "same-b");
+}
+
+#[test]
+fn time_window_keeps_both_bounds_and_remains_actionable_until_it_closes() {
+    let catalog = catalog_with_events(
+        r#"
+        {
+          "map_id": "test-map",
+          "event_id": "windowed-wave",
+          "trigger": { "kind": "at_game_time_window", "earliest_milliseconds": 60000, "latest_milliseconds": 75000 },
+          "facts": [],
+          "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 1 }],
+          "runtime_support": "automatic"
+        }
+        "#,
+    );
+    let mut engine = CopilotEngine::new(catalog, EngineSettings::default());
+
+    let opening_alert = observe(&mut engine, 30_000);
+    assert_eq!(
+        opening_alert.alert_batches[0].timing,
+        EventTiming::Window {
+            earliest_milliseconds: 60_000,
+            latest_milliseconds: 75_000,
+        }
+    );
+    assert_eq!(
+        opening_alert.view.upcoming_events[0].timing,
+        EventTiming::Window {
+            earliest_milliseconds: 60_000,
+            latest_milliseconds: 75_000,
+        }
+    );
+    assert_eq!(
+        opening_alert.view.upcoming_events[0].remaining_milliseconds,
+        30_000
+    );
+
+    let mut late_engine = CopilotEngine::new(
+        catalog_with_events(
+            r#"
+            {
+              "map_id": "test-map",
+              "event_id": "windowed-wave",
+              "trigger": { "kind": "at_game_time_window", "earliest_milliseconds": 60000, "latest_milliseconds": 75000 },
+              "facts": [],
+              "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 1 }],
+              "runtime_support": "automatic"
+            }
+            "#,
+        ),
+        EngineSettings::default(),
+    );
+    let active_window = observe(&mut late_engine, 65_000);
+    assert_eq!(active_window.alert_batches[0].event_ids, ["windowed-wave"]);
+    assert_eq!(
+        active_window.view.upcoming_events[0].remaining_milliseconds,
+        0
+    );
+
+    let mut after_window_engine = CopilotEngine::new(
+        catalog_with_events(
+            r#"
+            {
+              "map_id": "test-map",
+              "event_id": "windowed-wave",
+              "trigger": { "kind": "at_game_time_window", "earliest_milliseconds": 60000, "latest_milliseconds": 75000 },
+              "facts": [],
+              "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 1 }],
+              "runtime_support": "automatic"
+            }
+            "#,
+        ),
+        EngineSettings::default(),
+    );
+    let closed_window = observe(&mut after_window_engine, 75_000);
+    assert!(closed_window.alert_batches.is_empty());
+    assert_eq!(closed_window.newly_missed_event_ids, ["windowed-wave"]);
+    assert!(closed_window.view.upcoming_events.is_empty());
+}
+
+#[test]
+fn windows_with_different_upper_bounds_do_not_share_an_alert_batch() {
+    let catalog = catalog_with_events(
+        r#"
+        {
+          "map_id": "test-map",
+          "event_id": "short-window",
+          "trigger": { "kind": "at_game_time_window", "earliest_milliseconds": 60000, "latest_milliseconds": 70000 },
+          "facts": [],
+          "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 1 }],
+          "runtime_support": "automatic"
+        },
+        {
+          "map_id": "test-map",
+          "event_id": "long-window",
+          "trigger": { "kind": "at_game_time_window", "earliest_milliseconds": 60000, "latest_milliseconds": 75000 },
+          "facts": [],
+          "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 2 }],
+          "runtime_support": "automatic"
+        }
+        "#,
+    );
+    let mut engine = CopilotEngine::new(catalog, EngineSettings::default());
+
+    let update = observe(&mut engine, 30_000);
+
+    assert_eq!(update.alert_batches.len(), 2);
+}
+
+#[test]
+fn manually_selected_mutator_context_is_session_scoped() {
+    let catalog = catalog_with_events(
+        r#"
+        {
+          "map_id": "test-map",
+          "event_id": "wave-1",
+          "trigger": { "kind": "at_game_time", "milliseconds": 60000 },
+          "facts": [],
+          "source_refs": [{ "source_url": "https://example.invalid", "snapshot_batch": "test", "snapshot_path": "test.json", "table_index": 0, "row_index": 1 }],
+          "runtime_support": "automatic"
+        }
+        "#,
+    );
+    let mut engine = CopilotEngine::new(catalog, EngineSettings::default());
+    observe(&mut engine, 0);
+
+    let selected = engine.apply(EngineInput::Command(UserCommand::SetMutatorActive {
+        mutator_id: "polarity".to_owned(),
+        active: true,
+    }));
+    assert_eq!(selected.view.active_mutator_ids, ["polarity"]);
+
+    engine.apply(EngineInput::Observation(GameObservation::Menu));
+    let next_session = observe_session(&mut engine, "session-2", 0);
+    assert!(next_session.view.active_mutator_ids.is_empty());
 }
 
 fn observe(

@@ -4,7 +4,7 @@ use sc2_copilot_app::{
     AlertPlayer, AppController, AppSettings, NoopAlertPlayer, Sc2Observation, Sc2Poll,
     SettingsStore,
 };
-use sc2_copilot_core::{AlertBatch, ScheduleCatalog};
+use sc2_copilot_core::{AlertBatch, EventTiming, ScheduleCatalog};
 
 const CATALOG: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
@@ -84,12 +84,38 @@ fn settings_store_round_trips_persistent_settings() {
 fn noop_player_accepts_a_batch_without_choosing_a_sound_provider() {
     let mut player = NoopAlertPlayer;
     let batch = AlertBatch {
-        event_time_milliseconds: 10_000,
+        timing: EventTiming::Exact {
+            milliseconds: 10_000,
+        },
         event_ids: vec!["example".to_owned()],
     };
 
     player.play(&batch).expect("no-op delivery should succeed");
     assert_eq!(player.status(), "未配置（提醒接口已保留）");
+}
+
+#[test]
+fn controller_applies_manual_mutator_context_only_for_the_current_session() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", Some("oblivion-express"), 0));
+
+    let map = controller
+        .map("oblivion-express")
+        .expect("known map should be described");
+    assert_eq!(map.mutators.len(), 1);
+    assert_eq!(map.mutators[0].id, "polarity");
+    let event_id = "oblivion-express-t0-r1-c1";
+    assert!(!controller.event_label(event_id).contains("可造成伤害玩家"));
+
+    controller.set_mutator_active("polarity".to_owned(), true);
+    assert!(controller.event_label(event_id).contains("可造成伤害玩家"));
+
+    controller.handle_poll(Sc2Poll {
+        observation: Sc2Observation::Menu,
+        diagnostic: None,
+    });
+    controller.handle_poll(in_game("session-2", Some("oblivion-express"), 0));
+    assert!(!controller.event_label(event_id).contains("可造成伤害玩家"));
 }
 
 fn controller(player: Box<dyn AlertPlayer>) -> AppController {

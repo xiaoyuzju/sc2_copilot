@@ -7,7 +7,7 @@ $shortcutPath = Join-Path $startMenuDirectory 'SC2 Copilot.lnk'
 
 New-Item -ItemType Directory -Path $installDirectory -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'sc2-copilot.exe') -Destination $installDirectory -Force
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'sc2-replay.exe') -Destination $installDirectory -Force
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'sc2-fixture-replay.exe') -Destination $installDirectory -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Uninstall.ps1') -Destination $installDirectory -Force
 
 $shell = New-Object -ComObject WScript.Shell

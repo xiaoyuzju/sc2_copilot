@@ -36,7 +36,78 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 120,
+      "wiki_multi_fact_event_count": 20,
+      "keiframe_text_attribute_record_count": 19,
+      "keiframe_compound_record_count": 17,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        240,
+        300,
+        360,
+        420,
+        480,
+        600,
+        660,
+        720,
+        780,
+        840,
+        960,
+        1020,
+        1140,
+        1200,
+        1260,
+        1320,
+        1380,
+        1440,
+        1500
+      ],
+      "numeric_candidate_mismatch_times": [
+        300,
+        480,
+        660,
+        720,
+        840,
+        1020,
+        1200,
+        1260,
+        1380,
+        1500
+      ],
+      "category_review_times": [
+        240,
+        300,
+        360,
+        420,
+        480,
+        600,
+        660,
+        720,
+        780,
+        840,
+        960,
+        1020,
+        1140,
+        1200,
+        1260,
+        1320,
+        1380,
+        1440,
+        1500
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 1500,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 2,
+      "wiki_only_vocabulary_token_count": 29,
+      "keiframe_only_vocabulary_token_count": 25,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "虚空撕裂-左",
@@ -73,7 +144,76 @@
         1080
       ],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 73,
+      "wiki_multi_fact_event_count": 12,
+      "keiframe_text_attribute_record_count": 18,
+      "keiframe_compound_record_count": 18,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        180,
+        270,
+        360,
+        540,
+        560,
+        720,
+        820,
+        900,
+        1080,
+        1260,
+        1440
+      ],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [
+        180,
+        270,
+        360,
+        540,
+        560,
+        720,
+        820,
+        900,
+        1080,
+        1260,
+        1440
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 1620,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1800,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1980,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2160,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2340,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2520,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 8,
+      "wiki_only_vocabulary_token_count": 33,
+      "keiframe_only_vocabulary_token_count": 7,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "虚空撕裂-右",
@@ -106,7 +246,79 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 73,
+      "wiki_multi_fact_event_count": 12,
+      "keiframe_text_attribute_record_count": 17,
+      "keiframe_compound_record_count": 17,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        240,
+        270,
+        480,
+        560,
+        600,
+        820,
+        840,
+        960,
+        1080,
+        1200,
+        1320,
+        1560
+      ],
+      "numeric_candidate_mismatch_times": [
+        240,
+        480,
+        840,
+        960,
+        1200
+      ],
+      "category_review_times": [
+        240,
+        270,
+        480,
+        560,
+        600,
+        820,
+        840,
+        960,
+        1080,
+        1200,
+        1320,
+        1560
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 1740,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1920,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2100,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2280,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2460,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 8,
+      "wiki_only_vocabulary_token_count": 33,
+      "keiframe_only_vocabulary_token_count": 7,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "虚空降临",
@@ -159,7 +371,136 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 266,
+      "wiki_multi_fact_event_count": 40,
+      "keiframe_text_attribute_record_count": 13,
+      "keiframe_compound_record_count": 13,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        180,
+        300,
+        450,
+        595,
+        600,
+        660,
+        840,
+        1008,
+        1158,
+        1308,
+        1458
+      ],
+      "numeric_candidate_mismatch_times": [
+        1008,
+        1158,
+        1308,
+        1458
+      ],
+      "category_review_times": [
+        180,
+        300,
+        450,
+        595,
+        600,
+        660,
+        840,
+        1008,
+        1158,
+        1308,
+        1458
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 375,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 510,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 540,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 750,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 885,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 930,
+          "wiki_count": 4,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 975,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 980,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1080,
+          "wiki_count": 3,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1185,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1230,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1298,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1300,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1380,
+          "wiki_count": 6,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1415,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1420,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1425,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        }
+      ],
+      "shared_vocabulary_token_count": 7,
+      "wiki_only_vocabulary_token_count": 65,
+      "keiframe_only_vocabulary_token_count": 9,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "克哈裂痕",
@@ -185,7 +526,48 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 77,
+      "wiki_multi_fact_event_count": 11,
+      "keiframe_text_attribute_record_count": 11,
+      "keiframe_compound_record_count": 11,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        120,
+        300,
+        480,
+        660,
+        840,
+        1020,
+        1230,
+        1470,
+        1590,
+        1710,
+        1800
+      ],
+      "numeric_candidate_mismatch_times": [
+        480,
+        840
+      ],
+      "category_review_times": [
+        120,
+        300,
+        480,
+        660,
+        840,
+        1020,
+        1230,
+        1470,
+        1590,
+        1710,
+        1800
+      ],
+      "simultaneous_count_mismatches": [],
+      "shared_vocabulary_token_count": 3,
+      "wiki_only_vocabulary_token_count": 23,
+      "keiframe_only_vocabulary_token_count": 8,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "往日神庙-A",
@@ -262,7 +644,223 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 330,
+      "wiki_multi_fact_event_count": 63,
+      "keiframe_text_attribute_record_count": 28,
+      "keiframe_compound_record_count": 25,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        195,
+        255,
+        360,
+        405,
+        450,
+        540,
+        600,
+        660,
+        720,
+        750,
+        795,
+        900,
+        920,
+        970,
+        1000,
+        1080,
+        1095,
+        1155,
+        1200,
+        1215,
+        1350,
+        1410,
+        1420,
+        1480
+      ],
+      "numeric_candidate_mismatch_times": [
+        405,
+        600,
+        720,
+        795,
+        900,
+        920,
+        1000,
+        1095,
+        1215,
+        1350,
+        1420,
+        1480
+      ],
+      "category_review_times": [
+        195,
+        255,
+        360,
+        405,
+        450,
+        495,
+        540,
+        600,
+        660,
+        720,
+        750,
+        795,
+        825,
+        900,
+        920,
+        970,
+        1000,
+        1015,
+        1080,
+        1095,
+        1155,
+        1200,
+        1215,
+        1350,
+        1410,
+        1420,
+        1480
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 180,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 285,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 380,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 420,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 465,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 540,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 555,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 600,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 620,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 660,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 680,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 740,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 770,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 815,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 903,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 925,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1100,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1125,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1175,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1215,
+          "wiki_count": 3,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1320,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1350,
+          "wiki_count": 4,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1365,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1425,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1435,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1480,
+          "wiki_count": 3,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1495,
+          "wiki_count": 3,
+          "keiframe_count": 0
+        }
+      ],
+      "shared_vocabulary_token_count": 10,
+      "wiki_only_vocabulary_token_count": 28,
+      "keiframe_only_vocabulary_token_count": 16,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "往日神庙-B",
@@ -341,7 +939,248 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 350,
+      "wiki_multi_fact_event_count": 66,
+      "keiframe_text_attribute_record_count": 28,
+      "keiframe_compound_record_count": 25,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        190,
+        250,
+        360,
+        405,
+        450,
+        540,
+        600,
+        660,
+        720,
+        750,
+        815,
+        900,
+        930,
+        995,
+        1015,
+        1080,
+        1095,
+        1155,
+        1200,
+        1220,
+        1240,
+        1350,
+        1410,
+        1420,
+        1480
+      ],
+      "numeric_candidate_mismatch_times": [
+        405,
+        450,
+        600,
+        660,
+        720,
+        815,
+        995,
+        1015,
+        1095,
+        1200,
+        1220,
+        1240,
+        1350,
+        1420,
+        1480
+      ],
+      "category_review_times": [
+        190,
+        250,
+        360,
+        405,
+        450,
+        495,
+        540,
+        600,
+        660,
+        720,
+        750,
+        815,
+        825,
+        900,
+        930,
+        945,
+        995,
+        1015,
+        1080,
+        1095,
+        1155,
+        1200,
+        1220,
+        1240,
+        1350,
+        1410,
+        1420,
+        1480
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 180,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 280,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 380,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 420,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 465,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 540,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 550,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 560,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 600,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 620,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 660,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 675,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 680,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 740,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 770,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 835,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 998,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1020,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1100,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1125,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1175,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1200,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1220,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1235,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1250,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1350,
+          "wiki_count": 4,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1365,
+          "wiki_count": 2,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1425,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1435,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1480,
+          "wiki_count": 3,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1495,
+          "wiki_count": 3,
+          "keiframe_count": 0
+        }
+      ],
+      "shared_vocabulary_token_count": 10,
+      "wiki_only_vocabulary_token_count": 38,
+      "keiframe_only_vocabulary_token_count": 20,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "天界封锁",
@@ -378,7 +1217,115 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 56,
+      "wiki_multi_fact_event_count": 8,
+      "keiframe_text_attribute_record_count": 17,
+      "keiframe_compound_record_count": 17,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        240,
+        480,
+        660,
+        840,
+        1020
+      ],
+      "numeric_candidate_mismatch_times": [
+        240,
+        480,
+        660,
+        840,
+        1020
+      ],
+      "category_review_times": [
+        240,
+        480,
+        660,
+        840,
+        1020
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 660,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 840,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1020,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1140,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1260,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1380,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1500,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1620,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1740,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1860,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1980,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2100,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2220,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2340,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2460,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 2,
+      "wiki_only_vocabulary_token_count": 15,
+      "keiframe_only_vocabulary_token_count": 7,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "升格之链",
@@ -436,7 +1383,158 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 181,
+      "wiki_multi_fact_event_count": 36,
+      "keiframe_text_attribute_record_count": 29,
+      "keiframe_compound_record_count": 29,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        210,
+        300,
+        420,
+        540,
+        780,
+        840,
+        900,
+        1080,
+        1140,
+        1200,
+        1230,
+        1290,
+        1320,
+        1350,
+        1380,
+        1560,
+        1590,
+        1650,
+        1680,
+        1740,
+        1800,
+        1980,
+        2010,
+        2040,
+        2100
+      ],
+      "numeric_candidate_mismatch_times": [
+        420,
+        540,
+        900,
+        1320,
+        1380,
+        1650,
+        1800,
+        2010
+      ],
+      "category_review_times": [
+        210,
+        300,
+        420,
+        540,
+        780,
+        840,
+        900,
+        1080,
+        1140,
+        1200,
+        1230,
+        1290,
+        1320,
+        1350,
+        1380,
+        1560,
+        1590,
+        1650,
+        1680,
+        1740,
+        1800,
+        1980,
+        2010,
+        2040,
+        2100
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 0,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 210,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 240,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 420,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 480,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 720,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 780,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 960,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1200,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1650,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2010,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2160,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2220,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2280,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2340,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 6,
+      "wiki_only_vocabulary_token_count": 42,
+      "keiframe_only_vocabulary_token_count": 13,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "熔火危机",
@@ -467,7 +1565,93 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 7,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 63,
+      "wiki_multi_fact_event_count": 9,
+      "keiframe_text_attribute_record_count": 15,
+      "keiframe_compound_record_count": 14,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        210,
+        360
+      ],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [
+        210,
+        360
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 60,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 540,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 720,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 900,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1080,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1260,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1440,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1620,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1800,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1980,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2160,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2340,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2520,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 3,
+      "wiki_only_vocabulary_token_count": 17,
+      "keiframe_only_vocabulary_token_count": 21,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "机会渺茫-人虫",
@@ -536,7 +1720,194 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 271,
+      "wiki_multi_fact_event_count": 52,
+      "keiframe_text_attribute_record_count": 32,
+      "keiframe_compound_record_count": 32,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        180,
+        302,
+        331,
+        499,
+        523,
+        547,
+        571,
+        600,
+        748,
+        772,
+        795,
+        820,
+        843,
+        867,
+        930,
+        1122,
+        1156,
+        1189,
+        1194,
+        1227,
+        1261,
+        1275,
+        1512,
+        1532,
+        1550,
+        1569,
+        1589,
+        1622,
+        1656,
+        1686,
+        1691,
+        1725
+      ],
+      "numeric_candidate_mismatch_times": [
+        499,
+        523,
+        547,
+        867,
+        1589
+      ],
+      "category_review_times": [
+        180,
+        302,
+        331,
+        499,
+        523,
+        547,
+        571,
+        600,
+        748,
+        772,
+        795,
+        820,
+        843,
+        867,
+        930,
+        1122,
+        1156,
+        1189,
+        1194,
+        1227,
+        1261,
+        1275,
+        1512,
+        1532,
+        1550,
+        1569,
+        1589,
+        1622,
+        1656,
+        1686,
+        1691,
+        1725
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 180,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 210,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 255,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 275,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 405,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 450,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 475,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 600,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 660,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 705,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 730,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 930,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1020,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1065,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1100,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1275,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1420,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1465,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1500,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1686,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 18,
+      "wiki_only_vocabulary_token_count": 26,
+      "keiframe_only_vocabulary_token_count": 14,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "机会渺茫-神",
@@ -605,7 +1976,194 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 271,
+      "wiki_multi_fact_event_count": 52,
+      "keiframe_text_attribute_record_count": 32,
+      "keiframe_compound_record_count": 32,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        180,
+        300,
+        325,
+        495,
+        518,
+        541,
+        561,
+        600,
+        745,
+        768,
+        790,
+        811,
+        833,
+        856,
+        930,
+        1119,
+        1152,
+        1183,
+        1185,
+        1217,
+        1248,
+        1275,
+        1511,
+        1527,
+        1543,
+        1560,
+        1577,
+        1610,
+        1643,
+        1674,
+        1686,
+        1705
+      ],
+      "numeric_candidate_mismatch_times": [
+        495,
+        518,
+        541,
+        856,
+        1577
+      ],
+      "category_review_times": [
+        180,
+        300,
+        325,
+        495,
+        518,
+        541,
+        561,
+        600,
+        745,
+        768,
+        790,
+        811,
+        833,
+        856,
+        930,
+        1119,
+        1152,
+        1183,
+        1185,
+        1217,
+        1248,
+        1275,
+        1511,
+        1527,
+        1543,
+        1560,
+        1577,
+        1610,
+        1643,
+        1674,
+        1686,
+        1705
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 180,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 210,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 255,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 275,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 405,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 450,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 475,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 600,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 660,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 705,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 730,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 930,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1020,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1065,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1100,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1275,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1420,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1465,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1500,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 1686,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 18,
+      "wiki_only_vocabulary_token_count": 26,
+      "keiframe_only_vocabulary_token_count": 14,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "营救矿工",
@@ -637,7 +2195,47 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 70,
+      "wiki_multi_fact_event_count": 17,
+      "keiframe_text_attribute_record_count": 17,
+      "keiframe_compound_record_count": 17,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        390,
+        780,
+        1050,
+        1380,
+        1590,
+        1680,
+        1920
+      ],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [
+        225,
+        390,
+        480,
+        720,
+        780,
+        912,
+        990,
+        1050,
+        1158,
+        1380,
+        1410,
+        1560,
+        1590,
+        1620,
+        1680,
+        1740,
+        1920
+      ],
+      "simultaneous_count_mismatches": [],
+      "shared_vocabulary_token_count": 2,
+      "wiki_only_vocabulary_token_count": 17,
+      "keiframe_only_vocabulary_token_count": 17,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "亡者之夜",
@@ -659,7 +2257,57 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 298,
+      "wiki_multi_fact_event_count": 72,
+      "keiframe_text_attribute_record_count": 7,
+      "keiframe_compound_record_count": 7,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 840,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1290,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 1740,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2190,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 2655,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 3105,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 3555,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 1,
+      "wiki_only_vocabulary_token_count": 39,
+      "keiframe_only_vocabulary_token_count": 6,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "黑暗杀星",
@@ -690,7 +2338,62 @@
       ],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 77,
+      "wiki_multi_fact_event_count": 12,
+      "keiframe_text_attribute_record_count": 10,
+      "keiframe_compound_record_count": 10,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        168,
+        420,
+        540,
+        750,
+        960,
+        1140,
+        1320,
+        1440,
+        1560
+      ],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [
+        168,
+        420,
+        540,
+        750,
+        960,
+        1140,
+        1320,
+        1440,
+        1560
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 60,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 420,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 780,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        },
+        {
+          "time_value": 960,
+          "wiki_count": 2,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 6,
+      "wiki_only_vocabulary_token_count": 37,
+      "keiframe_only_vocabulary_token_count": 13,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "净网行动",
@@ -738,7 +2441,132 @@
         150
       ],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 6,
+      "wiki_multi_fact_event_count": 1,
+      "keiframe_text_attribute_record_count": 31,
+      "keiframe_compound_record_count": 30,
+      "keiframe_count_condition_record_count": 31,
+      "numeric_candidate_review_times": [],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 1,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 15,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 20,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 30,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 33,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 41,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 55,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 60,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 70,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 75,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 80,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 82,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 95,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 100,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 115,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 120,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 130,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 135,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 140,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        },
+        {
+          "time_value": 145,
+          "wiki_count": 0,
+          "keiframe_count": 3
+        },
+        {
+          "time_value": 150,
+          "wiki_count": 0,
+          "keiframe_count": 2
+        },
+        {
+          "time_value": 216,
+          "wiki_count": 1,
+          "keiframe_count": 0
+        }
+      ],
+      "shared_vocabulary_token_count": 6,
+      "wiki_only_vocabulary_token_count": 10,
+      "keiframe_only_vocabulary_token_count": 39,
+      "unsupported_runtime_condition": true
     },
     {
       "keiframe_config": "聚铁成兵",
@@ -764,7 +2592,47 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 62,
+      "wiki_multi_fact_event_count": 9,
+      "keiframe_text_attribute_record_count": 10,
+      "keiframe_compound_record_count": 9,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        225,
+        390,
+        600,
+        846,
+        1032,
+        1200,
+        1440,
+        1620,
+        1800
+      ],
+      "numeric_candidate_mismatch_times": [],
+      "category_review_times": [
+        225,
+        390,
+        600,
+        846,
+        1032,
+        1200,
+        1440,
+        1620,
+        1800
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 60,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 11,
+      "wiki_only_vocabulary_token_count": 21,
+      "keiframe_only_vocabulary_token_count": 36,
+      "unsupported_runtime_condition": false
     },
     {
       "keiframe_config": "死亡摇篮",
@@ -791,7 +2659,55 @@
       "wiki_simultaneous_times": [],
       "keiframe_simultaneous_times": [],
       "wiki_window_event_count": 0,
-      "wiki_subsecond_event_count": 0
+      "wiki_subsecond_event_count": 0,
+      "keiframe_time_label_mismatch_count": 0,
+      "wiki_structured_fact_count": 123,
+      "wiki_multi_fact_event_count": 18,
+      "keiframe_text_attribute_record_count": 11,
+      "keiframe_compound_record_count": 10,
+      "keiframe_count_condition_record_count": 0,
+      "numeric_candidate_review_times": [
+        240,
+        360,
+        540,
+        720,
+        900,
+        1080,
+        1260,
+        1500,
+        1740,
+        1980
+      ],
+      "numeric_candidate_mismatch_times": [
+        540,
+        720,
+        1500,
+        1740,
+        1980
+      ],
+      "category_review_times": [
+        240,
+        360,
+        540,
+        720,
+        900,
+        1080,
+        1260,
+        1500,
+        1740,
+        1980
+      ],
+      "simultaneous_count_mismatches": [
+        {
+          "time_value": 60,
+          "wiki_count": 0,
+          "keiframe_count": 1
+        }
+      ],
+      "shared_vocabulary_token_count": 0,
+      "wiki_only_vocabulary_token_count": 31,
+      "keiframe_only_vocabulary_token_count": 19,
+      "unsupported_runtime_condition": false
     }
   ]
 }

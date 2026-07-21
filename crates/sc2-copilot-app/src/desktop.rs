@@ -1,7 +1,7 @@
 use std::time::{Duration, Instant};
 
 use eframe::egui::{self, Color32, RichText, ViewportBuilder, ViewportId};
-use sc2_copilot_core::{EngineView, ScheduleCatalog};
+use sc2_copilot_core::{EngineView, EventTiming, ScheduleCatalog};
 
 use crate::{
     AlertCard, AppController, AppSettings, ConnectionState, LocalSc2HttpClient, NoopAlertPlayer,
@@ -128,10 +128,21 @@ impl DesktopApp {
             match action {
                 PlatformAction::ShowSettings => self.settings_visible = true,
                 PlatformAction::ToggleInteraction => {
-                    self.interactive_overlay = !self.interactive_overlay;
+                    if overlay_interaction_available(
+                        self.controller.connection(),
+                        self.controller.view().session_id.is_some(),
+                    ) {
+                        self.interactive_overlay = !self.interactive_overlay;
+                    }
                 }
                 PlatformAction::Quit => self.quitting = true,
             }
+        }
+        if !overlay_interaction_available(
+            self.controller.connection(),
+            self.controller.view().session_id.is_some(),
+        ) {
+            self.interactive_overlay = false;
         }
         self.alerts
             .retain(|alert| alert.expires_at > Instant::now());
@@ -198,7 +209,7 @@ impl DesktopApp {
             ui.heading("当前对局");
             self.map_selector(ui);
             self.variant_selector(ui);
-            self.stage_controls(ui);
+            self.mutator_selector(ui);
             if let Some(map_id) = self.controller.selected_map_id()
                 && let Some(map) = self.controller.map(map_id)
                 && map.unsupported_row_count > 0
@@ -212,12 +223,19 @@ impl DesktopApp {
                     },
                 );
             }
+            let interaction_available = overlay_interaction_available(
+                self.controller.connection(),
+                self.controller.view().session_id.is_some(),
+            );
             if ui
-                .button(if self.interactive_overlay {
-                    "恢复覆盖层鼠标穿透"
-                } else {
-                    "临时启用覆盖层交互"
-                })
+                .add_enabled(
+                    interaction_available,
+                    egui::Button::new(if self.interactive_overlay {
+                        "恢复覆盖层鼠标穿透"
+                    } else {
+                        "临时启用覆盖层交互"
+                    }),
+                )
                 .clicked()
             {
                 self.interactive_overlay = !self.interactive_overlay;
@@ -374,6 +392,32 @@ impl DesktopApp {
         }
     }
 
+    fn mutator_selector(&mut self, ui: &mut egui::Ui) {
+        let Some(map_id) = self.controller.selected_map_id().map(str::to_owned) else {
+            return;
+        };
+        let Some(map) = self.controller.map(&map_id) else {
+            return;
+        };
+        let mutators = map.mutators.clone();
+        if mutators.is_empty() {
+            return;
+        }
+        ui.label("当前突变因子（手动）");
+        for mutator in mutators {
+            let mut active = self
+                .controller
+                .view()
+                .active_mutator_ids
+                .iter()
+                .any(|id| id == &mutator.id);
+            if ui.checkbox(&mut active, &mutator.display_name).changed() {
+                let update = self.controller.set_mutator_active(mutator.id, active);
+                self.push_alerts(update.new_alerts);
+            }
+        }
+    }
+
     fn selected_map_name(&self) -> &str {
         self.controller
             .selected_map_id()
@@ -400,6 +444,7 @@ impl DesktopApp {
             .map(|event| {
                 (
                     event.remaining_milliseconds,
+                    event.timing,
                     self.controller.event_label(&event.event_id),
                 )
             })
@@ -420,6 +465,7 @@ impl DesktopApp {
                 if self.interactive_overlay {
                     ui.separator();
                     self.variant_selector(ui);
+                    self.mutator_selector(ui);
                     self.stage_controls(ui);
                 }
             });
@@ -500,7 +546,7 @@ fn overlay_contents(
     map_name: &str,
     view: &EngineView,
     alerts: &[AlertCard],
-    upcoming: &[(u64, String)],
+    upcoming: &[(u64, EventTiming, String)],
     interactive: bool,
 ) {
     ui.heading(RichText::new(map_name).color(Color32::from_rgb(100, 215, 255)));
@@ -521,10 +567,7 @@ fn overlay_contents(
                 .corner_radius(6.0)
                 .inner_margin(8.0)
                 .show(ui, |ui| {
-                    ui.strong(format!(
-                        "即将发生 · {}",
-                        format_time(alert.event_time_milliseconds)
-                    ));
+                    ui.strong(format!("即将发生 · {}", format_timing(alert.timing)));
                     for label in &alert.event_labels {
                         ui.label(label);
                     }
@@ -536,13 +579,17 @@ fn overlay_contents(
     if upcoming.is_empty() {
         ui.label("当前上下文没有可运行的后续事件。");
     } else {
-        for (remaining_milliseconds, label) in upcoming {
+        for (remaining_milliseconds, timing, label) in upcoming {
             ui.horizontal(|ui| {
                 ui.monospace(format_remaining(*remaining_milliseconds));
-                ui.label(label);
+                ui.label(format!("{} · {}", format_timing(*timing), label));
             });
         }
     }
+}
+
+fn overlay_interaction_available(connection: ConnectionState, has_session: bool) -> bool {
+    connection == ConnectionState::InGame && has_session
 }
 
 fn connection_text(connection: ConnectionState) -> &'static str {
@@ -556,6 +603,20 @@ fn connection_text(connection: ConnectionState) -> &'static str {
 fn format_time(milliseconds: u64) -> String {
     let seconds = milliseconds / 1_000;
     format!("{:02}:{:02}", seconds / 60, seconds % 60)
+}
+
+fn format_timing(timing: EventTiming) -> String {
+    match timing {
+        EventTiming::Exact { milliseconds } => format_time(milliseconds),
+        EventTiming::Window {
+            earliest_milliseconds,
+            latest_milliseconds,
+        } => format!(
+            "{}–{}",
+            format_time(earliest_milliseconds),
+            format_time(latest_milliseconds)
+        ),
+    }
 }
 
 fn format_remaining(milliseconds: u64) -> String {
@@ -588,4 +649,23 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
         return Ok(());
     }
     Err("未找到 Windows 中文字体，界面中文可能无法正确显示".to_owned())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{ConnectionState, overlay_interaction_available};
+
+    #[test]
+    fn overlay_interaction_requires_an_active_game_session() {
+        assert!(overlay_interaction_available(ConnectionState::InGame, true));
+        assert!(!overlay_interaction_available(
+            ConnectionState::InGame,
+            false
+        ));
+        assert!(!overlay_interaction_available(
+            ConnectionState::Disconnected,
+            true
+        ));
+        assert!(!overlay_interaction_available(ConnectionState::Menu, false));
+    }
 }

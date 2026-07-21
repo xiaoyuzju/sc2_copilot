@@ -122,6 +122,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 7
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上"
             }
           ],
           "map_id": "oblivion-express",
@@ -168,6 +175,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "下"
             }
           ],
           "map_id": "oblivion-express",
@@ -214,6 +228,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上"
             }
           ],
           "map_id": "oblivion-express",
@@ -260,6 +281,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 7
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "下"
             }
           ],
           "map_id": "oblivion-express",
@@ -309,6 +337,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 7
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上/下"
             }
           ],
           "map_id": "oblivion-express",
@@ -355,6 +390,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上"
             }
           ],
           "map_id": "oblivion-express",
@@ -404,6 +446,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "下/上"
             }
           ],
           "map_id": "oblivion-express",
@@ -450,6 +499,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 7
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "下"
             }
           ],
           "map_id": "oblivion-express",
@@ -496,6 +552,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上"
             }
           ],
           "map_id": "oblivion-express",
@@ -551,6 +614,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 13
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "下"
             }
           ],
           "map_id": "oblivion-express",
@@ -600,6 +670,13 @@
               "kind": "unit_count",
               "unit": "train_car",
               "value": 7
+            },
+            {
+              "display_name": "极性不定",
+              "kind": "mutator_context",
+              "label": "可造成伤害玩家",
+              "mutator_id": "polarity",
+              "value": "上"
             }
           ],
           "map_id": "oblivion-express",
@@ -1124,6 +1201,18 @@
               "number": 1
             },
             {
+              "kind": "count",
+              "subject": "刷新个数",
+              "value": "1"
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "虚空撕裂者区域1"
+              }
+            },
+            {
               "kind": "target",
               "value": "重锤军士的要塞"
             }
@@ -1156,6 +1245,18 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新个数",
+              "value": "2"
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "虚空撕裂者区域2"
+              }
             },
             {
               "kind": "target",
@@ -1192,6 +1293,18 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "刷新个数",
+              "value": "3"
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "虚空撕裂者区域3"
+              }
+            },
+            {
               "kind": "target",
               "value": "重锤军士的要塞"
             }
@@ -1224,6 +1337,18 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新个数",
+              "value": "4"
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "虚空撕裂者区域4"
+              }
             },
             {
               "kind": "target",
@@ -1275,6 +1400,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1322,6 +1451,10 @@
                 "mode": "single",
                 "name": "右"
               }
+            },
+            {
+              "kind": "route",
+              "value": "中间集结点"
             },
             {
               "kind": "target",
@@ -1373,6 +1506,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点(50%)左侧集结点(50%)"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1422,6 +1559,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1469,6 +1610,10 @@
                 "mode": "single",
                 "name": "右"
               }
+            },
+            {
+              "kind": "route",
+              "value": "中间集结点(50%)右侧集结点(50%)"
             },
             {
               "kind": "target",
@@ -1667,6 +1812,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1714,6 +1863,10 @@
                 "mode": "single",
                 "name": "右"
               }
+            },
+            {
+              "kind": "route",
+              "value": "中间集结点"
             },
             {
               "kind": "target",
@@ -1765,6 +1918,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点(50%)左侧集结点(50%)"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1814,6 +1971,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "中间集结点"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -1861,6 +2022,10 @@
                 "mode": "single",
                 "name": "右"
               }
+            },
+            {
+              "kind": "route",
+              "value": "中间集结点(50%)右侧集结点(50%)"
             },
             {
               "kind": "target",
@@ -2086,6 +2251,25 @@
               "number": 1
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 1
             },
@@ -2122,6 +2306,34 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "any",
+                "options": [
+                  {
+                    "name": "左侧",
+                    "weight_percent": 50
+                  },
+                  {
+                    "name": "右侧",
+                    "weight_percent": 50
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2162,6 +2374,34 @@
               "number": 3
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "any",
+                "options": [
+                  {
+                    "name": "右侧",
+                    "weight_percent": null
+                  },
+                  {
+                    "name": "左侧(与上一波相反)",
+                    "weight_percent": null
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -2198,6 +2438,25 @@
               "branch": 1,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2238,6 +2497,25 @@
               "number": 4
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -2274,6 +2552,25 @@
               "branch": 2,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2314,6 +2611,25 @@
               "number": 4
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -2350,6 +2666,25 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
             },
             {
               "kind": "scale_level",
@@ -2390,6 +2725,25 @@
               "number": 5
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -2426,6 +2780,25 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
             },
             {
               "kind": "scale_level",
@@ -2466,6 +2839,25 @@
               "number": 6
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "5"
+            },
+            {
               "kind": "scale_level",
               "value": 6
             },
@@ -2502,6 +2894,25 @@
               "branch": 2,
               "kind": "wave",
               "number": 6
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "5"
             },
             {
               "kind": "scale_level",
@@ -2542,6 +2953,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 6
             },
@@ -2578,6 +3008,25 @@
               "branch": 1,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2618,6 +3067,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 7
             },
@@ -2654,6 +3122,25 @@
               "branch": 1,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2694,6 +3181,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -2730,6 +3236,25 @@
               "branch": 2,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
             },
             {
               "kind": "scale_level",
@@ -2770,6 +3295,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
+            },
+            {
               "kind": "scale_level",
               "value": 6
             },
@@ -2806,6 +3350,25 @@
               "branch": 2,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2846,6 +3409,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
+            },
+            {
               "kind": "scale_level",
               "value": 7
             },
@@ -2882,6 +3464,25 @@
               "branch": 3,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "正中"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "3"
             },
             {
               "kind": "scale_level",
@@ -2922,6 +3523,25 @@
               "number": 7
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -2958,6 +3578,25 @@
               "branch": 3,
               "kind": "wave",
               "number": 7
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "右侧"
+              }
+            },
+            {
+              "kind": "count",
+              "subject": "穿梭机数量",
+              "value": "2"
             },
             {
               "kind": "scale_level",
@@ -2998,6 +3637,10 @@
               "number": 1
             },
             {
+              "kind": "wave_expression",
+              "value": "右"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -3034,6 +3677,10 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "wave_expression",
+              "value": "右"
             },
             {
               "kind": "scale_level",
@@ -3074,6 +3721,10 @@
               "number": 2
             },
             {
+              "kind": "wave_expression",
+              "value": "右"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -3110,6 +3761,10 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "wave_expression",
+              "value": "右"
             },
             {
               "kind": "scale_level",
@@ -3150,6 +3805,10 @@
               "number": 3
             },
             {
+              "kind": "wave_expression",
+              "value": "左"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -3188,6 +3847,10 @@
               "number": 3
             },
             {
+              "kind": "wave_expression",
+              "value": "左"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -3221,9 +3884,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 3
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3270,9 +3933,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 5
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3319,9 +3982,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 7
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3344,6 +4007,10 @@
             {
               "kind": "tech_level",
               "value": 2
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "void-launch",
@@ -3371,9 +4038,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 10
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3393,6 +4060,10 @@
             {
               "kind": "tech_level",
               "value": 3
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "void-launch",
@@ -3420,9 +4091,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 11
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3442,6 +4113,10 @@
             {
               "kind": "tech_level",
               "value": 3
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*3"
             }
           ],
           "map_id": "void-launch",
@@ -3469,9 +4144,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 14
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3491,6 +4166,10 @@
             {
               "kind": "tech_level",
               "value": 3
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*3"
             }
           ],
           "map_id": "void-launch",
@@ -3518,9 +4197,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 16
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3540,6 +4219,10 @@
             {
               "kind": "tech_level",
               "value": 4
+            },
+            {
+              "kind": "composition",
+              "value": "大型混合体*2"
             }
           ],
           "map_id": "void-launch",
@@ -3567,9 +4250,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 19
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3589,6 +4272,10 @@
             {
               "kind": "tech_level",
               "value": 5
+            },
+            {
+              "kind": "composition",
+              "value": "大型混合体*2"
             }
           ],
           "map_id": "void-launch",
@@ -3616,9 +4303,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 21
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3638,6 +4325,10 @@
             {
               "kind": "tech_level",
               "value": 6
+            },
+            {
+              "kind": "composition",
+              "value": "大型混合体*2+小型混合体*1"
             }
           ],
           "map_id": "void-launch",
@@ -3665,9 +4356,9 @@
               "value": "attack_wave"
             },
             {
-              "branch": null,
-              "kind": "wave",
-              "number": 24
+              "kind": "detail",
+              "label": "类型",
+              "value": "红点"
             },
             {
               "kind": "location",
@@ -3687,6 +4378,10 @@
             {
               "kind": "tech_level",
               "value": 7
+            },
+            {
+              "kind": "composition",
+              "value": "大型混合体*2+小型混合体*1"
             }
           ],
           "map_id": "void-launch",
@@ -3801,6 +4496,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "主矿"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -3848,6 +4547,10 @@
                 "mode": "single",
                 "name": "红点"
               }
+            },
+            {
+              "kind": "route",
+              "value": "主矿"
             },
             {
               "kind": "target",
@@ -3899,6 +4602,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -3946,6 +4653,10 @@
                 "mode": "single",
                 "name": "红点"
               }
+            },
+            {
+              "kind": "route",
+              "value": "主矿"
             },
             {
               "kind": "target",
@@ -3997,6 +4708,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "与红点波次3进攻路径相反"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -4044,6 +4759,10 @@
                 "mode": "single",
                 "name": "红点"
               }
+            },
+            {
+              "kind": "route",
+              "value": "主矿"
             },
             {
               "kind": "target",
@@ -4095,6 +4814,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "主矿"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -4142,6 +4865,10 @@
                 "mode": "single",
                 "name": "红点"
               }
+            },
+            {
+              "kind": "route",
+              "value": "主矿"
             },
             {
               "kind": "target",
@@ -4193,6 +4920,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "主矿"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -4240,6 +4971,10 @@
                 "mode": "single",
                 "name": "红点"
               }
+            },
+            {
+              "kind": "route",
+              "value": "主矿"
             },
             {
               "kind": "target",
@@ -4291,6 +5026,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "主矿"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -4327,34 +5066,6 @@
           "unsupported_rows": [
             {
               "reason": "source_expression_unsupported",
-              "row_index": 6
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 16
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 19
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 20
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 21
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 26
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 27
-            },
-            {
-              "reason": "source_expression_unsupported",
               "row_index": 28
             },
             {
@@ -4380,14 +5091,6 @@
             {
               "reason": "source_expression_unsupported",
               "row_index": 34
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 35
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 36
             },
             {
               "reason": "source_expression_unsupported",
@@ -4418,40 +5121,7 @@
           "snapshot_path": "data/sources/huiji/2026-07-21/往日神庙.json",
           "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%BE%80%E6%97%A5%E7%A5%9E%E5%BA%99",
           "table_index": 5,
-          "unsupported_rows": [
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 6
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 16
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 17
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 18
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 19
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 25
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 29
-            },
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 30
-            }
-          ]
+          "unsupported_rows": []
         },
         {
           "runtime_support": "unsupported",
@@ -4679,6 +5349,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -4724,6 +5398,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -4931,11 +5609,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "1"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量1800/护盾600"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5161,6 +5847,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5206,6 +5896,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5251,6 +5945,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5296,6 +5994,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5611,6 +6313,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5656,6 +6362,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5773,11 +6483,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "2"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量2550/护盾2100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5823,6 +6541,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5868,6 +6590,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5913,6 +6639,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5958,6 +6688,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -5983,6 +6717,10 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "空投"
             },
             {
               "kind": "scale_level",
@@ -6025,6 +6763,10 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "空投"
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -6065,11 +6807,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "3"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量3300/护盾3600"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6115,6 +6865,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6160,6 +6914,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6205,6 +6963,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6250,6 +7012,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6457,6 +7223,10 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "空投"
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -6495,6 +7265,10 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "空投"
             },
             {
               "kind": "scale_level",
@@ -6537,11 +7311,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "4"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量4050/护盾5100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6569,11 +7351,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "5"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量4050/护盾5100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6799,6 +7589,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*4+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6844,6 +7638,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*4+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6889,6 +7687,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -6934,6 +7736,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -7429,6 +8235,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -7474,6 +8284,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -7681,11 +8495,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "1"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量1800/护盾600"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -7947,6 +8769,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -7992,6 +8818,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8037,6 +8867,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8082,6 +8916,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8433,6 +9271,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8478,6 +9320,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8595,11 +9441,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "2"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量2550/护盾2100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8625,6 +9479,10 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "空投"
             },
             {
               "kind": "scale_level",
@@ -8667,6 +9525,10 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "空投"
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -8707,11 +9569,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "3"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量3300/护盾3600"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8757,6 +9627,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8802,6 +9676,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8847,6 +9725,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8892,6 +9774,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -8946,6 +9832,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9000,6 +9890,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9054,6 +9948,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9108,6 +10006,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9225,11 +10127,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "6"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量4050/护盾5100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9275,6 +10185,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9320,6 +10234,10 @@
                 "mode": "single",
                 "name": "左下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9365,6 +10283,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9410,6 +10332,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9455,6 +10381,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9500,6 +10430,10 @@
                 "mode": "single",
                 "name": "右上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "空军混合体*1"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9527,11 +10461,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "4"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量4050/护盾5100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9559,11 +10501,19 @@
               "value": "attack_wave"
             },
             {
+              "kind": "wave_expression",
+              "value": "虚空撕裂者"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "5"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "血量4050/护盾5100"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9789,6 +10739,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*4+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9834,6 +10788,10 @@
                 "mode": "single",
                 "name": "左上"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*4+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9879,6 +10837,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -9924,6 +10886,10 @@
                 "mode": "single",
                 "name": "右下"
               }
+            },
+            {
+              "kind": "composition",
+              "value": "大混合体*1+小混合体*3+空军混合体*2"
             }
           ],
           "map_id": "temple-of-the-past",
@@ -10329,6 +11295,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "2"
+            },
+            {
               "kind": "target",
               "value": "天锁1→玩家"
             }
@@ -10376,6 +11346,10 @@
                 "mode": "single",
                 "name": "右2"
               }
+            },
+            {
+              "kind": "route",
+              "value": "4"
             },
             {
               "kind": "target",
@@ -10427,6 +11401,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "2"
+            },
+            {
               "kind": "target",
               "value": "天锁1→玩家"
             }
@@ -10474,6 +11452,10 @@
                 "mode": "single",
                 "name": "右2"
               }
+            },
+            {
+              "kind": "route",
+              "value": "4"
             },
             {
               "kind": "target",
@@ -10525,6 +11507,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "2"
+            },
+            {
               "kind": "target",
               "value": "天锁4→天锁3→天锁1→玩家"
             }
@@ -10572,6 +11558,10 @@
                 "mode": "single",
                 "name": "右2"
               }
+            },
+            {
+              "kind": "route",
+              "value": "4"
             },
             {
               "kind": "target",
@@ -10623,6 +11613,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "2"
+            },
+            {
               "kind": "target",
               "value": "天锁3→天锁1→玩家"
             }
@@ -10670,6 +11664,10 @@
                 "mode": "single",
                 "name": "右2"
               }
+            },
+            {
+              "kind": "route",
+              "value": "4"
             },
             {
               "kind": "target",
@@ -10816,6 +11814,20 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "默认"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "0.35"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.175"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -10846,6 +11858,16 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "0.5"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.25"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -10876,6 +11898,16 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "0.6"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.3"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -10906,6 +11938,16 @@
               "branch": null,
               "kind": "wave",
               "number": 3
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "0.7"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.375"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -10936,6 +11978,16 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "0.9"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.45"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -10966,6 +12018,16 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉前进速度",
+              "value": "1"
+            },
+            {
+              "kind": "detail",
+              "label": "吉娜拉后退速度",
+              "value": "0.5"
             }
           ],
           "map_id": "chain-of-ascension",
@@ -12171,6 +13233,10 @@
               "value": "主矿"
             },
             {
+              "kind": "scale_expression",
+              "value": "4/2"
+            },
+            {
               "kind": "tech_level",
               "value": 4
             }
@@ -12216,6 +13282,10 @@
               "value": "主矿"
             },
             {
+              "kind": "scale_expression",
+              "value": "5/2"
+            },
+            {
               "kind": "tech_level",
               "value": 7
             }
@@ -12259,6 +13329,10 @@
             {
               "kind": "target",
               "value": "主矿"
+            },
+            {
+              "kind": "scale_expression",
+              "value": "6/2"
             },
             {
               "kind": "tech_level",
@@ -12457,6 +13531,11 @@
             {
               "kind": "target",
               "value": "1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12506,6 +13585,11 @@
             {
               "kind": "target",
               "value": "1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "空运"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12555,6 +13639,11 @@
             {
               "kind": "target",
               "value": "玩家1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地/空运"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12588,6 +13677,10 @@
               "number": 4
             },
             {
+              "kind": "scale_expression",
+              "value": "4/2"
+            },
+            {
               "kind": "tech_level",
               "value": 3
             },
@@ -12601,6 +13694,11 @@
             {
               "kind": "target",
               "value": "玩家1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地/空运"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12634,6 +13732,10 @@
               "number": 4
             },
             {
+              "kind": "scale_expression",
+              "value": "4/2"
+            },
+            {
               "kind": "tech_level",
               "value": 3
             },
@@ -12647,6 +13749,11 @@
             {
               "kind": "target",
               "value": "玩家2"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地/空运"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12697,6 +13804,11 @@
             {
               "kind": "target",
               "value": "1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地/空运"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12747,6 +13859,11 @@
             {
               "kind": "target",
               "value": "玩家1/玩家2"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12797,6 +13914,11 @@
             {
               "kind": "target",
               "value": "玩家1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -12847,6 +13969,11 @@
             {
               "kind": "target",
               "value": "玩家1"
+            },
+            {
+              "kind": "detail",
+              "label": "进攻方式",
+              "value": "陆地"
             }
           ],
           "map_id": "the-vermillion-problem",
@@ -13139,6 +14266,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "1/2"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -13186,6 +14317,10 @@
                 "mode": "single",
                 "name": "左"
               }
+            },
+            {
+              "kind": "route",
+              "value": "见下表"
             },
             {
               "kind": "target",
@@ -13237,8 +14372,16 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见下表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -13337,6 +14480,10 @@
             {
               "kind": "target",
               "value": "玩家1+玩家2"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -13814,6 +14961,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 1
+            },
+            {
               "kind": "scale_level",
               "value": 1
             },
@@ -13858,6 +15015,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 1
+            },
+            {
               "kind": "scale_level",
               "value": 1
             },
@@ -13900,6 +15067,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采1"
             },
             {
               "branch": null,
@@ -13951,6 +15123,11 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采1"
+            },
+            {
               "branch": null,
               "kind": "wave",
               "number": 1
@@ -14000,6 +15177,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 1
             },
@@ -14042,6 +15224,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
             },
             {
               "kind": "scale_level",
@@ -14088,9 +15275,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采2"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 2
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -14137,9 +15329,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采2"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 2
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -14184,6 +15381,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
             },
             {
               "kind": "scale_level",
@@ -14239,6 +15441,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14290,6 +15497,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
             },
             {
               "kind": "scale_level",
@@ -14345,6 +15557,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14396,6 +15613,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
             },
             {
               "kind": "scale_level",
@@ -14451,6 +15673,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -14504,6 +15731,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14546,6 +15783,16 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
             },
             {
               "kind": "scale_level",
@@ -14592,9 +15839,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采3"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 3
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -14654,9 +15906,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采3"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 3
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -14716,6 +15973,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14771,6 +16033,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
             },
             {
               "kind": "scale_level",
@@ -14830,6 +16097,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14885,6 +16157,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
             },
             {
               "kind": "scale_level",
@@ -14944,6 +16221,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -14999,6 +16281,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
             },
             {
               "kind": "scale_level",
@@ -15058,6 +16345,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -15113,6 +16405,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
             },
             {
               "kind": "scale_level",
@@ -15172,6 +16469,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -15189,6 +16491,10 @@
             {
               "kind": "target",
               "value": "右机器人"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -15216,6 +16522,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
+            },
+            {
               "kind": "scale_level",
               "value": 3
             },
@@ -15233,6 +16544,10 @@
             {
               "kind": "target",
               "value": "右机器人"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -15260,6 +16575,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15277,6 +16602,10 @@
             {
               "kind": "target",
               "value": "分2->主基"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -15304,6 +16633,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15321,6 +16660,10 @@
             {
               "kind": "target",
               "value": "分2->主基"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -15348,9 +16691,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采4"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 4
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -15406,9 +16754,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采4"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 4
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -15462,6 +16815,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
             },
             {
               "kind": "scale_level",
@@ -15521,6 +16879,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15576,6 +16939,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
             },
             {
               "kind": "scale_level",
@@ -15635,6 +17003,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15692,6 +17065,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15745,6 +17123,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15796,6 +17179,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
             },
             {
               "kind": "scale_level",
@@ -15855,6 +17243,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -15910,6 +17303,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
             },
             {
               "kind": "scale_level",
@@ -15969,6 +17367,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -16026,6 +17429,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16068,6 +17481,16 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
             },
             {
               "kind": "scale_level",
@@ -16114,9 +17537,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采5"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 5
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -16172,9 +17600,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采5"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 5
+              "number": 1
             },
             {
               "kind": "scale_level",
@@ -16230,6 +17663,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -16274,6 +17712,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 2
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -16316,6 +17759,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
             },
             {
               "kind": "scale_level",
@@ -16371,6 +17819,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 3
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -16422,6 +17875,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
             },
             {
               "kind": "scale_level",
@@ -16481,6 +17939,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 4
+            },
+            {
               "kind": "scale_level",
               "value": 4
             },
@@ -16538,6 +18001,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16591,6 +18059,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16642,6 +18115,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
             },
             {
               "kind": "scale_level",
@@ -16701,6 +18179,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 6
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16758,6 +18241,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 7
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16802,6 +18290,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 7
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16844,6 +18337,11 @@
             {
               "kind": "event_category",
               "value": "attack_wave"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 8
             },
             {
               "kind": "scale_level",
@@ -16903,6 +18401,11 @@
               "value": "attack_wave"
             },
             {
+              "branch": null,
+              "kind": "wave",
+              "number": 8
+            },
+            {
               "kind": "scale_level",
               "value": 5
             },
@@ -16960,6 +18463,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 6
             },
@@ -16977,6 +18490,10 @@
             {
               "kind": "target",
               "value": "主基地"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -17004,6 +18521,16 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "红"
+            },
+            {
+              "branch": null,
+              "kind": "wave",
+              "number": 5
+            },
+            {
               "kind": "scale_level",
               "value": 6
             },
@@ -17021,6 +18548,10 @@
             {
               "kind": "target",
               "value": "主基地"
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*4+大型混合体*2"
             }
           ],
           "map_id": "mist-opportunities",
@@ -17048,9 +18579,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采5"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 5
+              "number": 9
             },
             {
               "kind": "scale_level",
@@ -17106,9 +18642,14 @@
               "value": "attack_wave"
             },
             {
+              "kind": "detail",
+              "label": "类型",
+              "value": "采5"
+            },
+            {
               "branch": null,
               "kind": "wave",
-              "number": 5
+              "number": 9
             },
             {
               "kind": "scale_level",
@@ -17761,6 +19302,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -17786,6 +19331,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -17811,6 +19360,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -17836,6 +19389,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -17861,6 +19418,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -17886,6 +19447,10 @@
             {
               "kind": "event_category",
               "value": "main_objective"
+            },
+            {
+              "kind": "wave_expression",
+              "value": "触发时间"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18100,6 +19665,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家主矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18145,6 +19714,10 @@
                 "mode": "single",
                 "name": "中"
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18207,6 +19780,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18269,6 +19846,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18331,6 +19912,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18393,6 +19978,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -18455,6 +20044,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家分矿"
             }
           ],
           "map_id": "miner-evacuation",
@@ -19003,6 +20596,11 @@
               "number": 1
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19048,6 +20646,11 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "8"
             },
             {
               "kind": "location",
@@ -19097,6 +20700,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "6"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19142,6 +20750,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "6"
             },
             {
               "kind": "location",
@@ -19191,6 +20804,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "6"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19236,6 +20854,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -19285,6 +20908,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "6"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19330,6 +20958,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -19379,6 +21012,11 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "8"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19424,6 +21062,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -19473,6 +21116,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "8"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19518,6 +21166,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "10"
             },
             {
               "kind": "location",
@@ -19567,6 +21220,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "10"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19612,6 +21270,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "8"
             },
             {
               "kind": "location",
@@ -19661,6 +21324,11 @@
               "number": 1
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19706,6 +21374,11 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -19755,6 +21428,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19800,6 +21478,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
             },
             {
               "kind": "location",
@@ -19849,6 +21532,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19894,6 +21582,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -19943,6 +21636,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -19988,6 +21686,11 @@
               "branch": null,
               "kind": "wave",
               "number": 3
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -20037,6 +21740,11 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20082,6 +21790,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -20131,6 +21844,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20176,6 +21894,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -20225,6 +21948,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20270,6 +21998,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
             },
             {
               "kind": "location",
@@ -20319,6 +22052,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20364,6 +22102,11 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -20413,6 +22156,11 @@
               "number": 1
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20458,6 +22206,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -20507,6 +22260,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20552,6 +22310,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -20601,6 +22364,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20646,6 +22414,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -20695,6 +22468,11 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20740,6 +22518,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -20789,6 +22572,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20834,6 +22622,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -20883,6 +22676,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -20928,6 +22726,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
             },
             {
               "kind": "location",
@@ -20977,6 +22780,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21022,6 +22830,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -21071,6 +22884,11 @@
               "number": 1
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21116,6 +22934,11 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -21165,6 +22988,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21210,6 +23038,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
             },
             {
               "kind": "location",
@@ -21259,6 +23092,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21304,6 +23142,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
             },
             {
               "kind": "location",
@@ -21353,6 +23196,11 @@
               "number": 2
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21398,6 +23246,11 @@
               "branch": null,
               "kind": "wave",
               "number": 3
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
             },
             {
               "kind": "location",
@@ -21447,6 +23300,11 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21492,6 +23350,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -21541,6 +23404,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21586,6 +23454,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
             },
             {
               "kind": "location",
@@ -21635,6 +23508,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21680,6 +23558,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "5"
             },
             {
               "kind": "location",
@@ -21729,6 +23612,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21774,6 +23662,11 @@
               "branch": null,
               "kind": "wave",
               "number": 3
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -21823,6 +23716,11 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21868,6 +23766,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -21917,6 +23820,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -21962,6 +23870,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -22011,6 +23924,11 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "any",
@@ -22056,6 +23974,11 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -22105,6 +24028,16 @@
               "number": 3
             },
             {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "1"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
@@ -22143,11 +24076,26 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "3"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "基地外围坑道虫刷新点位随机一点"
               }
+            },
+            {
+              "kind": "detail",
+              "label": "出现间隔",
+              "value": "2秒"
             }
           ],
           "map_id": "dead-of-night",
@@ -22181,11 +24129,26 @@
               "number": 4
             },
             {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "4"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "2"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "基地外围坑道虫刷新点位随机一点"
               }
+            },
+            {
+              "kind": "detail",
+              "label": "出现间隔",
+              "value": "2秒"
             }
           ],
           "map_id": "dead-of-night",
@@ -22219,11 +24182,26 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "4"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "3"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "基地外围坑道虫刷新点位随机一点"
               }
+            },
+            {
+              "kind": "detail",
+              "label": "出现间隔",
+              "value": "2秒"
             }
           ],
           "map_id": "dead-of-night",
@@ -22255,6 +24233,16 @@
               "branch": null,
               "kind": "wave",
               "number": 5
+            },
+            {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "5"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "1"
             },
             {
               "kind": "location",
@@ -22295,11 +24283,26 @@
               "number": 5
             },
             {
+              "kind": "count",
+              "subject": "最大数目",
+              "value": "5"
+            },
+            {
+              "kind": "count",
+              "subject": "刷新数目",
+              "value": "4"
+            },
+            {
               "kind": "location",
               "value": {
                 "mode": "single",
                 "name": "基地外围坑道虫刷新点位随机一点"
               }
+            },
+            {
+              "kind": "detail",
+              "label": "出现间隔",
+              "value": "2秒"
             }
           ],
           "map_id": "dead-of-night",
@@ -22358,7 +24361,14 @@
               "number": 1
             },
             {
-              "kind": "target",
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "奖励出发点"
+              }
+            },
+            {
+              "kind": "route",
               "value": "东奖励目标"
             }
           ],
@@ -22392,7 +24402,23 @@
               "number": 2
             },
             {
-              "kind": "target",
+              "kind": "location",
+              "value": {
+                "mode": "any",
+                "options": [
+                  {
+                    "name": "奖励出发点",
+                    "weight_percent": null
+                  },
+                  {
+                    "name": "东奖励目标",
+                    "weight_percent": null
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "route",
               "value": "南奖励目标/北奖励目标"
             }
           ],
@@ -22426,7 +24452,27 @@
               "number": 3
             },
             {
-              "kind": "target",
+              "kind": "location",
+              "value": {
+                "mode": "any",
+                "options": [
+                  {
+                    "name": "奖励出发点",
+                    "weight_percent": null
+                  },
+                  {
+                    "name": "南奖励目标",
+                    "weight_percent": null
+                  },
+                  {
+                    "name": "北奖励目标",
+                    "weight_percent": null
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "route",
               "value": "北奖励目标/南奖励目标"
             }
           ],
@@ -22474,6 +24520,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "玩家1/玩家2（与刷新位置对应）"
             },
             {
               "kind": "target",
@@ -22525,6 +24575,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "与上一波相反"
+            },
+            {
               "kind": "target",
               "value": "主矿"
             },
@@ -22535,6 +24589,10 @@
             {
               "kind": "tech_level",
               "value": 2
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22574,6 +24632,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "二矿"
+            },
+            {
               "kind": "target",
               "value": "主矿"
             },
@@ -22584,6 +24646,10 @@
             {
               "kind": "tech_level",
               "value": 3
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22633,6 +24699,10 @@
             {
               "kind": "tech_level",
               "value": 4
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22691,6 +24761,10 @@
             {
               "kind": "tech_level",
               "value": 5
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22749,6 +24823,10 @@
             {
               "kind": "tech_level",
               "value": 6
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22807,6 +24885,10 @@
             {
               "kind": "tech_level",
               "value": 5
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22865,6 +24947,10 @@
             {
               "kind": "tech_level",
               "value": 6
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22923,6 +25009,10 @@
             {
               "kind": "tech_level",
               "value": 6
+            },
+            {
+              "kind": "composition",
+              "value": "小型混合体*2+大型混合体*1"
             }
           ],
           "map_id": "scythe-of-amon",
@@ -22997,10 +25087,6 @@
           "source_url": "https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%87%80%E7%BD%91%E8%A1%8C%E5%8A%A8",
           "table_index": 6,
           "unsupported_rows": [
-            {
-              "reason": "source_expression_unsupported",
-              "row_index": 1
-            },
             {
               "reason": "source_expression_unsupported",
               "row_index": 2
@@ -23371,6 +25457,13 @@
               "number": 1
             },
             {
+              "kind": "location",
+              "value": {
+                "mode": "single",
+                "name": "左（A型）右（B型）"
+              }
+            },
+            {
               "kind": "tech_level",
               "value": 1
             },
@@ -23454,6 +25547,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "1/2(与红点波次1红点位置对应)"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -23510,6 +25607,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "2/1(与红点波次2红点位置对应)"
             },
             {
               "kind": "target",
@@ -23570,6 +25671,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "3→5→1(50%)/2(50%)//4→5→1(50%)/2(50%) [与红点波次3红点位置对应]"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -23626,6 +25731,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "6"
             },
             {
               "kind": "target",
@@ -23686,6 +25795,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "3→5→1(50%)/2(50%)//4→5→1(50%)/2(50%) [与红点波次5红点位置对应]"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -23742,6 +25855,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "1/2(与红点波次6红点位置对应)"
             },
             {
               "kind": "target",
@@ -23860,6 +25977,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "1/2(与红点波次8红点位置对应)"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -23916,6 +26037,10 @@
                   }
                 ]
               }
+            },
+            {
+              "kind": "route",
+              "value": "1/2(与红点波次9红点位置对应)"
             },
             {
               "kind": "target",
@@ -24042,6 +26167,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -24089,6 +26218,10 @@
                 "mode": "single",
                 "name": "见主要目标"
               }
+            },
+            {
+              "kind": "route",
+              "value": "见附表"
             },
             {
               "kind": "target",
@@ -24189,6 +26322,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -24238,6 +26375,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -24285,6 +26426,10 @@
                 "mode": "single",
                 "name": "见主要目标"
               }
+            },
+            {
+              "kind": "route",
+              "value": "见附表"
             },
             {
               "kind": "target",
@@ -24385,6 +26530,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -24432,6 +26581,10 @@
                 "mode": "single",
                 "name": "见主要目标"
               }
+            },
+            {
+              "kind": "route",
+              "value": "见附表"
             },
             {
               "kind": "target",
@@ -24483,6 +26636,10 @@
               }
             },
             {
+              "kind": "route",
+              "value": "见附表"
+            },
+            {
               "kind": "target",
               "value": "玩家1+玩家2"
             }
@@ -24515,6 +26672,11 @@
               "branch": null,
               "kind": "wave",
               "number": 1
+            },
+            {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "30秒"
             },
             {
               "kind": "scale_level",
@@ -24561,6 +26723,11 @@
               "branch": null,
               "kind": "wave",
               "number": 2
+            },
+            {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "30秒"
             },
             {
               "kind": "scale_level",
@@ -24613,6 +26780,11 @@
               "number": 3
             },
             {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "15秒"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -24661,6 +26833,11 @@
               "branch": null,
               "kind": "wave",
               "number": 4
+            },
+            {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "15秒"
             },
             {
               "kind": "scale_level",
@@ -24713,6 +26890,11 @@
               "number": 5
             },
             {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "10秒"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -24761,6 +26943,11 @@
               "branch": null,
               "kind": "wave",
               "number": 6
+            },
+            {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "15秒"
             },
             {
               "kind": "scale_level",
@@ -24813,6 +27000,11 @@
               "number": 7
             },
             {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "15秒"
+            },
+            {
               "kind": "scale_level",
               "value": 2
             },
@@ -24861,6 +27053,11 @@
               "branch": null,
               "kind": "wave",
               "number": 8
+            },
+            {
+              "kind": "detail",
+              "label": "等待时间",
+              "value": "10秒"
             },
             {
               "kind": "scale_level",

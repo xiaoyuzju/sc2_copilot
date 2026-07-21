@@ -8,7 +8,8 @@ mod settings;
 
 pub use alert::{AlertPlayer, NoopAlertPlayer};
 pub use controller::{
-    AlertCard, AppController, ConnectionState, ControllerUpdate, MapDescriptor, VariantDescriptor,
+    AlertCard, AppController, ConnectionState, ControllerUpdate, MapDescriptor, MutatorDescriptor,
+    VariantDescriptor,
 };
 pub use monitor::{MonitorRecord, MonitorReducer};
 pub use sc2::{

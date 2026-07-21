@@ -16,7 +16,7 @@ cargo run -p schedule-data -- diff-keiframe data/maps/catalog.json reference-che
 
 把日期替换为新批次日期，但 Keiframe commit 未经重新决策不得替换。`compile` 只读取灰机 Wiki 快照；`diff-keiframe` 只读取已经生成的目录和固定数据库，且只生成差异报告。它没有写回目录的接口。
 
-每次运行应检查：快照验证统计、编译后的地图/相关表/事件数量、`unclassified_row_count=0`、目录来源引用校验，以及差异报告中的固定 commit。生成的 `catalog.json` 是唯一构建输入；`coverage-report.json` 和 `data/diffs` 仅供审查。
+每次运行应检查：快照验证统计、编译后的地图/相关表/事件数量、`unclassified_row_count=0`、每张表的 `handled_rows` 与 `unsupported_rows` 互斥且并集等于 `source_row_count`、目录来源引用校验，以及差异报告中的固定 commit。生成的 `catalog.json` 是唯一构建输入；`coverage-report.json` 和 `data/diffs` 仅供审查。
 
 ## 固定输入
 
@@ -120,7 +120,7 @@ data/
 
 规范化时遵守以下规则：
 
-1. 按表头名称识别表格，不依赖页面中的固定表格序号。
+1. 每个地图 adapter 按已审核快照显式声明相关表序号和预期时间列；页面表结构变化后必须重新审核，不能自动套用到新序号。
 2. 将 `m:ss` 时间转换为秒，同时保留原始时间文本用于审查。
 3. 生命值、规模、科技等级和数量按页面精确值保存，不转换成 `k` 简写。
 4. 合并单元格只向其覆盖范围展开；相同时间的不同事件不得合并。
@@ -140,17 +140,15 @@ sqlite3 -json reference-checkout\resources\db\maps.db `
   "SELECT map_name, time_label, time_value, event_text, army_text FROM map_configs ORDER BY map_name, time_value, rowid;"
 ```
 
-比较器只产生以下差异类别：
+Rust 比较器读取 `time_label`、`time_value`、`count_value`、`event_text` 和 `army_text`，但生成的报告不包含后三者的原文。报告从以下维度给出计数、时间点或需人工复核的标记：
 
-- `match`：时间和能够安全解释的事实字段一致；
-- `missing_in_keiframe`：灰机 Wiki 事件没有参照记录；
-- `missing_in_huiji`：参照记录没有灰机 Wiki 事件，仅报告，不反向补入；
-- `value_conflict`：相同事件的明确数值不同；
-- `precision_loss`：Keiframe 只保留了取整或简写值；
-- `structure_loss`：Keiframe 合并了分支、多目标或逐路编成；
-- `vocabulary_difference`：可能描述同一位置，但词汇映射没有来源依据。
+- 时间集合、窗口/亚秒精度、`time_label` 与 `time_value` 一致性；
+- 同刻记录数量差异和多事实/复合记录数量，用于发现结构压缩；
+- 相同时间点的结构化数值候选差异；候选解析不反向写入应用事实；
+- 两边词汇 token 的交集和各自独有数量，不输出 Keiframe 词汇表；
+- 净网行动的节点数/阶段剩余倒计时被明确标记为首版不支持的运行条件。
 
-冲突时保留灰机 Wiki 值，并在差异文件中保存两边原始值和参照 commit。不要把 Keiframe 的 `event_text`、`army_text` 或数据库行直接转换成应用提示文案。
+冲突时保留灰机 Wiki 值；差异文件只保存归一化诊断与参照 commit，不保存 Keiframe 的 `event_text`、`army_text`、整行记录或词汇表。不要把这些字段直接转换成应用提示文案。
 
 ## 第五步：审核与发布
 

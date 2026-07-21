@@ -6,7 +6,7 @@ mod model;
 
 pub use catalog::{CatalogError, ScheduleCatalog};
 pub use engine::{
-    AlertBatch, CopilotEngine, EngineInput, EngineSettings, EngineUpdate, EngineView,
+    AlertBatch, CopilotEngine, EngineInput, EngineSettings, EngineUpdate, EngineView, EventTiming,
     GameObservation, ScheduledEventView, StageAnchorView, UserCommand,
 };
 pub use model::{

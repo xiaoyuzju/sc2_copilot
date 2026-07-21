@@ -327,3 +327,46 @@ fn catalog_exposes_variants_stage_triggers_and_source_coverage() {
         }
     );
 }
+
+#[test]
+fn catalog_rejects_a_time_window_with_reversed_bounds() {
+    let json = br#"
+    {
+      "schema_version": 1,
+      "maps": [{
+        "map_id": "test-map",
+        "display_name": "Test Map",
+        "events": [{
+          "map_id": "test-map",
+          "event_id": "invalid-window",
+          "trigger": {
+            "kind": "at_game_time_window",
+            "earliest_milliseconds": 2000,
+            "latest_milliseconds": 1000
+          },
+          "facts": [],
+          "source_refs": [{
+            "source_url": "https://example.invalid/map",
+            "snapshot_batch": "test",
+            "snapshot_path": "fixture.json",
+            "table_index": 0,
+            "row_index": 1
+          }],
+          "runtime_support": "automatic"
+        }]
+      }]
+    }
+    "#;
+
+    let error = ScheduleCatalog::from_json(json).expect_err("reversed window should fail");
+
+    assert!(matches!(
+        error,
+        CatalogError::InvalidTimeWindow {
+            map_id,
+            event_id,
+            earliest_milliseconds: 2_000,
+            latest_milliseconds: 1_000,
+        } if map_id == "test-map" && event_id == "invalid-window"
+    ));
+}

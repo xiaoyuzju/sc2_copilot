@@ -14,6 +14,12 @@
 
 ## Shared foundation
 
+### Conditional and composite timeline triggers
+
+为灰机 Wiki 中当前标为 `condition_unavailable`、`source_expression_unsupported` 或 `ambiguous_clock` 的行，独立建模 `WhenCondition`、`After`、`AnyOf` / `AllOf` 和 `Repeat`。首版不会为了提高自动覆盖率，把条件、依赖或重复间隔近似成开局绝对时间。
+
+完成条件：每种表达式都有明确的状态输入与时钟语义；依赖关系无环；重复次数或终止条件有界；暂停、重连、时间回退和晚启动的行为均有确定性测试；原先的 `unsupported` 行可逐条迁移且保留原 `SourceRef`。
+
 ### Game window capture and coordinate model
 
 在 Windows 11 上发现 SC2 客户区，仅在对局需要识别时采集最新画面，并把实际客户区、DPI、宽高比和黑边转换为统一的规范坐标。

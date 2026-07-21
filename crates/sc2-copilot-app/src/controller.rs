@@ -1,13 +1,20 @@
 use std::collections::{BTreeMap, BTreeSet, HashMap, VecDeque};
 
 use sc2_copilot_core::{
-    AlertBatch, CopilotEngine, EngineInput, EngineSettings, EngineUpdate, EngineView, Fact,
-    GameObservation, LocationSpec, ScheduleCatalog, Trigger, UserCommand,
+    AlertBatch, CopilotEngine, EngineInput, EngineSettings, EngineUpdate, EngineView, EventTiming,
+    Fact, GameObservation, LocationSpec, ScheduleCatalog, Trigger, UserCommand,
 };
 
 use crate::{AlertPlayer, AppSettings, Sc2Observation, Sc2Poll};
 
 const DIAGNOSTIC_LIMIT: usize = 20;
+type MutatorEventDetails = HashMap<String, BTreeMap<String, Vec<String>>>;
+
+struct CatalogDescription {
+    maps: Vec<MapDescriptor>,
+    event_labels: HashMap<String, String>,
+    mutator_event_details: MutatorEventDetails,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ConnectionState {
@@ -23,10 +30,17 @@ pub struct VariantDescriptor {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct MutatorDescriptor {
+    pub id: String,
+    pub display_name: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct MapDescriptor {
     pub id: String,
     pub display_name: String,
     pub variants: Vec<VariantDescriptor>,
+    pub mutators: Vec<MutatorDescriptor>,
     pub stage_ids: Vec<String>,
     pub unsupported_row_count: usize,
     pub unsupported_reasons: Vec<String>,
@@ -34,7 +48,7 @@ pub struct MapDescriptor {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AlertCard {
-    pub event_time_milliseconds: u64,
+    pub timing: EventTiming,
     pub event_ids: Vec<String>,
     pub event_labels: Vec<String>,
 }
@@ -48,6 +62,7 @@ pub struct AppController {
     engine: CopilotEngine,
     maps: Vec<MapDescriptor>,
     event_labels: HashMap<String, String>,
+    mutator_event_details: MutatorEventDetails,
     player: Box<dyn AlertPlayer>,
     connection: ConnectionState,
     engine_view: EngineView,
@@ -66,15 +81,16 @@ impl AppController {
         settings: AppSettings,
         player: Box<dyn AlertPlayer>,
     ) -> Self {
-        let (maps, event_labels) = describe_catalog(&catalog);
+        let description = describe_catalog(&catalog);
         let snapshot_batch = catalog.snapshot_batch().to_owned();
         let engine_settings = EngineSettings {
             lead_time_milliseconds: settings.lead_time_seconds.saturating_mul(1_000),
         };
         Self {
             engine: CopilotEngine::new(catalog, engine_settings),
-            maps,
-            event_labels,
+            maps: description.maps,
+            event_labels: description.event_labels,
+            mutator_event_details: description.mutator_event_details,
             player,
             connection: ConnectionState::Disconnected,
             engine_view: EngineView::default(),
@@ -155,6 +171,13 @@ impl AppController {
         }))
     }
 
+    pub fn set_mutator_active(&mut self, mutator_id: String, active: bool) -> ControllerUpdate {
+        self.apply_engine(EngineInput::Command(UserCommand::SetMutatorActive {
+            mutator_id,
+            active,
+        }))
+    }
+
     pub fn update_settings(&mut self, settings: AppSettings) -> ControllerUpdate {
         self.settings = settings;
         self.apply_engine(EngineInput::SettingsChanged(EngineSettings {
@@ -213,11 +236,23 @@ impl AppController {
     }
 
     pub fn event_label(&self, event_id: &str) -> String {
-        self.event_labels
+        let mut label = self
+            .event_labels
             .get(event_id)
             .map(String::as_str)
             .unwrap_or(event_id)
-            .to_owned()
+            .to_owned();
+        if let Some(details_by_mutator) = self.mutator_event_details.get(event_id) {
+            for mutator_id in &self.engine_view.active_mutator_ids {
+                if let Some(details) = details_by_mutator.get(mutator_id) {
+                    for detail in details {
+                        label.push_str(" · ");
+                        label.push_str(detail);
+                    }
+                }
+            }
+        }
+        label
     }
 
     fn refresh_current_observation(&mut self) -> ControllerUpdate {
@@ -256,7 +291,7 @@ impl AppController {
 
     fn alert_card(&self, batch: &AlertBatch) -> AlertCard {
         AlertCard {
-            event_time_milliseconds: batch.event_time_milliseconds,
+            timing: batch.timing,
             event_ids: batch.event_ids.clone(),
             event_labels: batch
                 .event_ids
@@ -278,14 +313,35 @@ impl AppController {
     }
 }
 
-fn describe_catalog(catalog: &ScheduleCatalog) -> (Vec<MapDescriptor>, HashMap<String, String>) {
+fn describe_catalog(catalog: &ScheduleCatalog) -> CatalogDescription {
     let mut maps = Vec::with_capacity(catalog.map_count());
     let mut labels = HashMap::new();
+    let mut mutator_event_details = HashMap::new();
     for schedule in catalog.schedules() {
         let mut stage_ids = BTreeSet::new();
+        let mut mutators = BTreeMap::<String, String>::new();
         let mut unsupported_reasons = BTreeMap::<String, usize>::new();
         for event in schedule.events() {
             labels.insert(event.id().to_owned(), describe_event(event.facts()));
+            let mut event_mutator_details = BTreeMap::<String, Vec<String>>::new();
+            for fact in event.facts() {
+                if let Fact::MutatorContext {
+                    mutator_id,
+                    display_name,
+                    label,
+                    value,
+                } = fact
+                {
+                    mutators.insert(mutator_id.clone(), display_name.clone());
+                    event_mutator_details
+                        .entry(mutator_id.clone())
+                        .or_default()
+                        .push(format!("{label} {value}"));
+                }
+            }
+            if !event_mutator_details.is_empty() {
+                mutator_event_details.insert(event.id().to_owned(), event_mutator_details);
+            }
             match event.trigger() {
                 Trigger::AtStageElapsed { stage_id, .. }
                 | Trigger::AtStageRemaining { stage_id, .. } => {
@@ -314,6 +370,10 @@ fn describe_catalog(catalog: &ScheduleCatalog) -> (Vec<MapDescriptor>, HashMap<S
                     display_name: variant.display_name().to_owned(),
                 })
                 .collect(),
+            mutators: mutators
+                .into_iter()
+                .map(|(id, display_name)| MutatorDescriptor { id, display_name })
+                .collect(),
             stage_ids: stage_ids.into_iter().collect(),
             unsupported_row_count: schedule
                 .coverage()
@@ -326,7 +386,11 @@ fn describe_catalog(catalog: &ScheduleCatalog) -> (Vec<MapDescriptor>, HashMap<S
                 .collect(),
         });
     }
-    (maps, labels)
+    CatalogDescription {
+        maps,
+        event_labels: labels,
+        mutator_event_details,
+    }
 }
 
 fn describe_event(facts: &[Fact]) -> String {
@@ -345,12 +409,22 @@ fn describe_fact(fact: &Fact) -> Option<String> {
             Some(branch) => format!("第 {number}-{branch} 波"),
             None => format!("第 {number} 波"),
         }),
+        Fact::WaveExpression { value } => Some(format!("波次 {value}")),
         Fact::Location { value } => Some(describe_location(value)),
         Fact::Target { value } => Some(value.clone()),
+        Fact::Route { value } => Some(format!("路线 {value}")),
         Fact::Health { value } => Some(format!("生命值 {value}")),
+        Fact::Shield { value } => Some(format!("护盾值 {value}")),
         Fact::UnitCount { unit, value } => Some(format!("{unit:?} × {value}")),
+        Fact::Count { subject, value } => Some(format!("{subject} {value}")),
         Fact::ScaleLevel { value } => Some(format!("规模 {value}")),
+        Fact::ScaleExpression { value } => Some(format!("规模 {value}")),
         Fact::TechLevel { value } => Some(format!("科技 {value}")),
+        Fact::TechExpression { value } => Some(format!("科技 {value}")),
+        Fact::Composition { value } => Some(format!("组成 {value}")),
+        Fact::Probability { value } => Some(format!("概率 {value}")),
+        Fact::Detail { label, value } => Some(format!("{label} {value}")),
+        Fact::MutatorContext { .. } => None,
     }
 }
 

@@ -1,6 +1,9 @@
-use std::{collections::HashMap, path::Path};
+use std::{
+    collections::{BTreeSet, HashMap},
+    path::Path,
+};
 
-use sc2_copilot_core::ScheduleCatalog;
+use sc2_copilot_core::{EventCategory, RuntimeSupport, ScheduleCatalog, UnsupportedReason};
 use serde_json::{Value, json};
 use thiserror::Error;
 
@@ -59,8 +62,15 @@ pub fn compile_snapshot_batch(batch_dir: &Path) -> Result<CompileOutput, Compile
                 })?;
             let compiled =
                 compile_table(plan, table_plan, table, &snapshot, batch, &snapshot_path)?;
+            let source_row_count = table.rows.len().saturating_sub(1);
+            let classified_rows = validate_table_coverage(
+                plan.name,
+                table_plan.table_index,
+                source_row_count,
+                &compiled,
+            )?;
 
-            classified_row_count += table.rows.len().saturating_sub(1);
+            classified_row_count += classified_rows;
             event_count += compiled.events.len();
             relevant_table_count += 1;
             events.extend(compiled.events);
@@ -69,6 +79,7 @@ pub fn compile_snapshot_batch(batch_dir: &Path) -> Result<CompileOutput, Compile
                 "display_name": plan.name,
                 "table_index": table_plan.table_index,
                 "runtime_support": table_plan.runtime_support(),
+                "source_row_count": source_row_count,
                 "handled_rows": compiled.handled_rows,
                 "unsupported_rows": compiled.unsupported_rows,
             }));
@@ -172,7 +183,7 @@ fn compile_table(
 
     for row_index in 1..table.rows.len() {
         let row = grid.get(row_index).cloned().unwrap_or_default();
-        let mut row_events = Vec::new();
+        let mut pending_events = Vec::new();
         let mut row_has_unparsed_expression = false;
 
         for &column_index in &time_columns {
@@ -181,16 +192,18 @@ fn compile_table(
                 .map(String::as_str)
                 .unwrap_or("")
                 .trim();
-            if value.is_empty() {
+            if value.is_empty() || value == "-" {
                 continue;
             }
 
             let (trigger, stage_id) = match plan.policy {
                 Policy::Absolute { selector, .. } => {
                     let candidate = match selector {
-                        TimeSelector::EmbeddedGameTime => {
-                            value.strip_prefix("游戏时间为").unwrap_or(value)
-                        }
+                        TimeSelector::EmbeddedGameTime => match value.strip_prefix("游戏时间为")
+                        {
+                            Some(candidate) => candidate,
+                            None => continue,
+                        },
                         _ => value,
                     };
                     match parse_time_expression(candidate) {
@@ -248,9 +261,34 @@ fn compile_table(
                 Policy::Unsupported(_) => unreachable!(),
             };
 
+            pending_events.push((column_index, trigger, stage_id));
+        }
+
+        if pending_events.is_empty() || row_has_unparsed_expression {
+            unsupported_rows.push(unsupported_row(
+                row_index,
+                UnsupportedReason::SourceExpressionUnsupported,
+            ));
+            continue;
+        }
+
+        let trigger_columns = pending_events
+            .iter()
+            .map(|(column_index, _, _)| *column_index)
+            .collect::<Vec<_>>();
+        let facts = compile_facts(
+            map,
+            table.table_index,
+            row_index,
+            &row,
+            headers,
+            &trigger_columns,
+            plan.category(),
+        )?;
+        for (column_index, trigger, stage_id) in pending_events {
             let variant_id = plan.variant_for(headers.get(column_index).map(String::as_str));
             let runtime_support = if variant_id.is_some() || stage_id.is_some() {
-                "manual_context"
+                RuntimeSupport::ManualContext
             } else {
                 plan.runtime_support()
             };
@@ -258,8 +296,7 @@ fn compile_table(
                 "{}-t{}-r{}-c{}",
                 map.id, table.table_index, row_index, column_index
             );
-            let facts = compile_facts(&row, headers, plan.category());
-            row_events.push(json!({
+            events.push(json!({
                 "map_id": map.id,
                 "variant_id": variant_id,
                 "event_id": event_id,
@@ -275,14 +312,7 @@ fn compile_table(
                 "runtime_support": runtime_support,
             }));
         }
-
-        if row_events.is_empty() || row_has_unparsed_expression {
-            unsupported_rows.push(unsupported_row(row_index, "source_expression_unsupported"));
-        }
-        if !row_events.is_empty() {
-            handled_rows.push(row_index);
-            events.extend(row_events);
-        }
+        handled_rows.push(row_index);
     }
 
     Ok(CompiledTable {
@@ -292,38 +322,121 @@ fn compile_table(
     })
 }
 
-fn compile_facts(row: &[String], headers: &[String], category: &str) -> Vec<Value> {
+fn validate_table_coverage(
+    map: &str,
+    table_index: usize,
+    source_row_count: usize,
+    compiled: &CompiledTable,
+) -> Result<usize, CompileError> {
+    let expected = (1..=source_row_count).collect::<BTreeSet<_>>();
+    let handled = compiled
+        .handled_rows
+        .iter()
+        .copied()
+        .collect::<BTreeSet<_>>();
+    let unsupported = compiled
+        .unsupported_rows
+        .iter()
+        .filter_map(|row| row["row_index"].as_u64())
+        .map(|row_index| row_index as usize)
+        .collect::<BTreeSet<_>>();
+    let overlap = handled
+        .intersection(&unsupported)
+        .copied()
+        .collect::<Vec<_>>();
+    let classified = handled
+        .union(&unsupported)
+        .copied()
+        .collect::<BTreeSet<_>>();
+    let missing = expected
+        .difference(&classified)
+        .copied()
+        .collect::<Vec<_>>();
+    let unexpected = classified
+        .difference(&expected)
+        .copied()
+        .collect::<Vec<_>>();
+    if !overlap.is_empty() || !missing.is_empty() || !unexpected.is_empty() {
+        return Err(CompileError::InvalidRowCoverage {
+            map: map.to_owned(),
+            table_index,
+            overlap,
+            missing,
+            unexpected,
+        });
+    }
+    Ok(classified.len())
+}
+
+fn compile_facts(
+    map: &MapPlan,
+    table_index: usize,
+    row_index: usize,
+    row: &[String],
+    headers: &[String],
+    trigger_columns: &[usize],
+    category: EventCategory,
+) -> Result<Vec<Value>, CompileError> {
     let mut facts = vec![json!({ "kind": "event_category", "value": category })];
 
-    if let Some((number, branch)) = row.first().and_then(|value| wave_number(value)) {
-        facts.push(json!({ "kind": "wave", "number": number, "branch": branch }));
-    }
-
-    for (header, value) in headers.iter().zip(row) {
+    for (column_index, (header, value)) in headers.iter().zip(row).enumerate() {
         let value = value.trim();
-        if value.is_empty() || value == "-" {
+        if value.is_empty() || value == "-" || trigger_columns.contains(&column_index) {
             continue;
         }
-        if (header.contains("刷新位置")
-            || header.contains("刷新点")
-            || header.contains("红点位置")
-            || header == "位置")
-            && !facts.iter().any(|fact| fact["kind"] == "location")
-        {
+        if is_known_expanded_duplicate_column(map, table_index, column_index) {
+            continue;
+        }
+
+        if is_wave_header(header) {
+            if let Some((number, branch)) = wave_number(value) {
+                facts.push(json!({ "kind": "wave", "number": number, "branch": branch }));
+            } else {
+                facts.push(json!({ "kind": "wave_expression", "value": value }));
+            }
+        } else if is_location_header(header) {
             facts.push(json!({ "kind": "location", "value": location_value(value) }));
-        } else if header.contains("目标") && !facts.iter().any(|fact| fact["kind"] == "target") {
+        } else if header.contains("进攻路径") || header == "前进目标" {
+            facts.push(json!({ "kind": "route", "value": value }));
+        } else if header.contains("目标") {
             facts.push(json!({ "kind": "target", "value": value }));
         } else if header.contains("规模") {
             if let Ok(value) = value.parse::<u8>() {
                 facts.push(json!({ "kind": "scale_level", "value": value }));
+            } else {
+                facts.push(json!({ "kind": "scale_expression", "value": value }));
             }
         } else if header.contains("科技") {
             if let Ok(value) = value.parse::<u8>() {
                 facts.push(json!({ "kind": "tech_level", "value": value }));
+            } else {
+                facts.push(json!({ "kind": "tech_expression", "value": value }));
             }
         } else if header.contains("生命值") {
             if let Ok(value) = value.parse::<u32>() {
                 facts.push(json!({ "kind": "health", "value": value }));
+            } else {
+                return Err(CompileError::InvalidFactValue {
+                    map: map.name.to_owned(),
+                    table_index,
+                    row_index,
+                    column_index,
+                    header: header.to_owned(),
+                    value: value.to_owned(),
+                });
+            }
+        } else if header.contains("护盾") {
+            if let Ok(value) = value.parse::<u32>() {
+                facts.push(json!({ "kind": "shield", "value": value }));
+            } else {
+                return Err(CompileError::InvalidFactValue {
+                    map: map.name.to_owned(),
+                    table_index,
+                    row_index,
+                    column_index,
+                    header: header.to_owned(),
+                    value: value.to_owned(),
+                });
             }
         } else if header.contains("列车节数")
             && let Ok(value) = value.parse::<u16>()
@@ -333,10 +446,84 @@ fn compile_facts(row: &[String], headers: &[String], category: &str) -> Vec<Valu
                 "unit": "train_car",
                 "value": value,
             }));
+        } else if is_count_header(header) {
+            facts.push(json!({ "kind": "count", "subject": header, "value": value }));
+        } else if header.contains("混合体") || header == "补充" {
+            facts.push(json!({ "kind": "composition", "value": value }));
+        } else if header.contains("概率") {
+            facts.push(json!({ "kind": "probability", "value": value }));
+        } else if header.contains("Polarity") && header.contains("可造成伤害玩家") {
+            facts.push(json!({
+                "kind": "mutator_context",
+                "mutator_id": "polarity",
+                "display_name": "极性不定",
+                "label": "可造成伤害玩家",
+                "value": value,
+            }));
+        } else if is_detail_header(header) {
+            facts.push(json!({
+                "kind": "detail",
+                "label": header,
+                "value": value,
+            }));
+        } else {
+            return Err(CompileError::UnknownFactColumn {
+                map: map.name.to_owned(),
+                table_index,
+                row_index,
+                column_index,
+                header: header.to_owned(),
+            });
         }
     }
 
-    facts
+    Ok(facts)
+}
+
+fn is_known_expanded_duplicate_column(
+    map: &MapPlan,
+    table_index: usize,
+    column_index: usize,
+) -> bool {
+    map.id == "lock-and-load" && table_index == 2 && column_index == 7
+}
+
+fn is_wave_header(header: &str) -> bool {
+    header.contains("波次") || header == "夜晚次数"
+}
+
+fn is_location_header(header: &str) -> bool {
+    header.contains("刷新位置")
+        || header.contains("刷新点")
+        || header.contains("红点位置")
+        || matches!(
+            header,
+            "位置"
+                | "停泊湾"
+                | "时空航道"
+                | "反奖励波次位置"
+                | "生成位置"
+                | "出发位置"
+                | "刷新区域"
+                | "构造体区域"
+                | "降落点"
+                | "触发位置"
+                | "空投区域"
+        )
+}
+
+fn is_count_header(header: &str) -> bool {
+    header.contains("数量")
+        || header.contains("数目")
+        || header.contains("个数")
+        || header.contains("节数")
+}
+
+fn is_detail_header(header: &str) -> bool {
+    matches!(
+        header,
+        "类型" | "进攻方式" | "集结时间" | "等待时间" | "出现间隔"
+    ) || header.contains("速度")
 }
 
 fn location_value(value: &str) -> Value {
@@ -496,7 +683,7 @@ fn parse_cradle_stage_time(value: &str) -> Option<(String, u64)> {
     Some((format!("main-objective-{wave}"), milliseconds))
 }
 
-fn unsupported_row(row_index: usize, reason: &str) -> Value {
+fn unsupported_row(row_index: usize, reason: UnsupportedReason) -> Value {
     json!({ "row_index": row_index, "reason": reason })
 }
 
@@ -556,26 +743,26 @@ struct TablePlan {
 }
 
 impl TablePlan {
-    fn runtime_support(self) -> &'static str {
+    fn runtime_support(self) -> RuntimeSupport {
         match self.policy {
             Policy::Absolute { variant, .. } => match variant {
-                VariantMode::None => "automatic",
-                VariantMode::Fixed(_) | VariantMode::SpeciesHeader => "manual_context",
+                VariantMode::None => RuntimeSupport::Automatic,
+                VariantMode::Fixed(_) | VariantMode::SpeciesHeader => RuntimeSupport::ManualContext,
             },
             Policy::StageNight { .. }
             | Policy::StageRemaining { .. }
-            | Policy::StageCradle { .. } => "manual_context",
-            Policy::Unsupported(_) => "unsupported",
+            | Policy::StageCradle { .. } => RuntimeSupport::ManualContext,
+            Policy::Unsupported(_) => RuntimeSupport::Unsupported,
         }
     }
 
-    fn category(self) -> &'static str {
+    fn category(self) -> EventCategory {
         match self.policy {
             Policy::Absolute { category, .. }
             | Policy::StageNight { category }
             | Policy::StageRemaining { category }
             | Policy::StageCradle { category } => category,
-            Policy::Unsupported(_) => "attack_wave",
+            Policy::Unsupported(_) => EventCategory::AttackWave,
         }
     }
 
@@ -605,20 +792,20 @@ impl TablePlan {
 #[derive(Debug, Clone, Copy)]
 enum Policy {
     Absolute {
-        category: &'static str,
+        category: EventCategory,
         selector: TimeSelector,
         variant: VariantMode,
     },
     StageNight {
-        category: &'static str,
+        category: EventCategory,
     },
     StageRemaining {
-        category: &'static str,
+        category: EventCategory,
     },
     StageCradle {
-        category: &'static str,
+        category: EventCategory,
     },
-    Unsupported(&'static str),
+    Unsupported(UnsupportedReason),
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -635,7 +822,7 @@ enum VariantMode {
     SpeciesHeader,
 }
 
-fn absolute(table_index: usize, category: &'static str) -> TablePlan {
+fn absolute(table_index: usize, category: EventCategory) -> TablePlan {
     TablePlan {
         table_index,
         policy: Policy::Absolute {
@@ -648,7 +835,7 @@ fn absolute(table_index: usize, category: &'static str) -> TablePlan {
 
 fn absolute_variant(
     table_index: usize,
-    category: &'static str,
+    category: EventCategory,
     variant: &'static str,
 ) -> TablePlan {
     TablePlan {
@@ -661,12 +848,23 @@ fn absolute_variant(
     }
 }
 
-fn unsupported(table_index: usize, reason: &'static str) -> TablePlan {
+fn unsupported(table_index: usize, reason: UnsupportedReason) -> TablePlan {
     TablePlan {
         table_index,
         policy: Policy::Unsupported(reason),
     }
 }
+
+const ATTACK_WAVE: EventCategory = EventCategory::AttackWave;
+const MAIN_OBJECTIVE: EventCategory = EventCategory::MainObjective;
+const BONUS_OBJECTIVE: EventCategory = EventCategory::BonusObjective;
+const AMBIGUOUS_CLOCK: UnsupportedReason = UnsupportedReason::AmbiguousClock;
+const CONDITION_UNAVAILABLE: UnsupportedReason = UnsupportedReason::ConditionUnavailable;
+const DUPLICATE_SUMMARY: UnsupportedReason = UnsupportedReason::DuplicateSummary;
+const SOURCE_EXPRESSION_UNSUPPORTED: UnsupportedReason =
+    UnsupportedReason::SourceExpressionUnsupported;
+const SUPPORTING_TABLE: UnsupportedReason = UnsupportedReason::SupportingTableNoIndependentTrigger;
+const VISUAL_STATE_REQUIRED: UnsupportedReason = UnsupportedReason::VisualStateRequired;
 
 fn map_plans() -> Vec<MapPlan> {
     vec![
@@ -675,10 +873,10 @@ fn map_plans() -> Vec<MapPlan> {
             name: "湮灭快车",
             variants: vec![],
             tables: vec![
-                absolute(0, "main_objective"),
-                unsupported(1, "supporting_table_no_independent_trigger"),
-                unsupported(2, "duplicate_summary"),
-                absolute(3, "attack_wave"),
+                absolute(0, MAIN_OBJECTIVE),
+                unsupported(1, SUPPORTING_TABLE),
+                unsupported(2, DUPLICATE_SUMMARY),
+                absolute(3, ATTACK_WAVE),
             ],
         },
         MapPlan {
@@ -695,9 +893,9 @@ fn map_plans() -> Vec<MapPlan> {
                 },
             ],
             tables: vec![
-                absolute(0, "main_objective"),
-                absolute_variant(3, "attack_wave", "layout-a"),
-                absolute_variant(4, "attack_wave", "layout-b"),
+                absolute(0, MAIN_OBJECTIVE),
+                absolute_variant(3, ATTACK_WAVE, "layout-a"),
+                absolute_variant(4, ATTACK_WAVE, "layout-b"),
             ],
         },
         MapPlan {
@@ -705,9 +903,9 @@ fn map_plans() -> Vec<MapPlan> {
             name: "虚空降临",
             variants: vec![],
             tables: vec![
-                absolute(1, "main_objective"),
-                absolute(2, "bonus_objective"),
-                absolute(3, "attack_wave"),
+                absolute(1, MAIN_OBJECTIVE),
+                absolute(2, BONUS_OBJECTIVE),
+                absolute(3, ATTACK_WAVE),
             ],
         },
         MapPlan {
@@ -715,9 +913,9 @@ fn map_plans() -> Vec<MapPlan> {
             name: "克哈裂痕",
             variants: vec![],
             tables: vec![
-                unsupported(0, "condition_unavailable"),
-                absolute(3, "attack_wave"),
-                unsupported(4, "condition_unavailable"),
+                unsupported(0, CONDITION_UNAVAILABLE),
+                absolute(3, ATTACK_WAVE),
+                unsupported(4, CONDITION_UNAVAILABLE),
             ],
         },
         MapPlan {
@@ -734,31 +932,28 @@ fn map_plans() -> Vec<MapPlan> {
                 },
             ],
             tables: vec![
-                absolute_variant(3, "attack_wave", "layout-a"),
-                unsupported(4, "supporting_table_no_independent_trigger"),
-                absolute_variant(5, "attack_wave", "layout-b"),
-                unsupported(6, "supporting_table_no_independent_trigger"),
+                absolute_variant(3, ATTACK_WAVE, "layout-a"),
+                unsupported(4, SUPPORTING_TABLE),
+                absolute_variant(5, ATTACK_WAVE, "layout-b"),
+                unsupported(6, SUPPORTING_TABLE),
             ],
         },
         MapPlan {
             id: "lock-and-load",
             name: "天界封锁",
             variants: vec![],
-            tables: vec![
-                absolute(2, "attack_wave"),
-                unsupported(3, "ambiguous_clock"),
-            ],
+            tables: vec![absolute(2, ATTACK_WAVE), unsupported(3, AMBIGUOUS_CLOCK)],
         },
         MapPlan {
             id: "chain-of-ascension",
             name: "升格之链",
             variants: vec![],
             tables: vec![
-                absolute(0, "main_objective"),
-                unsupported(1, "condition_unavailable"),
-                unsupported(2, "supporting_table_no_independent_trigger"),
-                absolute(3, "main_objective"),
-                absolute(5, "attack_wave"),
+                absolute(0, MAIN_OBJECTIVE),
+                unsupported(1, CONDITION_UNAVAILABLE),
+                unsupported(2, SUPPORTING_TABLE),
+                absolute(3, MAIN_OBJECTIVE),
+                absolute(5, ATTACK_WAVE),
             ],
         },
         MapPlan {
@@ -766,10 +961,10 @@ fn map_plans() -> Vec<MapPlan> {
             name: "熔火危机",
             variants: vec![],
             tables: vec![
-                unsupported(0, "source_expression_unsupported"),
-                absolute(3, "attack_wave"),
-                unsupported(4, "supporting_table_no_independent_trigger"),
-                unsupported(5, "supporting_table_no_independent_trigger"),
+                unsupported(0, SOURCE_EXPRESSION_UNSUPPORTED),
+                absolute(3, ATTACK_WAVE),
+                unsupported(4, SUPPORTING_TABLE),
+                unsupported(5, SUPPORTING_TABLE),
             ],
         },
         MapPlan {
@@ -786,18 +981,18 @@ fn map_plans() -> Vec<MapPlan> {
                 },
             ],
             tables: vec![
-                absolute(2, "attack_wave"),
-                unsupported(3, "condition_unavailable"),
-                unsupported(5, "duplicate_summary"),
-                unsupported(6, "duplicate_summary"),
-                unsupported(7, "duplicate_summary"),
-                unsupported(8, "duplicate_summary"),
-                unsupported(9, "duplicate_summary"),
-                absolute(10, "main_objective"),
+                absolute(2, ATTACK_WAVE),
+                unsupported(3, CONDITION_UNAVAILABLE),
+                unsupported(5, DUPLICATE_SUMMARY),
+                unsupported(6, DUPLICATE_SUMMARY),
+                unsupported(7, DUPLICATE_SUMMARY),
+                unsupported(8, DUPLICATE_SUMMARY),
+                unsupported(9, DUPLICATE_SUMMARY),
+                absolute(10, MAIN_OBJECTIVE),
                 TablePlan {
                     table_index: 11,
                     policy: Policy::Absolute {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                         selector: TimeSelector::HeaderTime,
                         variant: VariantMode::SpeciesHeader,
                     },
@@ -809,29 +1004,29 @@ fn map_plans() -> Vec<MapPlan> {
             name: "营救矿工",
             variants: vec![],
             tables: vec![
-                unsupported(1, "condition_unavailable"),
-                unsupported(2, "condition_unavailable"),
+                unsupported(1, CONDITION_UNAVAILABLE),
+                unsupported(2, CONDITION_UNAVAILABLE),
                 TablePlan {
                     table_index: 3,
                     policy: Policy::Absolute {
-                        category: "main_objective",
+                        category: MAIN_OBJECTIVE,
                         selector: TimeSelector::AllAfterFirst,
                         variant: VariantMode::None,
                     },
                 },
-                absolute(4, "attack_wave"),
-                absolute(10, "attack_wave"),
-                unsupported(11, "ambiguous_clock"),
-                unsupported(12, "ambiguous_clock"),
-                unsupported(13, "ambiguous_clock"),
-                unsupported(14, "ambiguous_clock"),
-                unsupported(15, "supporting_table_no_independent_trigger"),
-                unsupported(16, "ambiguous_clock"),
-                unsupported(17, "ambiguous_clock"),
-                unsupported(18, "ambiguous_clock"),
-                unsupported(19, "ambiguous_clock"),
-                unsupported(20, "ambiguous_clock"),
-                unsupported(21, "ambiguous_clock"),
+                absolute(4, ATTACK_WAVE),
+                absolute(10, ATTACK_WAVE),
+                unsupported(11, AMBIGUOUS_CLOCK),
+                unsupported(12, AMBIGUOUS_CLOCK),
+                unsupported(13, AMBIGUOUS_CLOCK),
+                unsupported(14, AMBIGUOUS_CLOCK),
+                unsupported(15, SUPPORTING_TABLE),
+                unsupported(16, AMBIGUOUS_CLOCK),
+                unsupported(17, AMBIGUOUS_CLOCK),
+                unsupported(18, AMBIGUOUS_CLOCK),
+                unsupported(19, AMBIGUOUS_CLOCK),
+                unsupported(20, AMBIGUOUS_CLOCK),
+                unsupported(21, AMBIGUOUS_CLOCK),
             ],
         },
         MapPlan {
@@ -839,103 +1034,103 @@ fn map_plans() -> Vec<MapPlan> {
             name: "亡者之夜",
             variants: vec![],
             tables: vec![
-                unsupported(0, "source_expression_unsupported"),
-                unsupported(1, "source_expression_unsupported"),
-                unsupported(2, "supporting_table_no_independent_trigger"),
+                unsupported(0, SOURCE_EXPRESSION_UNSUPPORTED),
+                unsupported(1, SOURCE_EXPRESSION_UNSUPPORTED),
+                unsupported(2, SUPPORTING_TABLE),
                 TablePlan {
                     table_index: 3,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 5,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 7,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 9,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 11,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 14,
                     policy: Policy::StageNight {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
                 TablePlan {
                     table_index: 15,
                     policy: Policy::StageRemaining {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
-                unsupported(16, "supporting_table_no_independent_trigger"),
+                unsupported(16, SUPPORTING_TABLE),
             ],
         },
         MapPlan {
             id: "scythe-of-amon",
             name: "黑暗杀星",
             variants: vec![],
-            tables: vec![absolute(5, "bonus_objective"), absolute(6, "attack_wave")],
+            tables: vec![absolute(5, BONUS_OBJECTIVE), absolute(6, ATTACK_WAVE)],
         },
         MapPlan {
             id: "malwarfare",
             name: "净网行动",
             variants: vec![],
             tables: vec![
-                unsupported(4, "ambiguous_clock"),
-                unsupported(5, "ambiguous_clock"),
+                unsupported(4, AMBIGUOUS_CLOCK),
+                unsupported(5, AMBIGUOUS_CLOCK),
                 TablePlan {
                     table_index: 6,
                     policy: Policy::Absolute {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                         selector: TimeSelector::EmbeddedGameTime,
                         variant: VariantMode::None,
                     },
                 },
-                unsupported(7, "visual_state_required"),
-                unsupported(8, "visual_state_required"),
-                unsupported(9, "visual_state_required"),
-                unsupported(10, "visual_state_required"),
-                unsupported(11, "visual_state_required"),
-                unsupported(12, "visual_state_required"),
-                unsupported(13, "visual_state_required"),
-                unsupported(14, "visual_state_required"),
+                unsupported(7, VISUAL_STATE_REQUIRED),
+                unsupported(8, VISUAL_STATE_REQUIRED),
+                unsupported(9, VISUAL_STATE_REQUIRED),
+                unsupported(10, VISUAL_STATE_REQUIRED),
+                unsupported(11, VISUAL_STATE_REQUIRED),
+                unsupported(12, VISUAL_STATE_REQUIRED),
+                unsupported(13, VISUAL_STATE_REQUIRED),
+                unsupported(14, VISUAL_STATE_REQUIRED),
             ],
         },
         MapPlan {
             id: "part-and-parcel",
             name: "聚铁成兵",
             variants: vec![],
-            tables: vec![absolute(7, "attack_wave")],
+            tables: vec![absolute(7, ATTACK_WAVE)],
         },
         MapPlan {
             id: "cradle-of-death",
             name: "死亡摇篮",
             variants: vec![],
             tables: vec![
-                unsupported(0, "supporting_table_no_independent_trigger"),
-                absolute(4, "attack_wave"),
-                unsupported(5, "supporting_table_no_independent_trigger"),
+                unsupported(0, SUPPORTING_TABLE),
+                absolute(4, ATTACK_WAVE),
+                unsupported(5, SUPPORTING_TABLE),
                 TablePlan {
                     table_index: 6,
                     policy: Policy::StageCradle {
-                        category: "attack_wave",
+                        category: ATTACK_WAVE,
                     },
                 },
             ],
@@ -957,6 +1152,37 @@ pub enum CompileError {
     EmptyTable { map: String, table_index: usize },
     #[error("map {map} table {table_index} has no configured time column")]
     MissingTimeColumn { map: String, table_index: usize },
+    #[error(
+        "map {map} table {table_index} row {row_index} column {column_index} has an unmodeled fact header {header:?}"
+    )]
+    UnknownFactColumn {
+        map: String,
+        table_index: usize,
+        row_index: usize,
+        column_index: usize,
+        header: String,
+    },
+    #[error(
+        "map {map} table {table_index} row {row_index} column {column_index} has invalid {header:?} value {value:?}"
+    )]
+    InvalidFactValue {
+        map: String,
+        table_index: usize,
+        row_index: usize,
+        column_index: usize,
+        header: String,
+        value: String,
+    },
+    #[error(
+        "map {map} table {table_index} has invalid row coverage (overlap: {overlap:?}, missing: {missing:?}, unexpected: {unexpected:?})"
+    )]
+    InvalidRowCoverage {
+        map: String,
+        table_index: usize,
+        overlap: Vec<usize>,
+        missing: Vec<usize>,
+        unexpected: Vec<usize>,
+    },
     #[error(transparent)]
     Json(#[from] serde_json::Error),
     #[error(transparent)]
