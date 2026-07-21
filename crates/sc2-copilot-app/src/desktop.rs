@@ -68,6 +68,7 @@ pub fn run() -> Result<(), String> {
                 store,
                 poller,
                 startup_diagnostics,
+                creation_context.egui_ctx.clone(),
             )))
         }),
     )
@@ -98,9 +99,12 @@ impl DesktopApp {
         store: SettingsStore,
         poller: Option<Sc2PollingHandle>,
         startup_diagnostics: Vec<String>,
+        egui_context: egui::Context,
     ) -> Self {
         let (platform, platform_diagnostics) =
-            PlatformIntegration::new(controller.settings().hotkey.as_deref());
+            PlatformIntegration::new(controller.settings().hotkey.as_deref(), move || {
+                egui_context.request_repaint();
+            });
         for diagnostic in startup_diagnostics.into_iter().chain(platform_diagnostics) {
             controller.record_external_diagnostic(diagnostic);
         }

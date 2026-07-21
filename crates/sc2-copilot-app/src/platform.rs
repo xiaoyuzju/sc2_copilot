@@ -7,6 +7,11 @@ pub enum PlatformAction {
 
 #[cfg(windows)]
 mod windows {
+    use std::sync::{
+        Arc, Mutex, OnceLock, Weak,
+        mpsc::{self, Receiver, Sender},
+    };
+
     use global_hotkey::{GlobalHotKeyEvent, GlobalHotKeyManager, HotKeyState, hotkey::HotKey};
     use tray_icon::{
         Icon, TrayIcon, TrayIconBuilder,
@@ -15,6 +20,86 @@ mod windows {
 
     use super::PlatformAction;
 
+    type WakeEventLoop = Arc<dyn Fn() + Send + Sync>;
+
+    struct MenuEventTarget {
+        sender: Sender<MenuEvent>,
+        receiver: Mutex<Receiver<MenuEvent>>,
+        wake_event_loop: WakeEventLoop,
+    }
+
+    impl MenuEventTarget {
+        fn new(wake_event_loop: WakeEventLoop) -> Self {
+            let (sender, receiver) = mpsc::channel();
+            Self {
+                sender,
+                receiver: Mutex::new(receiver),
+                wake_event_loop,
+            }
+        }
+
+        fn forward(&self, event: MenuEvent) {
+            let _ = self.sender.send(event);
+            (self.wake_event_loop)();
+        }
+
+        fn try_recv(&self) -> Option<MenuEvent> {
+            self.receiver
+                .lock()
+                .expect("menu event lock poisoned")
+                .try_recv()
+                .ok()
+        }
+    }
+
+    struct MenuEventDispatcher {
+        targets: Mutex<Vec<Weak<MenuEventTarget>>>,
+    }
+
+    impl MenuEventDispatcher {
+        fn new() -> Self {
+            Self {
+                targets: Mutex::new(Vec::new()),
+            }
+        }
+
+        fn subscribe(&self, target: &Arc<MenuEventTarget>) {
+            self.targets
+                .lock()
+                .expect("menu target lock poisoned")
+                .push(Arc::downgrade(target));
+        }
+
+        fn dispatch(&self, event: MenuEvent) {
+            let live_targets = {
+                let mut targets = self.targets.lock().expect("menu target lock poisoned");
+                let live_targets = targets.iter().filter_map(Weak::upgrade).collect::<Vec<_>>();
+                targets.retain(|target| target.strong_count() > 0);
+                live_targets
+            };
+            for target in live_targets {
+                target.forward(event.clone());
+            }
+        }
+    }
+
+    static MENU_EVENT_DISPATCHER: OnceLock<MenuEventDispatcher> = OnceLock::new();
+
+    fn menu_event_target(wake_event_loop: WakeEventLoop) -> Arc<MenuEventTarget> {
+        let dispatcher = MENU_EVENT_DISPATCHER.get_or_init(|| {
+            let dispatcher = MenuEventDispatcher::new();
+            MenuEvent::set_event_handler(Some(|event| {
+                if let Some(dispatcher) = MENU_EVENT_DISPATCHER.get() {
+                    dispatcher.dispatch(event);
+                }
+            }));
+            dispatcher
+        });
+        let target = Arc::new(MenuEventTarget::new(wake_event_loop));
+        dispatcher.subscribe(&target);
+        target
+    }
+
     pub struct PlatformIntegration {
         _tray: Option<TrayIcon>,
         show_settings_id: Option<MenuId>,
@@ -22,13 +107,18 @@ mod windows {
         quit_id: Option<MenuId>,
         hotkey_manager: Option<GlobalHotKeyManager>,
         registered_hotkey: Option<HotKey>,
+        menu_events: Arc<MenuEventTarget>,
         tray_status: String,
         hotkey_status: String,
     }
 
     impl PlatformIntegration {
-        pub fn new(hotkey: Option<&str>) -> (Self, Vec<String>) {
+        pub fn new(
+            hotkey: Option<&str>,
+            wake_event_loop: impl Fn() + Send + Sync + 'static,
+        ) -> (Self, Vec<String>) {
             let mut diagnostics = Vec::new();
+            let menu_events = menu_event_target(Arc::new(wake_event_loop));
             let (tray, show_settings_id, toggle_interaction_id, quit_id, tray_status) =
                 match create_tray() {
                     Ok((tray, show, toggle, quit)) => (
@@ -58,6 +148,7 @@ mod windows {
                 quit_id,
                 hotkey_manager,
                 registered_hotkey: None,
+                menu_events,
                 tray_status,
                 hotkey_status,
             };
@@ -69,7 +160,7 @@ mod windows {
 
         pub fn poll_actions(&self) -> Vec<PlatformAction> {
             let mut actions = Vec::new();
-            while let Ok(event) = MenuEvent::receiver().try_recv() {
+            while let Some(event) = self.menu_events.try_recv() {
                 if self.show_settings_id.as_ref() == Some(event.id()) {
                     actions.push(PlatformAction::ShowSettings);
                 } else if self.toggle_interaction_id.as_ref() == Some(event.id()) {
@@ -164,6 +255,58 @@ mod windows {
         }
         pixels
     }
+
+    #[cfg(test)]
+    mod tests {
+        use std::sync::{
+            Arc,
+            atomic::{AtomicUsize, Ordering},
+        };
+
+        use super::{MenuEvent, MenuEventDispatcher, MenuEventTarget, MenuId};
+
+        #[test]
+        fn menu_event_dispatcher_fans_out_and_does_not_retain_dropped_targets() {
+            let dispatcher = MenuEventDispatcher::new();
+            let first_wake_count = Arc::new(AtomicUsize::new(0));
+            let first_counter = Arc::clone(&first_wake_count);
+            let first = Arc::new(MenuEventTarget::new(Arc::new(move || {
+                first_counter.fetch_add(1, Ordering::Relaxed);
+            })));
+            let first_weak = Arc::downgrade(&first);
+            dispatcher.subscribe(&first);
+
+            let second_wake_count = Arc::new(AtomicUsize::new(0));
+            let second_counter = Arc::clone(&second_wake_count);
+            let second = Arc::new(MenuEventTarget::new(Arc::new(move || {
+                second_counter.fetch_add(1, Ordering::Relaxed);
+            })));
+            dispatcher.subscribe(&second);
+
+            dispatcher.dispatch(MenuEvent {
+                id: MenuId::new("first"),
+            });
+            assert_eq!(first_wake_count.load(Ordering::Relaxed), 1);
+            assert_eq!(second_wake_count.load(Ordering::Relaxed), 1);
+            assert_eq!(
+                first.try_recv().expect("event should be forwarded").id(),
+                &MenuId::new("first")
+            );
+            assert_eq!(
+                second.try_recv().expect("event should be forwarded").id(),
+                &MenuId::new("first")
+            );
+
+            drop(first);
+            dispatcher.dispatch(MenuEvent {
+                id: MenuId::new("second"),
+            });
+
+            assert!(first_weak.upgrade().is_none());
+            assert_eq!(first_wake_count.load(Ordering::Relaxed), 1);
+            assert_eq!(second_wake_count.load(Ordering::Relaxed), 2);
+        }
+    }
 }
 
 #[cfg(not(windows))]
@@ -173,7 +316,10 @@ mod windows {
     pub struct PlatformIntegration;
 
     impl PlatformIntegration {
-        pub fn new(_hotkey: Option<&str>) -> (Self, Vec<String>) {
+        pub fn new(
+            _hotkey: Option<&str>,
+            _wake_event_loop: impl Fn() + Send + Sync + 'static,
+        ) -> (Self, Vec<String>) {
             (
                 Self,
                 vec!["托盘与全局热键仅在 Windows 11 版本启用".to_owned()],
