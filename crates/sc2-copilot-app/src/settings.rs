@@ -11,6 +11,7 @@ use thiserror::Error;
 pub struct AppSettings {
     pub lead_time_seconds: u64,
     pub overlay_position: [f32; 2],
+    pub overlay_size: [f32; 2],
     pub hotkey: Option<String>,
 }
 
@@ -19,6 +20,7 @@ impl Default for AppSettings {
         Self {
             lead_time_seconds: 30,
             overlay_position: [24.0, 120.0],
+            overlay_size: [440.0, 430.0],
             hotkey: None,
         }
     }

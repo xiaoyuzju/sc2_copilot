@@ -37,12 +37,14 @@ pub fn run() -> Result<(), String> {
         }
     };
     let overlay_position = settings.overlay_position;
+    let overlay_size = settings.overlay_size;
     let controller = AppController::new(catalog, settings, Box::new(NoopAlertPlayer));
     let native_options = eframe::NativeOptions {
         viewport: ViewportBuilder::default()
             .with_title("SC2 Copilot 覆盖层")
             .with_app_id("sc2-copilot")
-            .with_inner_size([440.0, 430.0])
+            .with_inner_size(overlay_size)
+            .with_min_inner_size([300.0, 220.0])
             .with_position(overlay_position)
             .with_decorations(false)
             .with_resizable(false)
@@ -87,7 +89,7 @@ struct DesktopApp {
     applied_interactive_overlay: Option<bool>,
     settings_visible: bool,
     quitting: bool,
-    hotkey_editor: String,
+    recording_hotkey: bool,
 }
 
 impl DesktopApp {
@@ -97,7 +99,6 @@ impl DesktopApp {
         poller: Option<Sc2PollingHandle>,
         startup_diagnostics: Vec<String>,
     ) -> Self {
-        let hotkey_editor = controller.settings().hotkey.clone().unwrap_or_default();
         let (platform, platform_diagnostics) =
             PlatformIntegration::new(controller.settings().hotkey.as_deref());
         for diagnostic in startup_diagnostics.into_iter().chain(platform_diagnostics) {
@@ -113,7 +114,7 @@ impl DesktopApp {
             applied_interactive_overlay: None,
             settings_visible: true,
             quitting: false,
-            hotkey_editor,
+            recording_hotkey: false,
         }
     }
 
@@ -250,17 +251,49 @@ impl DesktopApp {
             });
             ui.horizontal(|ui| {
                 ui.label("覆盖层交互热键");
-                ui.text_edit_singleline(&mut self.hotkey_editor);
-                if ui.button("应用").clicked() {
-                    let value = (!self.hotkey_editor.trim().is_empty())
-                        .then(|| self.hotkey_editor.trim().to_owned());
-                    match self.platform.configure_hotkey(value.as_deref()) {
-                        Ok(()) => settings.hotkey = value,
+                ui.monospace(settings.hotkey.as_deref().unwrap_or("未配置"));
+                if ui
+                    .button(if self.recording_hotkey {
+                        "请按组合键…"
+                    } else {
+                        "录制热键"
+                    })
+                    .clicked()
+                {
+                    self.recording_hotkey = true;
+                }
+                if ui
+                    .add_enabled(settings.hotkey.is_some(), egui::Button::new("清除"))
+                    .clicked()
+                {
+                    self.recording_hotkey = false;
+                    match self.platform.configure_hotkey(None) {
+                        Ok(()) => settings.hotkey = None,
                         Err(error) => self.controller.record_external_diagnostic(error),
                     }
                 }
             });
-            ui.small("示例格式：Control+Shift+KeyO；留空表示不注册默认热键。");
+            if self.recording_hotkey {
+                ui.small("请直接按下新的组合键；按 Esc 取消。");
+                let capture = ui.input(|input| input.events.iter().find_map(capture_hotkey));
+                match capture {
+                    Some(HotkeyCapture::Captured(value)) => {
+                        match self.platform.configure_hotkey(Some(&value)) {
+                            Ok(()) => {
+                                self.recording_hotkey = false;
+                                settings.hotkey = Some(value);
+                            }
+                            Err(error) => self.controller.record_external_diagnostic(error),
+                        }
+                    }
+                    Some(HotkeyCapture::Cancelled) => self.recording_hotkey = false,
+                    Some(HotkeyCapture::Unsupported(value)) => self
+                        .controller
+                        .record_external_diagnostic(format!("不支持该全局热键：{value}")),
+                    None => {}
+                }
+            }
+            ui.small("进入对局并启用交互模式后，可拖动标题栏和窗口边框调整覆盖层位置与大小。");
             if settings != *self.controller.settings() {
                 let update = self.controller.update_settings(settings);
                 self.push_alerts(update.new_alerts);
@@ -473,16 +506,32 @@ impl DesktopApp {
             if ui.input(|input| input.key_pressed(egui::Key::Escape)) {
                 self.interactive_overlay = false;
             }
-            if let Some(position) =
-                ui.input(|input| input.viewport().outer_rect.map(|rect| rect.min))
-            {
+            let (position, size) = ui.input(|input| {
+                let viewport = input.viewport();
+                (
+                    viewport.outer_rect.map(|rect| rect.min),
+                    viewport.inner_rect.map(|rect| rect.size()),
+                )
+            });
+            let mut settings = self.controller.settings().clone();
+            let mut changed = false;
+            if let Some(position) = position {
                 let new_position = [position.x, position.y];
-                if new_position != self.controller.settings().overlay_position {
-                    let mut settings = self.controller.settings().clone();
+                if new_position != settings.overlay_position {
                     settings.overlay_position = new_position;
-                    self.controller.update_settings(settings);
-                    self.save_settings();
+                    changed = true;
                 }
+            }
+            if let Some(size) = size {
+                let new_size = [size.x, size.y];
+                if new_size != settings.overlay_size {
+                    settings.overlay_size = new_size;
+                    changed = true;
+                }
+            }
+            if changed {
+                self.controller.update_settings(settings);
+                self.save_settings();
             }
         }
     }
@@ -526,6 +575,9 @@ impl eframe::App for DesktopApp {
                 !self.interactive_overlay,
             ));
             ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(self.interactive_overlay));
+            ctx.send_viewport_cmd(egui::ViewportCommand::Resizable(self.interactive_overlay));
+            let [width, height] = self.controller.settings().overlay_size;
+            ctx.send_viewport_cmd(egui::ViewportCommand::InnerSize(egui::vec2(width, height)));
             self.applied_interactive_overlay = Some(self.interactive_overlay);
         }
         ctx.request_repaint_after(Duration::from_millis(100));
@@ -592,6 +644,88 @@ fn overlay_interaction_available(connection: ConnectionState, has_session: bool)
     connection == ConnectionState::InGame && has_session
 }
 
+#[derive(Debug, PartialEq, Eq)]
+enum HotkeyCapture {
+    Captured(String),
+    Cancelled,
+    Unsupported(String),
+}
+
+fn capture_hotkey(event: &egui::Event) -> Option<HotkeyCapture> {
+    let egui::Event::Key {
+        key,
+        physical_key,
+        pressed: true,
+        repeat: false,
+        modifiers,
+    } = event
+    else {
+        return None;
+    };
+    if *key == egui::Key::Escape {
+        return Some(HotkeyCapture::Cancelled);
+    }
+    let key = hotkey_key_name(physical_key.unwrap_or(*key))?;
+    let mut parts = Vec::with_capacity(4);
+    if modifiers.ctrl {
+        parts.push("Control".to_owned());
+    }
+    if modifiers.shift {
+        parts.push("Shift".to_owned());
+    }
+    if modifiers.alt {
+        parts.push("Alt".to_owned());
+    }
+    if modifiers.mac_cmd {
+        parts.push("Super".to_owned());
+    }
+    parts.push(key);
+    let value = parts.join("+");
+    Some(if hotkey_is_supported(&value) {
+        HotkeyCapture::Captured(value)
+    } else {
+        HotkeyCapture::Unsupported(value)
+    })
+}
+
+#[cfg(windows)]
+fn hotkey_is_supported(value: &str) -> bool {
+    value.parse::<global_hotkey::hotkey::HotKey>().is_ok()
+}
+
+#[cfg(not(windows))]
+fn hotkey_is_supported(_value: &str) -> bool {
+    true
+}
+
+fn hotkey_key_name(key: egui::Key) -> Option<String> {
+    let name = key.name();
+    if name.len() == 1 && name.as_bytes()[0].is_ascii_alphabetic() {
+        return Some(format!("Key{name}"));
+    }
+    if name.len() == 1 && name.as_bytes()[0].is_ascii_digit() {
+        return Some(format!("Digit{name}"));
+    }
+    Some(
+        match key {
+            egui::Key::ShiftLeft
+            | egui::Key::ShiftRight
+            | egui::Key::ControlLeft
+            | egui::Key::ControlRight
+            | egui::Key::AltLeft
+            | egui::Key::AltRight
+            | egui::Key::SuperLeft
+            | egui::Key::SuperRight => return None,
+            egui::Key::Equals => "Equal",
+            egui::Key::OpenBracket => "BracketLeft",
+            egui::Key::CloseBracket => "BracketRight",
+            egui::Key::Backtick => "Backquote",
+            _ => name,
+        }
+        .to_owned(),
+    )
+}
+
 fn connection_text(connection: ConnectionState) -> &'static str {
     match connection {
         ConnectionState::Disconnected => "未连接 / 游戏未启动",
@@ -653,7 +787,9 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{ConnectionState, overlay_interaction_available};
+    use super::{
+        ConnectionState, HotkeyCapture, capture_hotkey, egui, overlay_interaction_available,
+    };
 
     #[test]
     fn overlay_interaction_requires_an_active_game_session() {
@@ -667,5 +803,46 @@ mod tests {
             true
         ));
         assert!(!overlay_interaction_available(ConnectionState::Menu, false));
+    }
+
+    #[test]
+    fn hotkey_capture_uses_pressed_modifiers_and_escape_cancels() {
+        let modifiers = egui::Modifiers {
+            ctrl: true,
+            shift: true,
+            ..Default::default()
+        };
+        let pressed = egui::Event::Key {
+            key: egui::Key::O,
+            physical_key: Some(egui::Key::O),
+            pressed: true,
+            repeat: false,
+            modifiers,
+        };
+        assert_eq!(
+            capture_hotkey(&pressed),
+            Some(HotkeyCapture::Captured("Control+Shift+KeyO".to_owned()))
+        );
+
+        let escape = egui::Event::Key {
+            key: egui::Key::Escape,
+            physical_key: Some(egui::Key::Escape),
+            pressed: true,
+            repeat: false,
+            modifiers: egui::Modifiers::default(),
+        };
+        assert_eq!(capture_hotkey(&escape), Some(HotkeyCapture::Cancelled));
+
+        let unsupported = egui::Event::Key {
+            key: egui::Key::F25,
+            physical_key: Some(egui::Key::F25),
+            pressed: true,
+            repeat: false,
+            modifiers: egui::Modifiers::CTRL,
+        };
+        assert_eq!(
+            capture_hotkey(&unsupported),
+            Some(HotkeyCapture::Unsupported("Control+F25".to_owned()))
+        );
     }
 }

@@ -70,6 +70,7 @@ fn settings_store_round_trips_persistent_settings() {
     let settings = AppSettings {
         lead_time_seconds: 18,
         overlay_position: [100.5, 220.0],
+        overlay_size: [560.0, 360.0],
         hotkey: Some("Control+Shift+KeyO".to_owned()),
     };
 
