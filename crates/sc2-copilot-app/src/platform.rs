@@ -17,6 +17,14 @@ mod windows {
         Icon, TrayIcon, TrayIconBuilder,
         menu::{Menu, MenuEvent, MenuId, MenuItem},
     };
+    use windows_sys::Win32::{
+        Foundation::{GetLastError, SetLastError},
+        UI::WindowsAndMessaging::{
+            FindWindowW, GWL_EXSTYLE, GetWindowLongPtrW, SWP_FRAMECHANGED, SWP_NOACTIVATE,
+            SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos,
+            WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        },
+    };
 
     use super::PlatformAction;
 
@@ -215,6 +223,57 @@ mod windows {
         }
     }
 
+    pub fn make_window_nonactivating(title: &str) -> Result<bool, String> {
+        let title = title.encode_utf16().chain(Some(0)).collect::<Vec<_>>();
+        let window = unsafe { FindWindowW(std::ptr::null(), title.as_ptr()) };
+        if window.is_null() {
+            return Ok(false);
+        }
+
+        unsafe { SetLastError(0) };
+        let current_style = unsafe { GetWindowLongPtrW(window, GWL_EXSTYLE) };
+        let error = unsafe { GetLastError() };
+        if current_style == 0 && error != 0 {
+            return Err(format!(
+                "读取锁定按钮窗口样式失败：{}",
+                std::io::Error::from_raw_os_error(error as i32)
+            ));
+        }
+
+        let requested_style = current_style | WS_EX_NOACTIVATE as isize | WS_EX_TOOLWINDOW as isize;
+        if requested_style == current_style {
+            return Ok(true);
+        }
+
+        unsafe { SetLastError(0) };
+        let previous_style = unsafe { SetWindowLongPtrW(window, GWL_EXSTYLE, requested_style) };
+        let error = unsafe { GetLastError() };
+        if previous_style == 0 && error != 0 {
+            return Err(format!(
+                "设置锁定按钮窗口样式失败：{}",
+                std::io::Error::from_raw_os_error(error as i32)
+            ));
+        }
+        let updated = unsafe {
+            SetWindowPos(
+                window,
+                std::ptr::null_mut(),
+                0,
+                0,
+                0,
+                0,
+                SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE,
+            )
+        };
+        if updated == 0 {
+            return Err(format!(
+                "刷新锁定按钮窗口样式失败：{}",
+                std::io::Error::last_os_error()
+            ));
+        }
+        Ok(true)
+    }
+
     fn create_tray() -> Result<(TrayIcon, MenuId, MenuId, MenuId), String> {
         let menu = Menu::new();
         let show = MenuItem::new("打开设置", true, None);
@@ -342,6 +401,10 @@ mod windows {
             "当前平台不支持"
         }
     }
+
+    pub fn make_window_nonactivating(_title: &str) -> Result<bool, String> {
+        Ok(true)
+    }
 }
 
-pub use windows::PlatformIntegration;
+pub use windows::{PlatformIntegration, make_window_nonactivating};

@@ -6,7 +6,7 @@ use sc2_copilot_core::{EngineView, ScheduleCatalog};
 use crate::{
     AlertCard, AppController, AppSettings, ConnectionState, ControllerUpdate, LocalSc2HttpClient,
     NoopAlertPlayer, Sc2PollingHandle, Sc2StateSource, SessionHistory, SettingsStore,
-    platform::{PlatformAction, PlatformIntegration},
+    platform::{PlatformAction, PlatformIntegration, make_window_nonactivating},
 };
 
 const CATALOG_JSON: &[u8] = include_bytes!(concat!(
@@ -14,8 +14,11 @@ const CATALOG_JSON: &[u8] = include_bytes!(concat!(
     "/../../data/maps/catalog.json"
 ));
 const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
+const OVERLAY_LOCK_VIEWPORT_ID: &str = "sc2-copilot-overlay-lock";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
 const OVERLAY_UPCOMING_LIMIT: usize = 3;
+const OVERLAY_LOCK_WINDOW_SIZE: [f32; 2] = [58.0, 32.0];
+const OVERLAY_LOCK_WINDOW_OFFSET: f32 = 8.0;
 const APP_BACKGROUND: Color32 = Color32::from_rgb(8, 13, 23);
 const NAVIGATION_BACKGROUND: Color32 = Color32::from_rgb(11, 18, 31);
 const SURFACE: Color32 = Color32::from_rgb(17, 26, 42);
@@ -63,6 +66,15 @@ impl SettingsPage {
             Self::Diagnostics => "运行状态、数据版本与本地日志",
         }
     }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+enum OverlayLockWindowState {
+    #[default]
+    Pending,
+    Showing,
+    Ready,
+    Failed,
 }
 
 pub fn run() -> Result<(), String> {
@@ -142,6 +154,8 @@ struct DesktopApp {
     quitting: bool,
     recording_hotkey: bool,
     settings_page: SettingsPage,
+    overlay_lock_window_title: String,
+    overlay_lock_window_state: OverlayLockWindowState,
     history: Option<SessionHistory>,
     history_status: String,
 }
@@ -190,6 +204,8 @@ impl DesktopApp {
             quitting: false,
             recording_hotkey: false,
             settings_page: SettingsPage::default(),
+            overlay_lock_window_title: format!("SC2 Copilot Overlay Lock {}", std::process::id()),
+            overlay_lock_window_state: OverlayLockWindowState::default(),
             history,
             history_status,
         }
@@ -874,6 +890,7 @@ impl DesktopApp {
             });
         } else {
             frame.show(ui, |ui| {
+                ui.add_space(OVERLAY_LOCK_WINDOW_SIZE[1]);
                 section_label(ui, "OVERLAY PREVIEW");
                 ui.heading(RichText::new("覆盖层布局预览").color(TEXT_PRIMARY).strong());
                 status_badge(ui, "正在调整位置和大小", WARNING);
@@ -913,6 +930,90 @@ impl DesktopApp {
             if changed {
                 self.controller.update_settings(settings);
                 self.save_settings();
+            }
+        }
+    }
+
+    fn show_overlay_lock_button(&mut self, ctx: &egui::Context) {
+        let has_session = self.controller.view().session_id.is_some();
+        if !overlay_should_render(has_session, self.interactive_overlay) {
+            self.overlay_lock_window_state = OverlayLockWindowState::Pending;
+            return;
+        }
+        if self.overlay_lock_window_state == OverlayLockWindowState::Failed {
+            return;
+        }
+
+        let [overlay_x, overlay_y] = self.controller.settings().overlay_position;
+        let button_position = [
+            overlay_x + OVERLAY_LOCK_WINDOW_OFFSET,
+            overlay_y + OVERLAY_LOCK_WINDOW_OFFSET,
+        ];
+        let visible = matches!(
+            self.overlay_lock_window_state,
+            OverlayLockWindowState::Showing | OverlayLockWindowState::Ready
+        );
+        let title = self.overlay_lock_window_title.clone();
+        let button_text = if self.interactive_overlay {
+            "锁定"
+        } else {
+            "解锁"
+        };
+        let button_fill = if self.interactive_overlay {
+            Color32::from_rgb(92, 57, 22)
+        } else {
+            ACCENT_SOFT
+        };
+        ctx.show_viewport_immediate(
+            ViewportId::from_hash_of(OVERLAY_LOCK_VIEWPORT_ID),
+            ViewportBuilder::default()
+                .with_title(title)
+                .with_inner_size(OVERLAY_LOCK_WINDOW_SIZE)
+                .with_min_inner_size(OVERLAY_LOCK_WINDOW_SIZE)
+                .with_position(button_position)
+                .with_decorations(false)
+                .with_resizable(false)
+                .with_transparent(true)
+                .with_has_shadow(false)
+                .with_always_on_top()
+                .with_mouse_passthrough(false)
+                .with_taskbar(false)
+                .with_active(false)
+                .with_visible(visible),
+            |ui, _class| {
+                let button = egui::Button::new(
+                    RichText::new(button_text)
+                        .size(12.0)
+                        .color(TEXT_PRIMARY)
+                        .strong(),
+                )
+                .fill(button_fill)
+                .stroke(egui::Stroke::new(1.0, BORDER))
+                .corner_radius(8.0);
+                if ui.add_sized(ui.available_size(), button).clicked() {
+                    self.interactive_overlay = !self.interactive_overlay;
+                }
+            },
+        );
+
+        if matches!(
+            self.overlay_lock_window_state,
+            OverlayLockWindowState::Pending | OverlayLockWindowState::Showing
+        ) {
+            match make_window_nonactivating(&self.overlay_lock_window_title) {
+                Ok(true) => {
+                    self.overlay_lock_window_state =
+                        if self.overlay_lock_window_state == OverlayLockWindowState::Pending {
+                            OverlayLockWindowState::Showing
+                        } else {
+                            OverlayLockWindowState::Ready
+                        };
+                }
+                Ok(false) => {}
+                Err(error) => {
+                    self.controller.record_external_diagnostic(error);
+                    self.overlay_lock_window_state = OverlayLockWindowState::Failed;
+                }
             }
         }
     }
@@ -1073,6 +1174,7 @@ impl eframe::App for DesktopApp {
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         self.show_overlay(ui);
+        self.show_overlay_lock_button(ui.ctx());
         self.show_settings_window(ui.ctx());
     }
 
@@ -1090,6 +1192,7 @@ fn overlay_contents(
     interactive: bool,
 ) {
     ui.horizontal(|ui| {
+        ui.add_space(OVERLAY_LOCK_WINDOW_SIZE[0]);
         ui.heading(
             RichText::new(map_name)
                 .size(21.0)
