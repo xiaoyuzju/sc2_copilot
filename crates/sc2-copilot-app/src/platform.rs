@@ -9,6 +9,7 @@ pub enum PlatformAction {
 mod windows {
     use std::sync::{
         Arc, Mutex, OnceLock, Weak,
+        atomic::{AtomicUsize, Ordering},
         mpsc::{self, Receiver, Sender},
     };
 
@@ -18,11 +19,15 @@ mod windows {
         menu::{Menu, MenuEvent, MenuId, MenuItem},
     };
     use windows_sys::Win32::{
-        Foundation::{GetLastError, SetLastError},
-        UI::WindowsAndMessaging::{
-            FindWindowExW, FindWindowW, GWL_EXSTYLE, GWLP_HWNDPARENT, GetWindowLongPtrW,
-            GetWindowThreadProcessId, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-            SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        Foundation::{GetLastError, HWND, LPARAM, LRESULT, SetLastError, WPARAM},
+        UI::{
+            Shell::{DefSubclassProc, RemoveWindowSubclass, SetWindowSubclass},
+            WindowsAndMessaging::{
+                FindWindowExW, FindWindowW, GWL_EXSTYLE, GWLP_HWNDPARENT, GetWindowLongPtrW,
+                GetWindowThreadProcessId, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos, WM_LBUTTONDBLCLK, WM_LBUTTONDOWN,
+                WM_NCDESTROY, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+            },
         },
     };
 
@@ -92,6 +97,61 @@ mod windows {
     }
 
     static MENU_EVENT_DISPATCHER: OnceLock<MenuEventDispatcher> = OnceLock::new();
+    static OVERLAY_LOCK_PRESSES: AtomicUsize = AtomicUsize::new(0);
+    const OVERLAY_LOCK_SUBCLASS_ID: usize = 1;
+
+    fn is_overlay_lock_press(message: u32) -> bool {
+        matches!(message, WM_LBUTTONDOWN | WM_LBUTTONDBLCLK)
+    }
+
+    fn record_overlay_lock_press(message: u32) {
+        if is_overlay_lock_press(message) {
+            OVERLAY_LOCK_PRESSES.fetch_add(1, Ordering::Release);
+        }
+    }
+
+    fn take_overlay_lock_actions() -> Vec<PlatformAction> {
+        vec![PlatformAction::ToggleInteraction; OVERLAY_LOCK_PRESSES.swap(0, Ordering::AcqRel)]
+    }
+
+    unsafe extern "system" fn overlay_lock_subclass_proc(
+        window: HWND,
+        message: u32,
+        wparam: WPARAM,
+        lparam: LPARAM,
+        _subclass_id: usize,
+        _reference_data: usize,
+    ) -> LRESULT {
+        record_overlay_lock_press(message);
+        if message == WM_NCDESTROY {
+            unsafe {
+                RemoveWindowSubclass(
+                    window,
+                    Some(overlay_lock_subclass_proc),
+                    OVERLAY_LOCK_SUBCLASS_ID,
+                )
+            };
+        }
+        unsafe { DefSubclassProc(window, message, wparam, lparam) }
+    }
+
+    fn configure_overlay_lock_input(window: HWND) -> Result<(), String> {
+        let installed = unsafe {
+            SetWindowSubclass(
+                window,
+                Some(overlay_lock_subclass_proc),
+                OVERLAY_LOCK_SUBCLASS_ID,
+                0,
+            )
+        };
+        if installed == 0 {
+            return Err(format!(
+                "配置锁定按钮输入失败：{}",
+                std::io::Error::last_os_error()
+            ));
+        }
+        Ok(())
+    }
 
     fn menu_event_target(wake_event_loop: WakeEventLoop) -> Arc<MenuEventTarget> {
         let dispatcher = MENU_EVENT_DISPATCHER.get_or_init(|| {
@@ -186,6 +246,7 @@ mod windows {
                     actions.push(PlatformAction::ToggleInteraction);
                 }
             }
+            actions.extend(take_overlay_lock_actions());
             actions
         }
 
@@ -273,36 +334,35 @@ mod windows {
         }
 
         let requested_style = current_style | WS_EX_NOACTIVATE as isize | WS_EX_TOOLWINDOW as isize;
-        if requested_style == current_style {
-            return Ok(true);
+        if requested_style != current_style {
+            unsafe { SetLastError(0) };
+            let previous_style = unsafe { SetWindowLongPtrW(window, GWL_EXSTYLE, requested_style) };
+            let error = unsafe { GetLastError() };
+            if previous_style == 0 && error != 0 {
+                return Err(format!(
+                    "设置锁定按钮窗口样式失败：{}",
+                    std::io::Error::from_raw_os_error(error as i32)
+                ));
+            }
+            let updated = unsafe {
+                SetWindowPos(
+                    window,
+                    std::ptr::null_mut(),
+                    0,
+                    0,
+                    0,
+                    0,
+                    SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE,
+                )
+            };
+            if updated == 0 {
+                return Err(format!(
+                    "刷新锁定按钮窗口样式失败：{}",
+                    std::io::Error::last_os_error()
+                ));
+            }
         }
-
-        unsafe { SetLastError(0) };
-        let previous_style = unsafe { SetWindowLongPtrW(window, GWL_EXSTYLE, requested_style) };
-        let error = unsafe { GetLastError() };
-        if previous_style == 0 && error != 0 {
-            return Err(format!(
-                "设置锁定按钮窗口样式失败：{}",
-                std::io::Error::from_raw_os_error(error as i32)
-            ));
-        }
-        let updated = unsafe {
-            SetWindowPos(
-                window,
-                std::ptr::null_mut(),
-                0,
-                0,
-                0,
-                0,
-                SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE,
-            )
-        };
-        if updated == 0 {
-            return Err(format!(
-                "刷新锁定按钮窗口样式失败：{}",
-                std::io::Error::last_os_error()
-            ));
-        }
+        configure_overlay_lock_input(window)?;
         Ok(true)
     }
 
@@ -378,7 +438,32 @@ mod windows {
             atomic::{AtomicUsize, Ordering},
         };
 
-        use super::{MenuEvent, MenuEventDispatcher, MenuEventTarget, MenuId};
+        use windows_sys::Win32::UI::WindowsAndMessaging::{
+            WM_LBUTTONDBLCLK, WM_LBUTTONDOWN, WM_LBUTTONUP,
+        };
+
+        use super::{
+            MenuEvent, MenuEventDispatcher, MenuEventTarget, MenuId, PlatformAction,
+            record_overlay_lock_press, take_overlay_lock_actions,
+        };
+
+        #[test]
+        fn overlay_lock_native_presses_become_single_use_toggle_actions() {
+            assert!(take_overlay_lock_actions().is_empty());
+
+            record_overlay_lock_press(WM_LBUTTONDOWN);
+            record_overlay_lock_press(WM_LBUTTONUP);
+            record_overlay_lock_press(WM_LBUTTONDBLCLK);
+
+            assert_eq!(
+                take_overlay_lock_actions(),
+                vec![
+                    PlatformAction::ToggleInteraction,
+                    PlatformAction::ToggleInteraction
+                ]
+            );
+            assert!(take_overlay_lock_actions().is_empty());
+        }
 
         #[test]
         fn menu_event_dispatcher_fans_out_and_does_not_retain_dropped_targets() {

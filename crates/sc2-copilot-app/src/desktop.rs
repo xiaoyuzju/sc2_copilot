@@ -15,7 +15,6 @@ const CATALOG_JSON: &[u8] = include_bytes!(concat!(
 ));
 const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
 const OVERLAY_LOCK_VIEWPORT_ID: &str = "sc2-copilot-overlay-lock";
-const OVERLAY_LOCK_AREA_ID: &str = "sc2-copilot-overlay-lock-inline";
 const OVERLAY_WINDOW_TITLE: &str = "SC2 Copilot 覆盖层";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
 const OVERLAY_UPCOMING_LIMIT: usize = 3;
@@ -960,30 +959,9 @@ impl DesktopApp {
                 self.save_settings();
             }
         }
-        if overlay_lock_control_should_render(
-            self.interactive_overlay,
-            self.overlay_geometry_transition.is_none(),
-        ) {
-            let lock_requested = egui::Area::new(egui::Id::new(OVERLAY_LOCK_AREA_ID))
-                .fixed_pos(egui::pos2(
-                    OVERLAY_LOCK_WINDOW_OFFSET,
-                    OVERLAY_LOCK_WINDOW_OFFSET,
-                ))
-                .movable(false)
-                .order(egui::Order::Foreground)
-                .show(ui.ctx(), |ui| overlay_lock_button(ui, true))
-                .inner;
-            if lock_requested {
-                self.interactive_overlay = false;
-            }
-        }
     }
 
     fn show_overlay_lock_button(&mut self, ctx: &egui::Context) {
-        if self.interactive_overlay {
-            self.overlay_lock_window_state = OverlayLockWindowState::Pending;
-            return;
-        }
         if self.overlay_lock_window_state == OverlayLockWindowState::Failed {
             return;
         }
@@ -998,6 +976,7 @@ impl DesktopApp {
             OverlayLockWindowState::Showing | OverlayLockWindowState::Ready
         );
         let title = self.overlay_lock_window_title.clone();
+        let interactive = self.interactive_overlay;
         ctx.show_viewport_immediate(
             ViewportId::from_hash_of(OVERLAY_LOCK_VIEWPORT_ID),
             ViewportBuilder::default()
@@ -1015,9 +994,7 @@ impl DesktopApp {
                 .with_active(false)
                 .with_visible(visible),
             |ui, _class| {
-                if overlay_lock_button(ui, false) {
-                    self.interactive_overlay = true;
-                }
+                overlay_lock_button(ui, interactive);
             },
         );
 
@@ -1083,7 +1060,7 @@ fn overlay_surface<R>(
         .show(ui, add_contents)
 }
 
-fn overlay_lock_button(ui: &mut egui::Ui, interactive: bool) -> bool {
+fn overlay_lock_button(ui: &mut egui::Ui, interactive: bool) {
     let button_text = if interactive { "锁定" } else { "解锁" };
     let button_fill = if interactive {
         Color32::from_rgb(92, 57, 22)
@@ -1099,7 +1076,7 @@ fn overlay_lock_button(ui: &mut egui::Ui, interactive: bool) -> bool {
     .fill(button_fill)
     .stroke(egui::Stroke::new(1.0, BORDER))
     .corner_radius(8.0);
-    ui.add_sized(OVERLAY_LOCK_WINDOW_SIZE, button).clicked()
+    ui.add_sized(OVERLAY_LOCK_WINDOW_SIZE, button);
 }
 
 fn card(ui: &mut egui::Ui, add_contents: impl FnOnce(&mut egui::Ui)) {
@@ -1345,10 +1322,6 @@ fn overlay_should_render(has_session: bool, interactive: bool) -> bool {
     has_session || interactive
 }
 
-fn overlay_lock_control_should_render(interactive: bool, geometry_stable: bool) -> bool {
-    interactive && geometry_stable
-}
-
 fn viewport_has_native_frame(outer_rect: egui::Rect, inner_rect: egui::Rect) -> bool {
     outer_rect.width() - inner_rect.width() > 1.0 || outer_rect.height() - inner_rect.height() > 1.0
 }
@@ -1536,8 +1509,7 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 mod tests {
     use super::{
         HotkeyCapture, capture_hotkey, corrected_overlay_outer_position, egui, overlay_event_row,
-        overlay_lock_control_should_render, overlay_should_render, overlay_surface,
-        viewport_has_native_frame,
+        overlay_should_render, overlay_surface, viewport_has_native_frame,
     };
 
     #[test]
@@ -1591,13 +1563,6 @@ mod tests {
         assert!(overlay_should_render(false, true));
         assert!(overlay_should_render(true, false));
         assert!(!overlay_should_render(false, false));
-    }
-
-    #[test]
-    fn overlay_lock_control_waits_for_stable_geometry() {
-        assert!(!overlay_lock_control_should_render(true, false));
-        assert!(overlay_lock_control_should_render(true, true));
-        assert!(!overlay_lock_control_should_render(false, true));
     }
 
     #[test]

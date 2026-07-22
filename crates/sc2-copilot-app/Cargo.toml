@@ -28,7 +28,7 @@ eframe.workspace = true
 [target.'cfg(windows)'.dependencies]
 global-hotkey.workspace = true
 tray-icon.workspace = true
-windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
 
 [build-dependencies]
 sc2-copilot-core = { path = "../sc2-copilot-core" }
