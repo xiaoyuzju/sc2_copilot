@@ -1261,25 +1261,38 @@ fn overlay_contents(
     } else {
         section_label(ui, "下一个事件");
         let (remaining_milliseconds, label) = &upcoming[0];
-        ui.horizontal(|ui| {
+        overlay_event_row(ui, *remaining_milliseconds, label, true);
+
+        for (remaining_milliseconds, label) in &upcoming[1..] {
+            overlay_event_row(ui, *remaining_milliseconds, label, false);
+        }
+    }
+}
+
+fn overlay_event_row(
+    ui: &mut egui::Ui,
+    remaining_milliseconds: u64,
+    label: &str,
+    primary: bool,
+) -> egui::Response {
+    ui.horizontal(|ui| {
+        if primary {
             ui.monospace(
-                RichText::new(format_remaining(*remaining_milliseconds))
+                RichText::new(format_remaining(remaining_milliseconds))
                     .size(22.0)
                     .color(ACCENT)
                     .strong(),
             );
-            ui.label(RichText::new(label).size(16.0).color(TEXT_PRIMARY).strong());
-        });
-
-        for (remaining_milliseconds, label) in &upcoming[1..] {
-            ui.horizontal(|ui| {
-                ui.monospace(
-                    RichText::new(format_remaining(*remaining_milliseconds)).color(TEXT_MUTED),
-                );
-                ui.label(RichText::new(label).color(TEXT_MUTED));
-            });
+            ui.add(
+                egui::Label::new(RichText::new(label).size(16.0).color(TEXT_PRIMARY).strong())
+                    .wrap(),
+            )
+        } else {
+            ui.monospace(RichText::new(format_remaining(remaining_milliseconds)).color(TEXT_MUTED));
+            ui.add(egui::Label::new(RichText::new(label).color(TEXT_MUTED)).wrap())
         }
-    }
+    })
+    .inner
 }
 
 fn overlay_should_render(has_session: bool, interactive: bool) -> bool {
@@ -1459,7 +1472,10 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{HotkeyCapture, capture_hotkey, egui, overlay_should_render, overlay_surface};
+    use super::{
+        HotkeyCapture, capture_hotkey, egui, overlay_event_row, overlay_should_render,
+        overlay_surface,
+    };
 
     #[test]
     fn overlay_surface_fills_the_available_client_area() {
@@ -1467,6 +1483,30 @@ mod tests {
             let available = ui.available_rect_before_wrap();
             let response = overlay_surface(ui, |_| {});
             assert_eq!(response.response.rect, available);
+        });
+    }
+
+    #[test]
+    fn overlay_event_text_stays_within_the_panel_width() {
+        let context = egui::Context::default();
+        let _ = context.run_ui(Default::default(), |ui| {
+            for primary in [true, false] {
+                ui.allocate_ui(egui::vec2(180.0, 200.0), |ui| {
+                    let right_edge = ui.max_rect().right();
+                    let label = overlay_event_row(
+                        ui,
+                        90_000,
+                        "A very long event description that must wrap inside the overlay panel",
+                        primary,
+                    );
+
+                    assert!(
+                        label.rect.right() <= right_edge,
+                        "event label right edge {} exceeded panel right edge {right_edge}",
+                        label.rect.right()
+                    );
+                });
+            }
         });
     }
 
