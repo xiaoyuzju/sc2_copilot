@@ -935,11 +935,6 @@ impl DesktopApp {
     }
 
     fn show_overlay_lock_button(&mut self, ctx: &egui::Context) {
-        let has_session = self.controller.view().session_id.is_some();
-        if !overlay_should_render(has_session, self.interactive_overlay) {
-            self.overlay_lock_window_state = OverlayLockWindowState::Pending;
-            return;
-        }
         if self.overlay_lock_window_state == OverlayLockWindowState::Failed {
             return;
         }
