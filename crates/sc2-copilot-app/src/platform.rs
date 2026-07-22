@@ -20,9 +20,9 @@ mod windows {
     use windows_sys::Win32::{
         Foundation::{GetLastError, SetLastError},
         UI::WindowsAndMessaging::{
-            FindWindowW, GWL_EXSTYLE, GetWindowLongPtrW, SWP_FRAMECHANGED, SWP_NOACTIVATE,
-            SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos,
-            WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+            FindWindowExW, FindWindowW, GWL_EXSTYLE, GWLP_HWNDPARENT, GetWindowLongPtrW,
+            GetWindowThreadProcessId, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+            SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
         },
     };
 
@@ -223,11 +223,43 @@ mod windows {
         }
     }
 
-    pub fn make_window_nonactivating(title: &str) -> Result<bool, String> {
+    pub fn configure_overlay_lock_window(title: &str, owner_title: &str) -> Result<bool, String> {
         let title = title.encode_utf16().chain(Some(0)).collect::<Vec<_>>();
         let window = unsafe { FindWindowW(std::ptr::null(), title.as_ptr()) };
         if window.is_null() {
             return Ok(false);
+        }
+
+        let mut process_id = 0;
+        if unsafe { GetWindowThreadProcessId(window, &mut process_id) } == 0 {
+            return Err(format!(
+                "读取锁定按钮窗口进程失败：{}",
+                std::io::Error::last_os_error()
+            ));
+        }
+        let Some(owner) = find_window_for_process(owner_title, process_id) else {
+            return Ok(false);
+        };
+
+        unsafe { SetLastError(0) };
+        let current_owner = unsafe { GetWindowLongPtrW(window, GWLP_HWNDPARENT) };
+        let error = unsafe { GetLastError() };
+        if current_owner == 0 && error != 0 {
+            return Err(format!(
+                "读取锁定按钮所属窗口失败：{}",
+                std::io::Error::from_raw_os_error(error as i32)
+            ));
+        }
+        if current_owner != owner {
+            unsafe { SetLastError(0) };
+            let previous_owner = unsafe { SetWindowLongPtrW(window, GWLP_HWNDPARENT, owner) };
+            let error = unsafe { GetLastError() };
+            if previous_owner == 0 && error != 0 {
+                return Err(format!(
+                    "设置锁定按钮所属窗口失败：{}",
+                    std::io::Error::from_raw_os_error(error as i32)
+                ));
+            }
         }
 
         unsafe { SetLastError(0) };
@@ -272,6 +304,30 @@ mod windows {
             ));
         }
         Ok(true)
+    }
+
+    fn find_window_for_process(title: &str, process_id: u32) -> Option<isize> {
+        let title = title.encode_utf16().chain(Some(0)).collect::<Vec<_>>();
+        let mut previous = std::ptr::null_mut();
+        loop {
+            let window = unsafe {
+                FindWindowExW(
+                    std::ptr::null_mut(),
+                    previous,
+                    std::ptr::null(),
+                    title.as_ptr(),
+                )
+            };
+            if window.is_null() {
+                return None;
+            }
+            let mut candidate_process_id = 0;
+            unsafe { GetWindowThreadProcessId(window, &mut candidate_process_id) };
+            if candidate_process_id == process_id {
+                return Some(window as isize);
+            }
+            previous = window;
+        }
     }
 
     fn create_tray() -> Result<(TrayIcon, MenuId, MenuId, MenuId), String> {
@@ -402,9 +458,9 @@ mod windows {
         }
     }
 
-    pub fn make_window_nonactivating(_title: &str) -> Result<bool, String> {
+    pub fn configure_overlay_lock_window(_title: &str, _owner_title: &str) -> Result<bool, String> {
         Ok(true)
     }
 }
 
-pub use windows::{PlatformIntegration, make_window_nonactivating};
+pub use windows::{PlatformIntegration, configure_overlay_lock_window};

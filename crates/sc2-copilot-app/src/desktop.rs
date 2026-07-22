@@ -6,7 +6,7 @@ use sc2_copilot_core::{EngineView, ScheduleCatalog};
 use crate::{
     AlertCard, AppController, AppSettings, ConnectionState, ControllerUpdate, LocalSc2HttpClient,
     NoopAlertPlayer, Sc2PollingHandle, Sc2StateSource, SessionHistory, SettingsStore,
-    platform::{PlatformAction, PlatformIntegration, make_window_nonactivating},
+    platform::{PlatformAction, PlatformIntegration, configure_overlay_lock_window},
 };
 
 const CATALOG_JSON: &[u8] = include_bytes!(concat!(
@@ -15,6 +15,7 @@ const CATALOG_JSON: &[u8] = include_bytes!(concat!(
 ));
 const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
 const OVERLAY_LOCK_VIEWPORT_ID: &str = "sc2-copilot-overlay-lock";
+const OVERLAY_WINDOW_TITLE: &str = "SC2 Copilot 覆盖层";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
 const OVERLAY_UPCOMING_LIMIT: usize = 3;
 const OVERLAY_LOCK_WINDOW_SIZE: [f32; 2] = [58.0, 32.0];
@@ -102,7 +103,7 @@ pub fn run() -> Result<(), String> {
     let controller = AppController::new(catalog, settings, Box::new(NoopAlertPlayer));
     let native_options = eframe::NativeOptions {
         viewport: ViewportBuilder::default()
-            .with_title("SC2 Copilot 覆盖层")
+            .with_title(OVERLAY_WINDOW_TITLE)
             .with_app_id("sc2-copilot")
             .with_inner_size(overlay_size)
             .with_min_inner_size([300.0, 220.0])
@@ -995,7 +996,10 @@ impl DesktopApp {
             self.overlay_lock_window_state,
             OverlayLockWindowState::Pending | OverlayLockWindowState::Showing
         ) {
-            match make_window_nonactivating(&self.overlay_lock_window_title) {
+            match configure_overlay_lock_window(
+                &self.overlay_lock_window_title,
+                OVERLAY_WINDOW_TITLE,
+            ) {
                 Ok(true) => {
                     self.overlay_lock_window_state =
                         if self.overlay_lock_window_state == OverlayLockWindowState::Pending {
