@@ -1,7 +1,7 @@
 use std::time::{Duration, Instant};
 
 use eframe::egui::{self, Color32, RichText, ViewportBuilder, ViewportId};
-use sc2_copilot_core::{EngineView, EventTiming, ScheduleCatalog};
+use sc2_copilot_core::{EngineView, ScheduleCatalog};
 
 use crate::{
     AlertCard, AppController, AppSettings, ConnectionState, ControllerUpdate, LocalSc2HttpClient,
@@ -15,6 +15,7 @@ const CATALOG_JSON: &[u8] = include_bytes!(concat!(
 ));
 const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
+const OVERLAY_UPCOMING_LIMIT: usize = 3;
 const APP_BACKGROUND: Color32 = Color32::from_rgb(8, 13, 23);
 const NAVIGATION_BACKGROUND: Color32 = Color32::from_rgb(11, 18, 31);
 const SURFACE: Color32 = Color32::from_rgb(17, 26, 42);
@@ -847,11 +848,10 @@ impl DesktopApp {
             let upcoming = view
                 .upcoming_events
                 .iter()
-                .take(6)
+                .take(OVERLAY_UPCOMING_LIMIT)
                 .map(|event| {
                     (
                         event.remaining_milliseconds,
-                        event.timing,
                         self.controller.event_label(&event.event_id),
                     )
                 })
@@ -1086,23 +1086,22 @@ fn overlay_contents(
     map_name: &str,
     view: &EngineView,
     alerts: &[AlertCard],
-    upcoming: &[(u64, EventTiming, String)],
+    upcoming: &[(u64, String)],
     interactive: bool,
 ) {
     ui.horizontal(|ui| {
-        ui.vertical(|ui| {
-            section_label(ui, "CURRENT MISSION");
-            ui.heading(
-                RichText::new(map_name)
-                    .size(23.0)
-                    .color(TEXT_PRIMARY)
-                    .strong(),
-            );
-        });
+        ui.heading(
+            RichText::new(map_name)
+                .size(21.0)
+                .color(TEXT_PRIMARY)
+                .strong(),
+        );
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-            keycap(
-                ui,
-                &format_time(view.game_time_milliseconds.unwrap_or_default()),
+            ui.label(
+                RichText::new(format_time(view.game_time_milliseconds.unwrap_or_default()))
+                    .size(19.0)
+                    .color(TEXT_MUTED)
+                    .monospace(),
             );
         });
     });
@@ -1118,43 +1117,37 @@ fn overlay_contents(
                 .corner_radius(9.0)
                 .inner_margin(11.0)
                 .show(ui, |ui| {
-                    ui.colored_label(
-                        WARNING,
-                        RichText::new(format!("即将发生 · {}", format_timing(alert.timing)))
-                            .strong(),
-                    );
+                    ui.colored_label(WARNING, RichText::new("即将发生").strong());
                     for label in &alert.event_labels {
-                        ui.label(RichText::new(label).color(TEXT_PRIMARY));
+                        ui.label(RichText::new(label).size(16.0).color(TEXT_PRIMARY).strong());
                     }
                 });
             ui.add_space(6.0);
         }
     }
     ui.add_space(12.0);
-    section_label(ui, "接下来");
     if upcoming.is_empty() {
         ui.label(RichText::new("当前上下文没有可运行的后续事件。").color(TEXT_MUTED));
     } else {
-        for (remaining_milliseconds, timing, label) in upcoming {
-            egui::Frame::new()
-                .fill(SURFACE)
-                .stroke(egui::Stroke::new(1.0, BORDER))
-                .corner_radius(8.0)
-                .inner_margin(10.0)
-                .show(ui, |ui| {
-                    ui.horizontal(|ui| {
-                        ui.monospace(
-                            RichText::new(format_remaining(*remaining_milliseconds))
-                                .color(ACCENT)
-                                .strong(),
-                        );
-                        ui.label(
-                            RichText::new(format!("{} · {}", format_timing(*timing), label))
-                                .color(TEXT_PRIMARY),
-                        );
-                    });
-                });
-            ui.add_space(5.0);
+        section_label(ui, "下一个事件");
+        let (remaining_milliseconds, label) = &upcoming[0];
+        ui.horizontal(|ui| {
+            ui.monospace(
+                RichText::new(format_remaining(*remaining_milliseconds))
+                    .size(22.0)
+                    .color(ACCENT)
+                    .strong(),
+            );
+            ui.label(RichText::new(label).size(16.0).color(TEXT_PRIMARY).strong());
+        });
+
+        for (remaining_milliseconds, label) in &upcoming[1..] {
+            ui.horizontal(|ui| {
+                ui.monospace(
+                    RichText::new(format_remaining(*remaining_milliseconds)).color(TEXT_MUTED),
+                );
+                ui.label(RichText::new(label).color(TEXT_MUTED));
+            });
         }
     }
 }
@@ -1248,20 +1241,6 @@ fn hotkey_key_name(key: egui::Key) -> Option<String> {
 fn format_time(milliseconds: u64) -> String {
     let seconds = milliseconds / 1_000;
     format!("{:02}:{:02}", seconds / 60, seconds % 60)
-}
-
-fn format_timing(timing: EventTiming) -> String {
-    match timing {
-        EventTiming::Exact { milliseconds } => format_time(milliseconds),
-        EventTiming::Window {
-            earliest_milliseconds,
-            latest_milliseconds,
-        } => format!(
-            "{}–{}",
-            format_time(earliest_milliseconds),
-            format_time(latest_milliseconds)
-        ),
-    }
 }
 
 fn format_remaining(milliseconds: u64) -> String {
