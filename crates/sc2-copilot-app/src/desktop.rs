@@ -79,6 +79,12 @@ enum OverlayLockWindowState {
     Failed,
 }
 
+#[derive(Clone, Copy, Debug)]
+struct OverlayGeometryTransition {
+    client_origin: egui::Pos2,
+    interactive: bool,
+}
+
 pub fn run() -> Result<(), String> {
     let catalog = ScheduleCatalog::from_json(CATALOG_JSON).map_err(|error| error.to_string())?;
     let store = SettingsStore::for_current_user().map_err(|error| error.to_string())?;
@@ -152,6 +158,7 @@ struct DesktopApp {
     alerts: Vec<DesktopAlert>,
     interactive_overlay: bool,
     applied_interactive_overlay: Option<bool>,
+    overlay_geometry_transition: Option<OverlayGeometryTransition>,
     settings_visible: bool,
     quitting: bool,
     recording_hotkey: bool,
@@ -202,6 +209,7 @@ impl DesktopApp {
             alerts: Vec::new(),
             interactive_overlay: false,
             applied_interactive_overlay: None,
+            overlay_geometry_transition: None,
             settings_visible: true,
             quitting: false,
             recording_hotkey: false,
@@ -252,6 +260,29 @@ impl DesktopApp {
             self.history = None;
         }
         self.push_alerts(update.new_alerts);
+    }
+
+    fn stabilize_overlay_geometry(&mut self, ctx: &egui::Context) {
+        let Some(transition) = self.overlay_geometry_transition else {
+            return;
+        };
+        let geometry = ctx.input(|input| {
+            let viewport = input.viewport();
+            viewport.outer_rect.zip(viewport.inner_rect)
+        });
+        let Some((outer_rect, inner_rect)) = geometry else {
+            return;
+        };
+        if viewport_has_native_frame(outer_rect, inner_rect) != transition.interactive {
+            return;
+        }
+        if inner_rect.min.distance(transition.client_origin) <= 0.5 {
+            self.overlay_geometry_transition = None;
+            return;
+        }
+        ctx.send_viewport_cmd(egui::ViewportCommand::OuterPosition(
+            corrected_overlay_outer_position(outer_rect, inner_rect, transition.client_origin),
+        ));
     }
 
     fn save_settings(&mut self) {
@@ -897,14 +928,14 @@ impl DesktopApp {
                 ui.label(RichText::new("按 Esc 结束并恢复鼠标穿透").color(TEXT_MUTED));
             });
         }
-        if self.interactive_overlay {
-            if ui.input(|input| input.key_pressed(egui::Key::Escape)) {
-                self.interactive_overlay = false;
-            }
+        if self.interactive_overlay && ui.input(|input| input.key_pressed(egui::Key::Escape)) {
+            self.interactive_overlay = false;
+        }
+        if self.interactive_overlay && self.overlay_geometry_transition.is_none() {
             let (position, size) = ui.input(|input| {
                 let viewport = input.viewport();
                 (
-                    viewport.outer_rect.map(|rect| rect.min),
+                    viewport.inner_rect.map(|rect| rect.min),
                     viewport.inner_rect.map(|rect| rect.size()),
                 )
             });
@@ -1187,6 +1218,17 @@ impl eframe::App for DesktopApp {
             self.interactive_overlay = false;
         }
         if self.applied_interactive_overlay != Some(self.interactive_overlay) {
+            let client_origin = if self.applied_interactive_overlay.is_none() {
+                let [x, y] = self.controller.settings().overlay_position;
+                Some(egui::pos2(x, y))
+            } else {
+                ctx.input(|input| input.viewport().inner_rect.map(|rect| rect.min))
+            };
+            self.overlay_geometry_transition =
+                client_origin.map(|client_origin| OverlayGeometryTransition {
+                    client_origin,
+                    interactive: self.interactive_overlay,
+                });
             ctx.send_viewport_cmd(egui::ViewportCommand::MousePassthrough(
                 !self.interactive_overlay,
             ));
@@ -1196,6 +1238,7 @@ impl eframe::App for DesktopApp {
             ctx.send_viewport_cmd(egui::ViewportCommand::InnerSize(egui::vec2(width, height)));
             self.applied_interactive_overlay = Some(self.interactive_overlay);
         }
+        self.stabilize_overlay_geometry(ctx);
         ctx.request_repaint_after(Duration::from_millis(100));
     }
 
@@ -1297,6 +1340,18 @@ fn overlay_event_row(
 
 fn overlay_should_render(has_session: bool, interactive: bool) -> bool {
     has_session || interactive
+}
+
+fn viewport_has_native_frame(outer_rect: egui::Rect, inner_rect: egui::Rect) -> bool {
+    outer_rect.width() - inner_rect.width() > 1.0 || outer_rect.height() - inner_rect.height() > 1.0
+}
+
+fn corrected_overlay_outer_position(
+    outer_rect: egui::Rect,
+    inner_rect: egui::Rect,
+    client_origin: egui::Pos2,
+) -> egui::Pos2 {
+    outer_rect.min + (client_origin - inner_rect.min)
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -1473,8 +1528,8 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::{
-        HotkeyCapture, capture_hotkey, egui, overlay_event_row, overlay_should_render,
-        overlay_surface,
+        HotkeyCapture, capture_hotkey, corrected_overlay_outer_position, egui, overlay_event_row,
+        overlay_should_render, overlay_surface, viewport_has_native_frame,
     };
 
     #[test]
@@ -1484,6 +1539,19 @@ mod tests {
             let response = overlay_surface(ui, |_| {});
             assert_eq!(response.response.rect, available);
         });
+    }
+
+    #[test]
+    fn overlay_outer_position_compensates_for_the_native_frame() {
+        let outer = egui::Rect::from_min_size(egui::pos2(220.0, 220.0), egui::vec2(458.0, 350.0));
+        let inner = egui::Rect::from_min_size(egui::pos2(227.0, 249.0), egui::vec2(443.0, 313.0));
+        let client_origin = egui::pos2(220.0, 220.0);
+
+        assert!(viewport_has_native_frame(outer, inner));
+        assert_eq!(
+            corrected_overlay_outer_position(outer, inner, client_origin),
+            egui::pos2(213.0, 191.0)
+        );
     }
 
     #[test]
