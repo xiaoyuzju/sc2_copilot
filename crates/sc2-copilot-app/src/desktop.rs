@@ -15,6 +15,7 @@ const CATALOG_JSON: &[u8] = include_bytes!(concat!(
 ));
 const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
 const OVERLAY_LOCK_VIEWPORT_ID: &str = "sc2-copilot-overlay-lock";
+const OVERLAY_LOCK_AREA_ID: &str = "sc2-copilot-overlay-lock-inline";
 const OVERLAY_WINDOW_TITLE: &str = "SC2 Copilot 覆盖层";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
 const OVERLAY_UPCOMING_LIMIT: usize = 3;
@@ -849,11 +850,6 @@ impl DesktopApp {
         if !overlay_should_render(has_session, self.interactive_overlay) {
             return;
         }
-        let frame = egui::Frame::new()
-            .fill(Color32::from_rgba_unmultiplied(8, 13, 23, 238))
-            .stroke(egui::Stroke::new(1.0, BORDER))
-            .corner_radius(14.0)
-            .inner_margin(16.0);
         if has_session {
             let view = self.controller.view().clone();
             let map_name = self.selected_map_name().to_owned();
@@ -873,7 +869,7 @@ impl DesktopApp {
                     )
                 })
                 .collect::<Vec<_>>();
-            frame.show(ui, |ui| {
+            overlay_surface(ui, |ui| {
                 overlay_contents(
                     ui,
                     &map_name,
@@ -890,7 +886,7 @@ impl DesktopApp {
                 }
             });
         } else {
-            frame.show(ui, |ui| {
+            overlay_surface(ui, |ui| {
                 ui.add_space(OVERLAY_LOCK_WINDOW_SIZE[1]);
                 section_label(ui, "OVERLAY PREVIEW");
                 ui.heading(RichText::new("覆盖层布局预览").color(TEXT_PRIMARY).strong());
@@ -933,9 +929,27 @@ impl DesktopApp {
                 self.save_settings();
             }
         }
+        if self.interactive_overlay {
+            let lock_requested = egui::Area::new(egui::Id::new(OVERLAY_LOCK_AREA_ID))
+                .fixed_pos(egui::pos2(
+                    OVERLAY_LOCK_WINDOW_OFFSET,
+                    OVERLAY_LOCK_WINDOW_OFFSET,
+                ))
+                .movable(false)
+                .order(egui::Order::Foreground)
+                .show(ui.ctx(), |ui| overlay_lock_button(ui, true))
+                .inner;
+            if lock_requested {
+                self.interactive_overlay = false;
+            }
+        }
     }
 
     fn show_overlay_lock_button(&mut self, ctx: &egui::Context) {
+        if self.interactive_overlay {
+            self.overlay_lock_window_state = OverlayLockWindowState::Pending;
+            return;
+        }
         if self.overlay_lock_window_state == OverlayLockWindowState::Failed {
             return;
         }
@@ -950,16 +964,6 @@ impl DesktopApp {
             OverlayLockWindowState::Showing | OverlayLockWindowState::Ready
         );
         let title = self.overlay_lock_window_title.clone();
-        let button_text = if self.interactive_overlay {
-            "锁定"
-        } else {
-            "解锁"
-        };
-        let button_fill = if self.interactive_overlay {
-            Color32::from_rgb(92, 57, 22)
-        } else {
-            ACCENT_SOFT
-        };
         ctx.show_viewport_immediate(
             ViewportId::from_hash_of(OVERLAY_LOCK_VIEWPORT_ID),
             ViewportBuilder::default()
@@ -977,17 +981,8 @@ impl DesktopApp {
                 .with_active(false)
                 .with_visible(visible),
             |ui, _class| {
-                let button = egui::Button::new(
-                    RichText::new(button_text)
-                        .size(12.0)
-                        .color(TEXT_PRIMARY)
-                        .strong(),
-                )
-                .fill(button_fill)
-                .stroke(egui::Stroke::new(1.0, BORDER))
-                .corner_radius(8.0);
-                if ui.add_sized(ui.available_size(), button).clicked() {
-                    self.interactive_overlay = !self.interactive_overlay;
+                if overlay_lock_button(ui, false) {
+                    self.interactive_overlay = true;
                 }
             },
         );
@@ -1038,6 +1033,39 @@ impl DesktopApp {
             },
         );
     }
+}
+
+fn overlay_surface<R>(
+    ui: &mut egui::Ui,
+    add_contents: impl FnOnce(&mut egui::Ui) -> R,
+) -> egui::InnerResponse<R> {
+    let frame = egui::Frame::new()
+        .fill(Color32::from_rgba_unmultiplied(8, 13, 23, 238))
+        .stroke(egui::Stroke::new(1.0, BORDER))
+        .corner_radius(14.0)
+        .inner_margin(16.0);
+    egui::CentralPanel::default()
+        .frame(frame)
+        .show(ui, add_contents)
+}
+
+fn overlay_lock_button(ui: &mut egui::Ui, interactive: bool) -> bool {
+    let button_text = if interactive { "锁定" } else { "解锁" };
+    let button_fill = if interactive {
+        Color32::from_rgb(92, 57, 22)
+    } else {
+        ACCENT_SOFT
+    };
+    let button = egui::Button::new(
+        RichText::new(button_text)
+            .size(12.0)
+            .color(TEXT_PRIMARY)
+            .strong(),
+    )
+    .fill(button_fill)
+    .stroke(egui::Stroke::new(1.0, BORDER))
+    .corner_radius(8.0);
+    ui.add_sized(OVERLAY_LOCK_WINDOW_SIZE, button).clicked()
 }
 
 fn card(ui: &mut egui::Ui, add_contents: impl FnOnce(&mut egui::Ui)) {
@@ -1431,7 +1459,16 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{HotkeyCapture, capture_hotkey, egui, overlay_should_render};
+    use super::{HotkeyCapture, capture_hotkey, egui, overlay_should_render, overlay_surface};
+
+    #[test]
+    fn overlay_surface_fills_the_available_client_area() {
+        egui::__run_test_ui(|ui| {
+            let available = ui.available_rect_before_wrap();
+            let response = overlay_surface(ui, |_| {});
+            assert_eq!(response.response.rect, available);
+        });
+    }
 
     #[test]
     fn overlay_adjustment_renders_a_preview_without_an_active_session() {
