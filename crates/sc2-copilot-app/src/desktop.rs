@@ -960,7 +960,10 @@ impl DesktopApp {
                 self.save_settings();
             }
         }
-        if self.interactive_overlay {
+        if overlay_lock_control_should_render(
+            self.interactive_overlay,
+            self.overlay_geometry_transition.is_none(),
+        ) {
             let lock_requested = egui::Area::new(egui::Id::new(OVERLAY_LOCK_AREA_ID))
                 .fixed_pos(egui::pos2(
                     OVERLAY_LOCK_WINDOW_OFFSET,
@@ -1342,6 +1345,10 @@ fn overlay_should_render(has_session: bool, interactive: bool) -> bool {
     has_session || interactive
 }
 
+fn overlay_lock_control_should_render(interactive: bool, geometry_stable: bool) -> bool {
+    interactive && geometry_stable
+}
+
 fn viewport_has_native_frame(outer_rect: egui::Rect, inner_rect: egui::Rect) -> bool {
     outer_rect.width() - inner_rect.width() > 1.0 || outer_rect.height() - inner_rect.height() > 1.0
 }
@@ -1529,7 +1536,8 @@ fn configure_chinese_font(ctx: &egui::Context) -> Result<(), String> {
 mod tests {
     use super::{
         HotkeyCapture, capture_hotkey, corrected_overlay_outer_position, egui, overlay_event_row,
-        overlay_should_render, overlay_surface, viewport_has_native_frame,
+        overlay_lock_control_should_render, overlay_should_render, overlay_surface,
+        viewport_has_native_frame,
     };
 
     #[test]
@@ -1583,6 +1591,13 @@ mod tests {
         assert!(overlay_should_render(false, true));
         assert!(overlay_should_render(true, false));
         assert!(!overlay_should_render(false, false));
+    }
+
+    #[test]
+    fn overlay_lock_control_waits_for_stable_geometry() {
+        assert!(!overlay_lock_control_should_render(true, false));
+        assert!(overlay_lock_control_should_render(true, true));
+        assert!(!overlay_lock_control_should_render(false, true));
     }
 
     #[test]
