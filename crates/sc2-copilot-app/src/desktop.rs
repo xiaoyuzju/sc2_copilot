@@ -966,6 +966,7 @@ impl DesktopApp {
             return;
         }
 
+        let viewport_id = ViewportId::from_hash_of(OVERLAY_LOCK_VIEWPORT_ID);
         let [overlay_x, overlay_y] = self.controller.settings().overlay_position;
         let button_position = [
             overlay_x + OVERLAY_LOCK_WINDOW_OFFSET,
@@ -978,7 +979,7 @@ impl DesktopApp {
         let title = self.overlay_lock_window_title.clone();
         let interactive = self.interactive_overlay;
         ctx.show_viewport_immediate(
-            ViewportId::from_hash_of(OVERLAY_LOCK_VIEWPORT_ID),
+            viewport_id,
             ViewportBuilder::default()
                 .with_title(title)
                 .with_inner_size(OVERLAY_LOCK_WINDOW_SIZE)
@@ -997,6 +998,8 @@ impl DesktopApp {
                 overlay_lock_button(ui, interactive);
             },
         );
+        ctx.send_viewport_cmd_to(viewport_id, egui::ViewportCommand::Decorations(false));
+        ctx.send_viewport_cmd_to(viewport_id, egui::ViewportCommand::Resizable(false));
 
         if matches!(
             self.overlay_lock_window_state,
@@ -1197,6 +1200,8 @@ impl eframe::App for DesktopApp {
             ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
             self.interactive_overlay = false;
         }
+        ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(self.interactive_overlay));
+        ctx.send_viewport_cmd(egui::ViewportCommand::Resizable(self.interactive_overlay));
         if self.applied_interactive_overlay != Some(self.interactive_overlay) {
             let client_origin = if self.applied_interactive_overlay.is_none() {
                 let [x, y] = self.controller.settings().overlay_position;
@@ -1212,8 +1217,6 @@ impl eframe::App for DesktopApp {
             ctx.send_viewport_cmd(egui::ViewportCommand::MousePassthrough(
                 !self.interactive_overlay,
             ));
-            ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(self.interactive_overlay));
-            ctx.send_viewport_cmd(egui::ViewportCommand::Resizable(self.interactive_overlay));
             let [width, height] = self.controller.settings().overlay_size;
             ctx.send_viewport_cmd(egui::ViewportCommand::InnerSize(egui::vec2(width, height)));
             self.applied_interactive_overlay = Some(self.interactive_overlay);
