@@ -17,6 +17,7 @@ path = "src/monitor_main.rs"
 
 [dependencies]
 sc2-copilot-core = { path = "../sc2-copilot-core" }
+sc2-copilot-vision = { path = "../sc2-copilot-vision" }
 tracing.workspace = true
 tracing-subscriber.workspace = true
 serde.workspace = true

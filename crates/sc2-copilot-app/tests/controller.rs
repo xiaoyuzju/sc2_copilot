@@ -5,6 +5,7 @@ use sc2_copilot_app::{
     SettingsStore,
 };
 use sc2_copilot_core::{AlertBatch, EventTiming, ScheduleCatalog};
+use sc2_copilot_vision::VisionUpdate;
 
 const CATALOG: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
@@ -145,6 +146,134 @@ fn controller_defaults_temple_of_the_past_to_schedule_b_per_session() {
         1_000,
     ));
     assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+}
+
+#[test]
+fn controller_applies_a_stable_visual_variant_for_the_current_session() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", Some("void-rifts"), 1_000));
+
+    controller.handle_vision(VisionUpdate::map_variant(
+        "session-1",
+        "void-rifts",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+}
+
+#[test]
+fn a_manual_variant_is_not_overwritten_by_visual_evidence() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", Some("void-rifts"), 1_000));
+    controller.select_variant(Some("layout-b".to_owned()));
+
+    controller.handle_vision(VisionUpdate::map_variant(
+        "session-1",
+        "void-rifts",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+}
+
+#[test]
+fn a_manual_variant_remains_authoritative_after_reconnecting_to_the_same_session() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", Some("void-rifts"), 1_000));
+    controller.select_variant(Some("layout-b".to_owned()));
+    controller.handle_poll(Sc2Poll {
+        observation: Sc2Observation::Disconnected,
+        diagnostic: None,
+    });
+    controller.handle_poll(in_game("session-1", Some("void-rifts"), 2_000));
+
+    controller.handle_vision(VisionUpdate::map_variant(
+        "session-1",
+        "void-rifts",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+}
+
+#[test]
+fn a_manual_variant_from_another_map_does_not_block_visual_evidence() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", Some("temple-of-the-past"), 1_000));
+    controller.select_variant(Some("layout-b".to_owned()));
+    controller.handle_poll(in_game("session-1", Some("void-rifts"), 2_000));
+
+    controller.handle_vision(VisionUpdate::map_variant(
+        "session-1",
+        "void-rifts",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+}
+
+#[test]
+fn a_manual_variant_source_resets_when_the_fallback_map_changes() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-1", None, 1_000));
+    controller.select_manual_map(Some("temple-of-the-past".to_owned()));
+    controller.select_variant(Some("layout-b".to_owned()));
+    controller.select_manual_map(Some("void-rifts".to_owned()));
+
+    controller.handle_vision(VisionUpdate::map_variant(
+        "session-1",
+        "void-rifts",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+}
+
+#[test]
+fn stale_or_invalid_visual_variants_are_ignored() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game("session-2", Some("void-rifts"), 1_000));
+
+    for update in [
+        VisionUpdate::map_variant("session-1", "void-rifts", "layout-a"),
+        VisionUpdate::map_variant("session-2", "temple-of-the-past", "layout-a"),
+        VisionUpdate::map_variant("session-2", "void-rifts", "unknown-layout"),
+    ] {
+        controller.handle_vision(update);
+    }
+
+    assert_eq!(controller.view().variant_id, None);
+}
+
+#[test]
+fn visual_evidence_replaces_defaults_after_manual_state_resets_for_a_new_session() {
+    let mut controller = controller(Box::new(NoopAlertPlayer));
+    controller.handle_poll(in_game(
+        "temple-session-1",
+        Some("temple-of-the-past"),
+        1_000,
+    ));
+    controller.handle_vision(VisionUpdate::map_variant(
+        "temple-session-1",
+        "temple-of-the-past",
+        "layout-a",
+    ));
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+
+    controller.select_variant(Some("layout-b".to_owned()));
+    controller.handle_poll(in_game(
+        "temple-session-2",
+        Some("temple-of-the-past"),
+        1_000,
+    ));
+    controller.handle_vision(VisionUpdate::map_variant(
+        "temple-session-2",
+        "temple-of-the-past",
+        "layout-a",
+    ));
+
+    assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
 }
 
 fn controller(player: Box<dyn AlertPlayer>) -> AppController {

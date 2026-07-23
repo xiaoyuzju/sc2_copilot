@@ -4,6 +4,7 @@ use sc2_copilot_core::{
     AlertBatch, CopilotEngine, EngineInput, EngineSettings, EngineUpdate, EngineView, EventTiming,
     Fact, GameObservation, LocationSpec, ScheduleCatalog, Trigger, UserCommand,
 };
+use sc2_copilot_vision::{VisionEvidence, VisionUpdate};
 
 use crate::{AlertPlayer, AppSettings, Sc2Observation, Sc2Poll};
 
@@ -60,6 +61,13 @@ pub struct ControllerUpdate {
     pub new_alerts: Vec<AlertCard>,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum VariantSelectionSource {
+    Default,
+    Vision,
+    Manual,
+}
+
 pub struct AppController {
     engine: CopilotEngine,
     maps: Vec<MapDescriptor>,
@@ -72,6 +80,7 @@ pub struct AppController {
     manual_map_id: Option<String>,
     current_session_id: Option<String>,
     current_game_time_milliseconds: Option<u64>,
+    variant_selection_source: Option<VariantSelectionSource>,
     diagnostics: VecDeque<String>,
     settings: AppSettings,
     snapshot_batch: String,
@@ -100,6 +109,7 @@ impl AppController {
             manual_map_id: None,
             current_session_id: None,
             current_game_time_milliseconds: None,
+            variant_selection_source: None,
             diagnostics: VecDeque::new(),
             settings,
             snapshot_batch,
@@ -123,6 +133,7 @@ impl AppController {
                 self.manual_map_id = None;
                 self.current_session_id = None;
                 self.current_game_time_milliseconds = None;
+                self.variant_selection_source = None;
                 self.apply_engine(EngineInput::Observation(GameObservation::Menu))
             }
             Sc2Observation::InGame {
@@ -131,10 +142,15 @@ impl AppController {
                 game_time_milliseconds,
                 ..
             } => {
+                let previous_map_id = self.selected_map_id().map(str::to_owned);
+                let is_new_session = self.current_session_id.as_deref() != Some(&session_id);
                 self.connection = ConnectionState::InGame;
                 self.auto_map_id = map_id;
                 self.current_session_id = Some(session_id.clone());
                 self.current_game_time_milliseconds = Some(game_time_milliseconds);
+                if is_new_session || previous_map_id.as_deref() != self.selected_map_id() {
+                    self.variant_selection_source = None;
+                }
                 let Some(map_id) = self.selected_map_id().map(str::to_owned) else {
                     self.record_diagnostic(
                         "无法从 6119 玩家列表唯一识别地图，请在设置中手动选择当前地图",
@@ -147,14 +163,45 @@ impl AppController {
     }
 
     pub fn select_manual_map(&mut self, map_id: Option<String>) -> ControllerUpdate {
+        let previous_map_id = self.selected_map_id().map(str::to_owned);
         self.manual_map_id = map_id;
+        if previous_map_id.as_deref() != self.selected_map_id() {
+            self.variant_selection_source = None;
+        }
         self.refresh_current_observation()
     }
 
     pub fn select_variant(&mut self, variant_id: Option<String>) -> ControllerUpdate {
+        self.variant_selection_source = variant_id.as_ref().map(|_| VariantSelectionSource::Manual);
         self.apply_engine(EngineInput::Command(UserCommand::SelectVariant {
             variant_id,
         }))
+    }
+
+    pub fn handle_vision(&mut self, update: VisionUpdate) -> ControllerUpdate {
+        if self.connection != ConnectionState::InGame
+            || self.variant_selection_source == Some(VariantSelectionSource::Manual)
+            || self.current_session_id.as_deref() != Some(&update.session_id)
+            || self.selected_map_id() != Some(&update.map_id)
+        {
+            return ControllerUpdate::default();
+        }
+
+        match update.evidence {
+            VisionEvidence::MapVariant { variant_id } => {
+                let variant_exists = self
+                    .map(&update.map_id)
+                    .is_some_and(|map| map.variants.iter().any(|variant| variant.id == variant_id));
+                if !variant_exists {
+                    return ControllerUpdate::default();
+                }
+                let result = self.apply_engine(EngineInput::Command(UserCommand::SelectVariant {
+                    variant_id: Some(variant_id),
+                }));
+                self.variant_selection_source = Some(VariantSelectionSource::Vision);
+                result
+            }
+        }
     }
 
     pub fn set_stage_anchor(&mut self, stage_id: String) -> ControllerUpdate {
@@ -293,6 +340,7 @@ impl AppController {
                 self.apply_engine(EngineInput::Command(UserCommand::SelectVariant {
                     variant_id: Some(TEMPLE_OF_THE_PAST_DEFAULT_VARIANT_ID.to_owned()),
                 }));
+            self.variant_selection_source = Some(VariantSelectionSource::Default);
             update.new_alerts.extend(default_update.new_alerts);
         }
         update
