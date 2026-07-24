@@ -4,6 +4,12 @@ SC2 Copilot 是面向《星际争霸 II》合作任务的只读辅助程序。�
 
 首版包含 15 张合作任务地图的灰机 Wiki 时间表、确定性计时与去重引擎、6119 状态适配器、透明置顶覆盖层、地图/分支/突变因子/阶段锚点的手动兜底、托盘、设置、诊断和可替换的提醒播放接口。具体提示音尚未实现。小地图红点自动分支目前只用于“往日神庙”和“虚空撕裂”：仅在 SC2 位于前台、客户区为不小于 1280×720 的无黑边 16:9 布局且 UI 缩放为 100% 时运行；1080p、1440p、4K 坐标已有测试，HDR 捕获路径已完成实时采集冒烟。虚空撕裂的真实无红点路径已验证，真实目标区域红点和往日神庙仍需继续标定。详见 [视觉方案](docs/vision-design.md)。
 
+## 参考项目
+
+本项目在功能调研、地图时间表差异检查和传统视觉方案研究中参考了 [Keiframe](https://github.com/Archer-Ucx0DSe4f57t9/Keiframe)。为保证差异报告可复现，当前参照固定为 [commit `192bdbce`](https://github.com/Archer-Ucx0DSe4f57t9/Keiframe/commit/192bdbce6868e597b297cf47f485ac5c79eb9baf)。
+
+SC2 Copilot 是独立的 Rust 实现，不以 Keiframe 作为运行时依赖，也不随发布包分发其代码、数据库、提示文案、音频或其他素材。具体参考边界见 [Keiframe 时间表清单](docs/research/keiframe-map-schedule-inventory.md)。
+
 ## 开发运行
 
 环境要求：Windows 11、PowerShell 7、Rust 1.97 或兼容的更新 stable 工具链。
