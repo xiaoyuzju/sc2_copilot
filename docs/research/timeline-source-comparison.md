@@ -12,7 +12,7 @@
 
 - 灰机 Wiki 总览：[合作任务](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1)
 - 灰机 Wiki 样例页：[合作任务/湮灭快车](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%B9%AE%E7%81%AD%E5%BF%AB%E8%BD%A6)
-- Keiframe 本地参照：`reference-checkout\resources\db\maps.db`
+- Keiframe 本地参照：由 `KEIFRAME_ROOT` 指向的固定基线 checkout 中的 `resources/db/maps.db`
 - Keiframe 固定基线：commit `192bdbce6868e597b297cf47f485ac5c79eb9baf`
 
 灰机 Wiki 是社区维护的二手资料。下面的时间、生命值和编成核对均是“灰机 Wiki 与参照实现之间的一致性检查”，不是官方认证；这是当前范围明确接受的限制。

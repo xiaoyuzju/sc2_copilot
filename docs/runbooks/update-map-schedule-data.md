@@ -7,11 +7,12 @@
 完成浏览器 DOM 抓取后，在仓库根目录按顺序执行：
 
 ```powershell
+$keiframeRoot = (Resolve-Path -LiteralPath $env:KEIFRAME_ROOT).Path
 cargo run -p schedule-data -- validate-snapshots data/sources/huiji/2026-07-21
 cargo run -p schedule-data -- compile data/sources/huiji/2026-07-21 data/maps/catalog.json data/maps/coverage-report.json
 cargo run -p schedule-data -- validate data/maps/catalog.json
-git -C reference-checkout rev-parse HEAD
-cargo run -p schedule-data -- diff-keiframe data/maps/catalog.json reference-checkout data/diffs/keiframe-192bdbce-2026-07-21.json
+git -C $keiframeRoot rev-parse HEAD
+cargo run -p schedule-data -- diff-keiframe data/maps/catalog.json $keiframeRoot data/diffs/keiframe-192bdbce-2026-07-21.json
 ```
 
 把日期替换为新批次日期，但 Keiframe commit 未经重新决策不得替换。`compile` 只读取灰机 Wiki 快照；`diff-keiframe` 只读取已经生成的目录和固定数据库，且只生成差异报告。它没有写回目录的接口。
@@ -22,14 +23,15 @@ cargo run -p schedule-data -- diff-keiframe data/maps/catalog.json reference-che
 
 - 灰机 Wiki 总览：<https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1>
 - 地图页面格式：`https://starcraft.huijiwiki.com/wiki/合作任务/<地图名>`
-- Keiframe 本地参照：`reference-checkout`
+- Keiframe 本地参照：由 `KEIFRAME_ROOT` 环境变量指向的只读 checkout
 - Keiframe 固定基线：commit `192bdbce6868e597b297cf47f485ac5c79eb9baf`
 - Keiframe 时间表数据库：`resources/db/maps.db`
 
-每次更新开始前记录采集日期，并用下面的只读命令确认参照版本。若输出不是固定 commit，停止比较；不要自动切换或修改参照仓库。
+每次更新开始前记录采集日期，设置 `KEIFRAME_ROOT`，并用下面的只读命令确认参照版本。若输出不是固定 commit，停止比较；不要自动切换或修改参照仓库。
 
 ```powershell
-git -C reference-checkout rev-parse HEAD
+$keiframeRoot = (Resolve-Path -LiteralPath $env:KEIFRAME_ROOT).Path
+git -C $keiframeRoot rev-parse HEAD
 ```
 
 ## 快照产物
@@ -136,7 +138,9 @@ data/
 使用 `sqlite3` 只读导出参照记录。为避免 PowerShell 中中文 SQL 字面量的编码差异，统一导出全部地图后按结构化字段匹配。
 
 ```powershell
-sqlite3 -json reference-checkout\resources\db\maps.db `
+$keiframeRoot = (Resolve-Path -LiteralPath $env:KEIFRAME_ROOT).Path
+$keiframeDb = Join-Path $keiframeRoot 'resources\db\maps.db'
+sqlite3 -json $keiframeDb `
   "SELECT map_name, time_label, time_value, event_text, army_text FROM map_configs ORDER BY map_name, time_value, rowid;"
 ```
 

@@ -4,11 +4,11 @@
 
 ## 结论
 
-现有快照完整包含 15 张基础地图，共 149 张表、1,609 个原始 DOM 行；逐页统计与 [`manifest.json`](repo-root/data/sources/huiji/2026-07-21/manifest.json) 一致。与地图时间或触发直接相关、或为其提供分支条件的候选表共 82 张、889 个原始行，其余主要是单位属性、技能冷却、概率/组成附表和全站地图导航。
+现有快照完整包含 15 张基础地图，共 149 张表、1,609 个原始 DOM 行；逐页统计与 [`manifest.json`](../../data/sources/huiji/2026-07-21/manifest.json) 一致。与地图时间或触发直接相关、或为其提供分支条件的候选表共 82 张、889 个原始行，其余主要是单位属性、技能冷却、概率/组成附表和全站地图导航。
 
 全量表格证明不能把地图时间表建模成单一的 `(地图, 秒数, 文案)`：至少需要游戏绝对时间、阶段相对时间、剩余倒计时、条件触发、重复间隔五类时钟语义，并支持不确定范围、公式、备选分支、同秒多事件和合并单元格继承。
 
-灰机 Wiki 是本项目选定的数据基线，但它是社区维护资料，不是官方来源。本报告只描述 2026-07-21 快照里的表格，不声称数据代表官方或当前游戏版本事实。Keiframe 仍只用于差异检查；边界见 [`keiframe-map-schedule-inventory.md`](repo-root/docs/research/keiframe-map-schedule-inventory.md)。
+灰机 Wiki 是本项目选定的数据基线，但它是社区维护资料，不是官方来源。本报告只描述 2026-07-21 快照里的表格，不声称数据代表官方或当前游戏版本事实。Keiframe 仍只用于差异检查；边界见 [`keiframe-map-schedule-inventory.md`](keiframe-map-schedule-inventory.md)。
 
 ## 快照边界
 
@@ -35,105 +35,105 @@
 
 ### 湮灭快车 — 5 表 / 43 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%B9%AE%E7%81%AD%E5%BF%AB%E8%BD%A6) · [快照](repo-root/data/sources/huiji/2026-07-21/湮灭快车.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%B9%AE%E7%81%AD%E5%BF%AB%E8%BD%A6) · [快照](../../data/sources/huiji/2026-07-21/湮灭快车.json)
 
 - 相关表：T0(12) 列车，T1(13) 护卫，T2(3) 奖励列车，T3(10) 进攻波次；均为游戏绝对时间。
 - T0/T2 有重叠事实；25:00 含 `8-1/8-2` 备选。T1 有 6 个 `rowspan=2` 单元格，表示同波多路护卫，不能按物理行直接生成独立波次。
 
 ### 虚空撕裂 — 6 表 / 78 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E6%92%95%E8%A3%82) · [快照](repo-root/data/sources/huiji/2026-07-21/虚空撕裂.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E6%92%95%E8%A3%82) · [快照](../../data/sources/huiji/2026-07-21/虚空撕裂.json)
 
 - 相关表：T0(5) 撕裂者绝对时间；T3(11)、T4(11) 两套绝对时间进攻表，并带 `8+n`、每 3 分钟重复公式。
 - T3/T4 各有两个跨行单元格；快照缺少外部章节标题，能确认“两套时间表”，不能只凭 JSON 给它们命名。Keiframe 的左/右配置可用于差异对照，不能替代灰机来源语义。
 
 ### 虚空降临 — 5 表 / 53 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E9%99%8D%E4%B8%B4) · [快照](repo-root/data/sources/huiji/2026-07-21/虚空降临.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%99%9A%E7%A9%BA%E9%99%8D%E4%B8%B4) · [快照](../../data/sources/huiji/2026-07-21/虚空降临.json)
 
 - 相关表：T1(25) 穿梭机，T2(4) 奖励出发/抵达，T3(11) 进攻；均为游戏绝对时间。
 - T1 有 15 个跨行单元格，表达同波多艘穿梭机、多个路线和波内不同时间；一波不是一个原子事件。
 
 ### 克哈裂痕 — 6 表 / 64 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%85%8B%E5%93%88%E8%A3%82%E7%97%95) · [快照](repo-root/data/sources/huiji/2026-07-21/克哈裂痕.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%85%8B%E5%93%88%E8%A3%82%E7%97%95) · [快照](../../data/sources/huiji/2026-07-21/克哈裂痕.json)
 
 - 相关表：T0(5) 碎片条件，T3(12) 绝对时间进攻，T4(5) 建筑数量到路径的条件映射。
 - T0 第一波是“4:48 或守军被消灭”，后续是“前一波全部被毁后 5 秒”，要求 `AnyOf` 与 `After`，不能只保存秒数。相关表无合并单元格。
 
 ### 往日神庙 — 9 表 / 123 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%BE%80%E6%97%A5%E7%A5%9E%E5%BA%99) · [快照](repo-root/data/sources/huiji/2026-07-21/往日神庙.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%BE%80%E6%97%A5%E7%A5%9E%E5%BA%99) · [快照](../../data/sources/huiji/2026-07-21/往日神庙.json)
 
 - 相关表：T3(45)、T5(38) 是两套含“触发时间 + 集结时间”的绝对时间表；T4/T6 是各自的混合体组成附表。
 - T3/T5 含大量跨行分组；T3 还有整行 `colspan=7` 注释。时间包含 `x/y/z/w` 随机增量，必须保留不确定表达式。快照不能独立确认两表的 A/B 名称。
 
 ### 天界封锁 — 5 表 / 59 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%A4%A9%E7%95%8C%E5%B0%81%E9%94%81) · [快照](repo-root/data/sources/huiji/2026-07-21/天界封锁.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%A4%A9%E7%95%8C%E5%B0%81%E9%94%81) · [快照](../../data/sources/huiji/2026-07-21/天界封锁.json)
 
 - 相关表：T2(17) 绝对时间进攻并含 `n` 递推；T3(6) 各天锁的“骚扰波次激活时间”，但表内未说明其时钟锚点，暂标未确认。
 - T2 同时大量使用 `rowspan=2` 和 `colspan=2`，一波左右两路共享时间/波次但有不同路线。
 
 ### 升格之链 — 7 表 / 75 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%8D%87%E6%A0%BC%E4%B9%8B%E9%93%BE) · [快照](repo-root/data/sources/huiji/2026-07-21/升格之链.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%8D%87%E6%A0%BC%E4%B9%8B%E9%93%BE) · [快照](../../data/sources/huiji/2026-07-21/升格之链.json)
 
 - 相关表：T0(7) 速度改变时间，T1(6) 时间与进入区域条件，T3(28) 护卫进攻，T5(9) 普通进攻；T2 为 T1 的概率附表。
 - T1 同行同时给出时间和区域条件，但未写二者逻辑关系；T1/T3/T5 后段均有 `n` 递推。相关表没有合并单元格。
 
 ### 熔火危机 — 7 表 / 60 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E7%86%94%E7%81%AB%E5%8D%B1%E6%9C%BA) · [快照](repo-root/data/sources/huiji/2026-07-21/熔火危机.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E7%86%94%E7%81%AB%E5%8D%B1%E6%9C%BA) · [快照](../../data/sources/huiji/2026-07-21/熔火危机.json)
 
 - 相关表：T0(19) 岩浆持续时间与重复间隔，T3(11) 绝对时间进攻；T4/T5 是随机顺位和降落点附表。
 - T0/T3 包含 `±15秒`、`±1.5秒` 和 `n` 递推，不能截成单一整数秒。相关表无合并单元格。
 
 ### 机会渺茫 — 13 表 / 118 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%9C%BA%E4%BC%9A%E6%B8%BA%E8%8C%AB) · [快照](repo-root/data/sources/huiji/2026-07-21/机会渺茫.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%9C%BA%E4%BC%9A%E6%B8%BA%E8%8C%AB) · [快照](../../data/sources/huiji/2026-07-21/机会渺茫.json)
 
 - 相关表：T2(6) 红点，T5–T9(40) 五个采集阶段，T10(6) 机器人消息/生成/出发，T11(34) 汇总进攻表；均给出游戏绝对时间。T3 是建筑数量到路线的条件表。
 - 采集波次同时有“星灵”和“人虫”两列时间，是明确的条件分支。T5/T6 用高 `rowspan` 保留嵌入布局，T11 用 `colspan` 合并双种族相同时间；T2、T5–T9 与 T11 有重叠，适配器需要去重而非重复提醒。
 
 ### 营救矿工 — 23 表 / 212 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%90%A5%E6%95%91%E7%9F%BF%E5%B7%A5) · [快照](repo-root/data/sources/huiji/2026-07-21/营救矿工.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%90%A5%E6%95%91%E7%9F%BF%E5%B7%A5) · [快照](../../data/sources/huiji/2026-07-21/营救矿工.json)
 
 - 相关表：T3(2) 发射、T4(5) 白点、T10(8) 红点为绝对时间；T11–T14 是按等待时间和重复次数展开的阶段序列；T16 是剩余倒计时；T17–T19/T21 有未命名时间分组，锚点未确认；T20 是等待间隔序列。T1/T2/T15 提供毁船概率、发射顺序和触发区域条件。
 - 这是结构最复杂的页面：相关表大量使用整行 `colspan` 表示等待/倒计时分组，用 `rowspan` 共享重复次数；时间精度可到 0.125 秒。不能根据物理行顺序猜测时钟锚点。
 
 ### 亡者之夜 — 20 表 / 277 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E4%BA%A1%E8%80%85%E4%B9%8B%E5%A4%9C) · [快照](repo-root/data/sources/huiji/2026-07-21/亡者之夜.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E4%BA%A1%E8%80%85%E4%B9%8B%E5%A4%9C) · [快照](../../data/sources/huiji/2026-07-21/亡者之夜.json)
 
 - 相关表：T0(13) 按夜晚的生成冷却，T1(43) 按夜晚的进攻延迟，T3/T5/T7/T9/T11(89) 按夜晚的特殊单位触发，T14(13) 坑道虫触发与出现间隔，T15(6) “夜晚结束前”触发；T2/T16 是概率/组成附表。
 - 主要时钟是夜晚阶段相对、重复间隔和阶段结束前剩余时间，不应换算成固定开局绝对时间。跨行合并广泛表示同一夜晚、同一触发时间或同一概率组。
 
 ### 黑暗杀星 — 9 表 / 97 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E9%BB%91%E6%9A%97%E6%9D%80%E6%98%9F) · [快照](repo-root/data/sources/huiji/2026-07-21/黑暗杀星.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E9%BB%91%E6%9A%97%E6%9D%80%E6%98%9F) · [快照](../../data/sources/huiji/2026-07-21/黑暗杀星.json)
 
 - 相关表：T5(4) 奖励，T6(10) 进攻；均为游戏绝对时间，无合并单元格。
 - 路径含概率和“与上一波相反”条件，应作为事件事实而不是时间字段的一部分。
 
 ### 净网行动 — 16 表 / 139 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%87%80%E7%BD%91%E8%A1%8C%E5%8A%A8) · [快照](repo-root/data/sources/huiji/2026-07-21/净网行动.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E5%87%80%E7%BD%91%E8%A1%8C%E5%8A%A8) · [快照](../../data/sources/huiji/2026-07-21/净网行动.json)
 
 - 相关表：T4/T5(8) 反制波次的锚点未确认；T6(4) 混合“游戏时间 3:36”和载具抵达区域条件；T7–T14(76) 同时给出阶段触发时间与剩余倒计时。
 - T7–T14 成对共享大部分波次但压制塔位置不同，不能按时间去重；T13/T14 有 `rowspan=2` 的同时间多目标。初版没有 OCR 时，只能编译明确的游戏绝对时间；其余规则标记 `runtime_support=unsupported`，不能误当绝对时间。
 
 ### 聚铁成兵 — 9 表 / 141 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%81%9A%E9%93%81%E6%88%90%E5%85%B5) · [快照](repo-root/data/sources/huiji/2026-07-21/聚铁成兵.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E8%81%9A%E9%93%81%E6%88%90%E5%85%B5) · [快照](../../data/sources/huiji/2026-07-21/聚铁成兵.json)
 
 - 相关表：T7(10) 游戏绝对时间进攻，无合并单元格。
 - 位置、路径含概率和“与某红点位置对应”的条件关系；它们是事实/条件，不是独立时间表分支。
 
 ### 死亡摇篮 — 9 表 / 70 行
 
-[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%AD%BB%E4%BA%A1%E6%91%87%E7%AF%AE) · [快照](repo-root/data/sources/huiji/2026-07-21/死亡摇篮.json)
+[页面](https://starcraft.huijiwiki.com/wiki/%E5%90%88%E4%BD%9C%E4%BB%BB%E5%8A%A1/%E6%AD%BB%E4%BA%A1%E6%91%87%E7%AF%AE) · [快照](../../data/sources/huiji/2026-07-21/死亡摇篮.json)
 
 - 相关表：T4(11) 绝对时间进攻；T6(9) 相对主目标波次启动的阶段时间，并另有等待时间；T0/T5 是构造体区域、刷新位置和路线附表。
 - 相关表无合并单元格。T6 必须分别保存“触发偏移”和“触发后等待”，不能相加后丢掉两个阶段。

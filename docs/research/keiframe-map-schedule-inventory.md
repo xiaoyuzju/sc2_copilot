@@ -9,7 +9,7 @@
 
 ## 调查边界与可复现基线
 
-本报告只检查本地仓库 `reference-checkout` 的固定提交：
+本报告只检查由 `KEIFRAME_ROOT` 指向的只读本地 checkout 中的固定提交：
 
 ```text
 commit: 192bdbce6868e597b297cf47f485ac5c79eb9baf
@@ -18,7 +18,7 @@ maps.db git blob: 4c0aa31953c75551320557f0568aeef02508e5a3
 maps.db SHA-256: FB8BF7066013EA233356C46C8E844476E2F443B587BFCFDC5F0C7410EE448975
 ```
 
-主要一手来源是固定提交中的 [`resources/db/maps.db`](reference-checkout/resources/db/maps.db)、数据库读取代码 [`map_daos.py`](reference-checkout/src/db/map_daos.py) 和实际消费代码 [`map_loader.py`](reference-checkout/src/map_handlers/map_loader.py)、[`map_event_manager.py`](reference-checkout/src/map_handlers/map_event_manager.py)、[`malwarfare_event_manager.py`](reference-checkout/src/map_handlers/malwarfare_event_manager.py)。未查询或引用灰机 Wiki。
+主要一手来源是固定提交中的 `resources/db/maps.db`、数据库读取代码 `src/db/map_daos.py` 和实际消费代码 `src/map_handlers/map_loader.py`、`src/map_handlers/map_event_manager.py`、`src/map_handlers/malwarfare_event_manager.py`。未查询或引用灰机 Wiki。
 
 数据库统计可用以下只读查询复现：
 
@@ -62,10 +62,10 @@ ORDER BY map_name;
 | 虚空降临 | 虚空降临 | 13 | 180..1458 | 1 | 10 | 普通波次、奖励目标和混合体数量 |
 | 黑暗杀星 | 黑暗杀星 | 10 | 60..1560 | 0 | 1 | 一条敌方种族提示，加方向、波次和混合体数量 |
 
-三组拆分规则在实现中也被明确当作版本按钮：`左/右`、`A/B`、`神/人虫`。参见 [`map_loader.py:130`](reference-checkout/src/map_handlers/map_loader.py:130)。其中：
+三组拆分规则在实现中也被明确当作版本按钮：`左/右`、`A/B`、`神/人虫`。参见固定提交中的 `src/map_handlers/map_loader.py:130`。其中：
 
-- `往日神庙-A/B` 和 `虚空撕裂-左/右` 还存在小地图红点自动判定规则，固定时间窗口、ROI、阈值、目标分支和提示文案均写在 [`map_variant_auto_resolver.py:18`](reference-checkout/src/map_handlers/map_variant_auto_resolver.py:18) 与 [`map_variant_auto_resolver.py:51`](reference-checkout/src/map_handlers/map_variant_auto_resolver.py:51)。这些属于视觉识别实现，不属于时间表事实。
-- `机会渺茫-人虫/神` 根据敌方种族状态自动切换，参见 [`map_loader.py:81`](reference-checkout/src/map_handlers/map_loader.py:81)。两份配置各 32 行，但很多事件相差数秒，不能只保留一份时间表再改名称。
+- `往日神庙-A/B` 和 `虚空撕裂-左/右` 还存在小地图红点自动判定规则，固定时间窗口、ROI、阈值、目标分支和提示文案均写在固定提交的 `src/map_handlers/map_variant_auto_resolver.py:18` 与 `src/map_handlers/map_variant_auto_resolver.py:51`。这些属于视觉识别实现，不属于时间表事实。
+- `机会渺茫-人虫/神` 根据敌方种族状态自动切换，参见固定提交中的 `src/map_handlers/map_loader.py:81`。两份配置各 32 行，但很多事件相差数秒，不能只保留一份时间表再改名称。
 
 ## 数据库记录形状
 
@@ -93,7 +93,7 @@ CREATE TABLE map_configs (
 
 主键包含 `event_text`，所以同一地图同一秒可以有多条记录。固定快照中共有 **10 组**同秒多事件：9 组属于 `净网行动`，另一组是 `虚空撕裂-左` 的 18:00（普通波次与第 4 次撕裂）。不能将 `(map, second)` 当作唯一事件键。
 
-DAO 将每行原样改造成以下展示模型，没有解析事件类型。参见 [`map_daos.py:33`](reference-checkout/src/db/map_daos.py:33)：
+DAO 将每行原样改造成以下展示模型，没有解析事件类型。参见固定提交中的 `src/db/map_daos.py:33`：
 
 ```text
 map_name
@@ -105,7 +105,7 @@ sound
 hero
 ```
 
-普通地图按 `time_value ASC` 排序；`净网行动` 按 `count_value ASC, time_value DESC` 排序，并用 `event_text` 是否以 `T` 开头参与同阶段排序。参见 [`map_daos.py:4`](reference-checkout/src/db/map_daos.py:4)。这进一步说明 `event_text` 既是展示文本，又被 Keiframe 当作隐含类型标签，数据库本身没有类型字段。
+普通地图按 `time_value ASC` 排序；`净网行动` 按 `count_value ASC, time_value DESC` 排序，并用 `event_text` 是否以 `T` 开头参与同阶段排序。参见固定提交中的 `src/db/map_daos.py:4`。这进一步说明 `event_text` 既是展示文本，又被 Keiframe 当作隐含类型标签，数据库本身没有类型字段。
 
 ## 字段的实际用途与性质
 
@@ -120,18 +120,18 @@ hero
 | `sound_filename` | 普通地图即将发生时传给 Toast/声音播放 | Keiframe 展示资产引用 | 不进入地图事实快照，不复制文件名或音频资源 |
 | `hero_text` | 仅在 `HeroesFromtheStorm` 激活时追加到普通地图 Toast | 突变因子特有、Keiframe 自定义编码 | 从本次基础地图时间表排除，未来若实现该突变需独立研究和建模 |
 
-字段的人类可读标题也明确把 `count_value` 标为“净网专用”、把 `army_text` 标为“补充（科技等级/混合体/...）”、把 `hero_text` 标为“风暴英雄”，参见 [`temp_translate_utils.py:2`](reference-checkout/src/utils/temp_translate_utils.py:2)。
+字段的人类可读标题也明确把 `count_value` 标为“净网专用”、把 `army_text` 标为“补充（科技等级/混合体/...）”、把 `hero_text` 标为“风暴英雄”，参见固定提交中的 `src/utils/temp_translate_utils.py:2`。
 
 ### `time_label` 与 `time_value` 的真实关系
 
-导入代码把 `MM:SS` 转成秒并同时写入两列，参见 [`map_daos.py:90`](reference-checkout/src/db/map_daos.py:90)。但运行时普通事件管理器读取表格中的 `time_label` 并再次解析，不直接使用 DAO 返回的 `time_value`；提醒条件是 `event_second - current_game_second`，参见 [`map_event_manager.py:43`](reference-checkout/src/map_handlers/map_event_manager.py:43) 与 [`map_event_manager.py:106`](reference-checkout/src/map_handlers/map_event_manager.py:106)。因此：
+导入代码把 `MM:SS` 转成秒并同时写入两列，参见固定提交中的 `src/db/map_daos.py:90`。但运行时普通事件管理器读取表格中的 `time_label` 并再次解析，不直接使用 DAO 返回的 `time_value`；提醒条件是 `event_second - current_game_second`，参见固定提交中的 `src/map_handlers/map_event_manager.py:43` 与 `src/map_handlers/map_event_manager.py:106`。因此：
 
 - 两列不是两个独立事实；应归一成一个整数秒字段，并在展示时格式化。
 - 数据库当前虽然没有差异，但仅复制 `time_value` 而忽略 label 的运行语义，可能无法准确解释旧实现。
 
 ### 普通地图事件
 
-普通地图的每一行使用开局经过秒：程序寻找下一个时间点、把过去行置灰，并在事件前的配置窗口内显示 `time + event + army`；`sound` 被作为可选提醒音，`hero` 仅在 `HeroesFromtheStorm` 激活时追加。参见 [`map_event_manager.py:42`](reference-checkout/src/map_handlers/map_event_manager.py:42)、[`map_event_manager.py:65`](reference-checkout/src/map_handlers/map_event_manager.py:65) 和 [`map_event_manager.py:106`](reference-checkout/src/map_handlers/map_event_manager.py:106)。
+普通地图的每一行使用开局经过秒：程序寻找下一个时间点、把过去行置灰，并在事件前的配置窗口内显示 `time + event + army`；`sound` 被作为可选提醒音，`hero` 仅在 `HeroesFromtheStorm` 激活时追加。参见固定提交中的 `src/map_handlers/map_event_manager.py:42`、`src/map_handlers/map_event_manager.py:65` 和 `src/map_handlers/map_event_manager.py:106`。
 
 这类行至少混合以下形状，数据库没有显式枚举：
 
@@ -145,13 +145,13 @@ hero
 
 ### `净网行动` 的不同时间语义
 
-`净网行动` 由加载器选择专用事件管理器，参见 [`map_loader.py:99`](reference-checkout/src/map_handlers/map_loader.py:99)。专用管理器只处理与当前 `count` 相等的行，并用：
+`净网行动` 由加载器选择专用事件管理器，参见固定提交中的 `src/map_handlers/map_loader.py:99`。专用管理器只处理与当前 `count` 相等的行，并用：
 
 ```text
 time_diff = current_countdown_seconds - row_threshold_seconds
 ```
 
-判断即将到达的阶段内倒计时阈值，参见 [`malwarfare_event_manager.py:51`](reference-checkout/src/map_handlers/malwarfare_event_manager.py:51) 与 [`malwarfare_event_manager.py:118`](reference-checkout/src/map_handlers/malwarfare_event_manager.py:118)。`current_count` 和倒计时来自 OCR 数据，而不是普通游戏经过时间，参见 [`game_time_handler.py:44`](reference-checkout/src/game_time_handler.py:44) 与 [`game_time_handler.py:67`](reference-checkout/src/game_time_handler.py:67)。
+判断即将到达的阶段内倒计时阈值，参见固定提交中的 `src/map_handlers/malwarfare_event_manager.py:51` 与 `src/map_handlers/malwarfare_event_manager.py:118`。`current_count` 和倒计时来自 OCR 数据，而不是普通游戏经过时间，参见固定提交中的 `src/game_time_handler.py:44` 与 `src/game_time_handler.py:67`。
 
 固定数据库中的有效 `count_value` 分布为：`0` 两行、`1` 六行、`2` 九行、`3` 七行、`4` 七行。`count=0` 包含识别提示和软件局限说明，不全是可触发的游戏事件。
 
