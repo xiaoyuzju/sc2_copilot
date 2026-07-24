@@ -13,6 +13,14 @@ pub struct NormalizedPoint {
     pub y: f32,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct NormalizedRect {
+    pub left: f32,
+    pub top: f32,
+    pub right: f32,
+    pub bottom: f32,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UnavailableReason {
     CaptureFailed,
@@ -27,10 +35,12 @@ pub enum PingObservation {
     NoEvidence,
     Candidate {
         position: NormalizedPoint,
+        core_bounds: NormalizedRect,
         confidence: f32,
     },
     Confirmed {
         position: NormalizedPoint,
+        core_bounds: NormalizedRect,
         confidence: f32,
     },
 }
@@ -134,11 +144,13 @@ impl MinimapPingRecognizer {
                 if confirmed {
                     PingObservation::Confirmed {
                         position: candidate.position,
+                        core_bounds: candidate.core_bounds,
                         confidence: candidate.confidence,
                     }
                 } else {
                     PingObservation::Candidate {
                         position: candidate.position,
+                        core_bounds: candidate.core_bounds,
                         confidence: candidate.confidence,
                     }
                 }
@@ -161,6 +173,7 @@ struct TrackedCandidate {
 #[derive(Debug, Clone, Copy)]
 struct Candidate {
     position: NormalizedPoint,
+    core_bounds: NormalizedRect,
     confidence: f32,
     pixel_count: u32,
     extent: u32,
@@ -322,6 +335,12 @@ fn score_component(
         position: NormalizedPoint {
             x: (core.center_x() + 0.5) / labels.width() as f32,
             y: (core.center_y() + 0.5) / labels.height() as f32,
+        },
+        core_bounds: NormalizedRect {
+            left: core.min_x as f32 / labels.width() as f32,
+            top: core.min_y as f32 / labels.height() as f32,
+            right: (core.max_x + 1) as f32 / labels.width() as f32,
+            bottom: (core.max_y + 1) as f32 / labels.height() as f32,
         },
         confidence: diamond_score,
         pixel_count: component.pixel_count,

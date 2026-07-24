@@ -6,8 +6,8 @@
 当前对局的语义证据。它不注入游戏进程、不读取进程内存、不模拟输入，也不让截图、
 窗口句柄或图像阈值进入 `sc2-copilot-core`。
 
-首个纵向切片实现小地图红色 ping 识别核心和地图分支证据接入。实时 Windows 采集、
-真实 ROI 标定和自动启用规则在后续切片完成。
+当前纵向切片已接通小地图红色 ping 的 Windows 实时采集、跨帧识别、地图规则和
+控制器分支证据。
 
 ## Architecture
 
@@ -43,29 +43,31 @@ Windows 11 上优先使用 DXGI Desktop Duplication；若目标窗口模式或�
 提供客户区，再评估 Windows Graphics Capture。adapter 负责：
 
 1. 查找 `SC2_x64.exe` 的顶层窗口和所在显示器。
-2. 仅在 6119 表示对局中、当前地图需要视觉证据且 SC2 可见时采集。
-3. 通过 `GetClientRect` 和 `ClientToScreen` 裁出客户区。
-4. 排除 SC2 Copilot 覆盖层，避免自身 UI 污染 ROI。
+2. 仅在 6119 表示对局中、当前地图处于检测时间窗且 SC2 是前台窗口时采集。
+3. 通过 `GetClientRect` 和 `ClientToScreen` 直接定位并只读回小地图 ROI。
+4. 对本进程所有可见顶层窗口设置 `WDA_EXCLUDEFROMCAPTURE`，避免自身 UI 污染 ROI；
+   排除尚未成功时暂停识别，不允许用可能包含覆盖层的画面作“无红点”判定。
 5. 使用容量为一的最新帧槽；消费者落后时丢弃旧帧。
 6. 不默认保存完整截图。显式诊断导出也只允许保存裁剪、脱敏后的 ROI。
 
-采集失败必须产生 `UnavailableReason`，不能伪装成“没有检测到”。
+采集支持 8 位 BGRA/RGBA、10 位 UNORM 和 HDR `R16G16B16A16_FLOAT`；优先请求
+8 位 BGRA，驱动不支持 `DuplicateOutput1` 时回退到兼容的 `DuplicateOutput` 并在
+CPU 端转换。显示模式或 Desktop Duplication 会话失效时丢弃 backend 并在下一次采样
+重建。
+
+采集失败必须产生 `UnavailableReason`，不能伪装成“没有检测到”。规范化 ROI 还要通过
+最小内容校验；纯黑、近乎均匀或尺寸错误的画面返回 `InvalidMinimap`，因此菜单、转场和
+异常读回不会累计有效帧。
 
 ### Coordinate model
 
-坐标 module 输入客户区矩形、DPI、像素尺寸和可选黑边，输出统一的内容矩形与锚定
-ROI。ROI 使用内容边缘锚点，而不是简单按整屏比例缩放：
+当前坐标 module 只接受不小于 1280×720 的严格 16:9 客户区，按 1920×1080 基准
+`(27, 807, 264, 259)` 缩放并归一化回 264×259。1080p、1440p 和 4K 均有确定性测试；
+4K HDR 已在真实 SC2 窗口完成采集冒烟。
 
-```rust
-RoiSpec {
-    anchor: BottomLeft,
-    offset_at_1080p: [i32; 2],
-    size_at_1080p: [u32; 2],
-}
-```
-
-第一批实时支持范围必须由夹具验证后声明；未验证的宽高比、UI 缩放或语言返回
-`UnsupportedLayout`。不会静默套用最接近的坐标。
+非 16:9、低于 720p、旋转显示器会明确返回不支持。黑边与非 100% SC2 UI 缩放尚未
+标定，因此当前发布要求游戏使用无黑边的 16:9 客户区和 100% UI 缩放；内容校验只负责
+拦截空画面，不能替代这些布局约束。
 
 ### Vision module
 
@@ -115,8 +117,15 @@ MinimapPingRecognizer::observe(PingFrame) -> PingObservation
 - `temple-of-the-past`
 - `void-rifts`
 
-真实 ROI、时间窗和位置区域尚未由本项目夹具标定前，不启用实时自动映射。控制器仍
-实现并测试稳定视觉分支证据的优先级：
+实时规则：
+
+- `temple-of-the-past`：03:15–03:20 检查小地图左下区域；确认红点选择
+  `layout-b`，时间窗内至少取得一个有效检测帧且未确认红点则选择 `layout-a`。
+- `void-rifts`：03:00–03:10 检查小地图右侧目标区域；确认红点选择
+  `layout-a`，时间窗内至少取得一个有效检测帧且未确认红点则选择 `layout-b`。
+
+程序在时间窗之后首次看到对局时不会猜测分支；整个窗口都无法截图时也不会把
+“不可用”解释为“无红点”。控制器按以下优先级处理稳定视觉分支证据：
 
 ```text
 Manual > Vision > Default
@@ -137,10 +146,10 @@ Manual > Vision > Default
 
 - 基础采样上限 10 Hz。
 - 红点识别只在目标地图的短时间窗启用。
-- 工作线程最多保留一帧和一份结果。
+- 工作线程不建立帧队列，只保留最新上下文、状态和一份尚未消费的结果。
 - 单次小地图 ROI 检测目标 p95 小于 10 ms。
 - 整条活跃视觉流水线目标 p95 小于 50 ms。
-- 连续采集错误采用有界退避，并发布诊断状态。
+- 采集错误会重置 DXGI backend、清除未确认候选并发布诊断状态；下一次 10 Hz 采样重试。
 
 ## Assets and calibration
 
@@ -161,20 +170,28 @@ Manual > Vision > Default
 - 使用独立生成的 ROI 测试正样本、静态红色对象、单帧噪声、不可用和会话切换。
 - 新增 `AppController::handle_vision`，验证会话、目录和手动优先级。
 
-Phase 1 不读取实时画面，也不自动映射真实地图位置。
+Phase 1 已完成。
 
 ### Phase 2 — capture and coordinates
 
 - 实现 DXGI 最新帧 adapter。
-- 实现客户区、DPI、黑边和锚定 ROI 坐标模型。
-- 覆盖窗口化、无边框、全屏、多显示器和 Alt+Tab 夹具/冒烟测试。
+- 实现 16:9 客户区到规范小地图 ROI 的坐标模型。
+- 覆盖 1080p、1440p、4K、HDR、前台切换和最小化行为。
+
+Phase 2 的 DXGI adapter、16:9 坐标模型、前台/最小化门控、HDR 转换和覆盖层捕获排除
+已完成；非 16:9、旋转显示器和更多窗口模式仍属于兼容性加固。
 
 ### Phase 3 — calibration and live map rules
 
-- 采集两张目标地图的独立正负 ROI。
-- 标定颜色、几何、时间窗和位置区域。
+- 用独立生成的正负 ROI 标定颜色和几何规则。
+- 实现两张目标地图的时间窗和位置区域。
 - 接通 ping 位置到 `layout-a` / `layout-b` 的映射。
 - 在设置和诊断页显示视觉可用性、候选和最终来源。
+
+Phase 3 的两张地图规则、时间窗、有效帧缺席语义、控制器接入和诊断状态已完成。
+虚空撕裂的真实无红点路径已完成端到端验证；实战标定记录见
+[minimap-red-ping.md](calibration/minimap-red-ping.md)。真实目标区域红点和往日神庙
+仍是后续标定项；长期误报/漏报数据在 Phase 4 持续积累。
 
 ### Phase 4 — hardening
 
@@ -183,7 +200,7 @@ Phase 1 不读取实时画面，也不自动映射真实地图位置。
 - 干净 Windows 11 发布包测试。
 - 根据误报/漏报数据决定是否保留纯 Rust 实现或重新评估 OpenCV 对照。
 
-## Phase 1 acceptance criteria
+## Current acceptance criteria
 
 - 一个有效动画 ping 序列进入并保持 `Confirmed`。
 - 单帧 ping 只产生 `Candidate`。
@@ -195,4 +212,8 @@ Phase 1 不读取实时画面，也不自动映射真实地图位置。
 - 新会话不会继承旧候选。
 - 控制器拒绝旧会话、错误地图和未知分支证据。
 - 手动分支不会被视觉证据覆盖；同会话短暂重连时仍保留，换图或新会话时清除。
+- 只有两张目标地图的检测时间窗会启动 DXGI 采集。
+- 时间窗内没有任何有效帧时不发布“无红点”分支；晚于时间窗加入时不猜测。
+- 1080p、1440p 和 4K 小地图坐标通过测试，4K HDR SC2 真实对局 ROI 已通过内容校验。
+- 覆盖层、设置和锁定按钮窗口被排除在 Desktop Duplication 捕获之外。
 - 新增视觉与控制器接入代码通过严格 Clippy，现有全量测试保持通过。

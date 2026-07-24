@@ -1,4 +1,5 @@
 mod alert;
+mod capture;
 mod controller;
 pub mod desktop;
 mod history;
@@ -6,6 +7,8 @@ mod monitor;
 mod platform;
 mod sc2;
 mod settings;
+mod vision;
+mod vision_runtime;
 
 pub use alert::{AlertPlayer, NoopAlertPlayer};
 pub use controller::{
@@ -19,3 +22,4 @@ pub use sc2::{
     Sc2Normalizer, Sc2Observation, Sc2Poll, Sc2PollingHandle, Sc2StateSource,
 };
 pub use settings::{AppSettings, SettingsError, SettingsStore};
+pub use vision::{MapVariantVision, VisionContext};

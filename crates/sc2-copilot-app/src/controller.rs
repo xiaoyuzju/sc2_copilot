@@ -256,6 +256,15 @@ impl AppController {
         self.manual_map_id.as_deref()
     }
 
+    pub fn variant_selection_source_label(&self) -> &'static str {
+        match self.variant_selection_source {
+            None => "未选择",
+            Some(VariantSelectionSource::Default) => "目录默认",
+            Some(VariantSelectionSource::Vision) => "视觉识别",
+            Some(VariantSelectionSource::Manual) => "用户手动",
+        }
+    }
+
     pub(crate) fn observed_session_id(&self) -> Option<&str> {
         self.current_session_id.as_deref()
     }

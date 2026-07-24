@@ -23,10 +23,11 @@ mod windows {
         UI::{
             Shell::{DefSubclassProc, RemoveWindowSubclass, SetWindowSubclass},
             WindowsAndMessaging::{
-                FindWindowExW, FindWindowW, GWL_EXSTYLE, GWLP_HWNDPARENT, GetWindowLongPtrW,
-                GetWindowThreadProcessId, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos, WM_LBUTTONDBLCLK, WM_LBUTTONDOWN,
-                WM_NCDESTROY, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+                EnumWindows, FindWindowExW, FindWindowW, GWL_EXSTYLE, GWLP_HWNDPARENT,
+                GetWindowLongPtrW, GetWindowThreadProcessId, IsWindowVisible, SWP_FRAMECHANGED,
+                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SetWindowDisplayAffinity,
+                SetWindowLongPtrW, SetWindowPos, WDA_EXCLUDEFROMCAPTURE, WM_LBUTTONDBLCLK,
+                WM_LBUTTONDOWN, WM_NCDESTROY, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
             },
         },
     };
@@ -366,6 +367,53 @@ mod windows {
         Ok(true)
     }
 
+    pub fn exclude_process_windows_from_capture() -> Result<usize, String> {
+        struct State {
+            process_id: u32,
+            excluded: usize,
+            error: Option<u32>,
+        }
+
+        unsafe extern "system" fn exclude_window(window: HWND, parameter: LPARAM) -> i32 {
+            let state = unsafe { &mut *(parameter as *mut State) };
+            let mut process_id = 0;
+            unsafe { GetWindowThreadProcessId(window, &mut process_id) };
+            if process_id == state.process_id && unsafe { IsWindowVisible(window) } != 0 {
+                if unsafe { SetWindowDisplayAffinity(window, WDA_EXCLUDEFROMCAPTURE) } == 0 {
+                    state.error.get_or_insert_with(|| unsafe { GetLastError() });
+                } else {
+                    state.excluded += 1;
+                }
+            }
+            1
+        }
+
+        let mut state = State {
+            process_id: std::process::id(),
+            excluded: 0,
+            error: None,
+        };
+        if unsafe {
+            EnumWindows(
+                Some(exclude_window),
+                std::ptr::from_mut(&mut state) as LPARAM,
+            )
+        } == 0
+        {
+            return Err(format!(
+                "枚举覆盖层窗口失败：{}",
+                std::io::Error::last_os_error()
+            ));
+        }
+        if let Some(error) = state.error {
+            return Err(format!(
+                "排除覆盖层画面捕获失败：{}",
+                std::io::Error::from_raw_os_error(error as i32)
+            ));
+        }
+        Ok(state.excluded)
+    }
+
     fn find_window_for_process(title: &str, process_id: u32) -> Option<isize> {
         let title = title.encode_utf16().chain(Some(0)).collect::<Vec<_>>();
         let mut previous = std::ptr::null_mut();
@@ -546,6 +594,12 @@ mod windows {
     pub fn configure_overlay_lock_window(_title: &str, _owner_title: &str) -> Result<bool, String> {
         Ok(true)
     }
+
+    pub fn exclude_process_windows_from_capture() -> Result<usize, String> {
+        Ok(0)
+    }
 }
 
-pub use windows::{PlatformIntegration, configure_overlay_lock_window};
+pub use windows::{
+    PlatformIntegration, configure_overlay_lock_window, exclude_process_windows_from_capture,
+};

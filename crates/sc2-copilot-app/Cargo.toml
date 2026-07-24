@@ -25,10 +25,22 @@ serde_json.workspace = true
 thiserror.workspace = true
 reqwest.workspace = true
 eframe.workspace = true
+image.workspace = true
 
 [target.'cfg(windows)'.dependencies]
 global-hotkey.workspace = true
+half.workspace = true
 tray-icon.workspace = true
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Direct3D",
+    "Win32_Graphics_Direct3D11",
+    "Win32_Graphics_Dxgi",
+    "Win32_Graphics_Dxgi_Common",
+    "Win32_Graphics_Gdi",
+    "Win32_System_Threading",
+    "Win32_UI_WindowsAndMessaging",
+] }
 windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
 
 [build-dependencies]

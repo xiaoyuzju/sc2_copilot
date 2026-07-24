@@ -6,7 +6,12 @@ use sc2_copilot_core::{EngineView, ScheduleCatalog};
 use crate::{
     AlertCard, AppController, AppSettings, ConnectionState, ControllerUpdate, LocalSc2HttpClient,
     NoopAlertPlayer, Sc2PollingHandle, Sc2StateSource, SessionHistory, SettingsStore,
-    platform::{PlatformAction, PlatformIntegration, configure_overlay_lock_window},
+    platform::{
+        PlatformAction, PlatformIntegration, configure_overlay_lock_window,
+        exclude_process_windows_from_capture,
+    },
+    vision::VisionContext,
+    vision_runtime::{VisionRuntime, VisionRuntimeState},
 };
 
 const CATALOG_JSON: &[u8] = include_bytes!(concat!(
@@ -17,6 +22,8 @@ const SETTINGS_VIEWPORT_ID: &str = "sc2-copilot-settings";
 const OVERLAY_LOCK_VIEWPORT_ID: &str = "sc2-copilot-overlay-lock";
 const OVERLAY_WINDOW_TITLE: &str = "SC2 Copilot 覆盖层";
 const ALERT_LIFETIME: Duration = Duration::from_secs(8);
+const VISION_INTERVAL: Duration = Duration::from_millis(100);
+const CAPTURE_EXCLUSION_INTERVAL: Duration = Duration::from_secs(1);
 const OVERLAY_UPCOMING_LIMIT: usize = 3;
 const OVERLAY_LOCK_WINDOW_SIZE: [f32; 2] = [58.0, 32.0];
 const OVERLAY_LOCK_WINDOW_OFFSET: f32 = 8.0;
@@ -153,6 +160,11 @@ struct DesktopApp {
     controller: AppController,
     store: SettingsStore,
     poller: Option<Sc2PollingHandle>,
+    vision: VisionRuntime,
+    vision_status: String,
+    capture_exclusion_status: String,
+    capture_exclusion_ready: bool,
+    last_capture_exclusion_check: Option<Instant>,
     platform: PlatformIntegration,
     alerts: Vec<DesktopAlert>,
     interactive_overlay: bool,
@@ -200,10 +212,17 @@ impl DesktopApp {
                 (None, status)
             }
         };
+        let vision = VisionRuntime::spawn(VISION_INTERVAL);
+        let vision_status = vision.take_latest().status;
         Self {
             controller,
             store,
             poller,
+            vision,
+            vision_status,
+            capture_exclusion_status: "等待窗口初始化".to_owned(),
+            capture_exclusion_ready: false,
+            last_capture_exclusion_check: None,
             platform,
             alerts: Vec::new(),
             interactive_overlay: false,
@@ -226,6 +245,13 @@ impl DesktopApp {
         {
             let update = self.controller.handle_poll(poll);
             self.apply_controller_update(update);
+            self.sync_vision_state();
+        }
+        let vision = self.vision.take_latest();
+        self.vision_status = vision.status;
+        if let Some(update) = vision.update {
+            let update = self.controller.handle_vision(update);
+            self.apply_controller_update(update);
         }
         for action in self.platform.poll_actions() {
             match action {
@@ -238,6 +264,50 @@ impl DesktopApp {
         }
         self.alerts
             .retain(|alert| alert.expires_at > Instant::now());
+    }
+
+    fn sync_vision_state(&self) {
+        let state = match self.controller.connection() {
+            ConnectionState::Menu => VisionRuntimeState::Idle,
+            ConnectionState::Disconnected => VisionRuntimeState::Paused("6119 连接中断".to_owned()),
+            ConnectionState::InGame if !self.capture_exclusion_ready => {
+                VisionRuntimeState::Paused("覆盖层捕获排除尚未就绪".to_owned())
+            }
+            ConnectionState::InGame => {
+                let context = self
+                    .controller
+                    .observed_session_id()
+                    .zip(self.controller.selected_map_id())
+                    .zip(self.controller.observed_game_time_milliseconds())
+                    .map(|((session_id, map_id), game_time_milliseconds)| {
+                        VisionContext::new(session_id, map_id, game_time_milliseconds)
+                    });
+                match context {
+                    Some(context) => VisionRuntimeState::Active(context),
+                    None => VisionRuntimeState::Paused("等待地图识别或手动选择".to_owned()),
+                }
+            }
+        };
+        self.vision.set_state(state);
+    }
+
+    fn refresh_capture_exclusion(&mut self) {
+        let now = Instant::now();
+        if self
+            .last_capture_exclusion_check
+            .is_some_and(|last| now.saturating_duration_since(last) < CAPTURE_EXCLUSION_INTERVAL)
+        {
+            return;
+        }
+        self.last_capture_exclusion_check = Some(now);
+        let (ready, status) = match exclude_process_windows_from_capture() {
+            Ok(0) => (false, "等待窗口初始化".to_owned()),
+            Ok(count) => (true, format!("已排除 {count} 个可见窗口")),
+            Err(error) => (false, format!("不可用：{error}")),
+        };
+        self.capture_exclusion_ready = ready;
+        self.capture_exclusion_status = status;
+        self.sync_vision_state();
     }
 
     fn push_alerts(&mut self, alerts: Vec<AlertCard>) {
@@ -485,9 +555,13 @@ impl DesktopApp {
             section_label(ui, "安全边界");
             ui.label(
                 RichText::new(
-                    "只读本机游戏状态，不截屏、不读取游戏内存、不修改游戏文件，也不模拟输入。",
+                    "只读本机游戏状态；仅在目标地图的短检测时间窗内截取小地图区域，不读取游戏内存、不修改游戏文件，也不模拟输入。",
                 )
                 .color(TEXT_PRIMARY),
+            );
+            ui.label(
+                RichText::new("红点识别要求无黑边 16:9 客户区，并将 SC2 UI 缩放设为 100%。")
+                    .color(TEXT_MUTED),
             );
             ui.label(
                 RichText::new("关闭本窗口后程序继续驻留托盘；可从托盘菜单重新打开或退出。")
@@ -664,6 +738,8 @@ impl DesktopApp {
                 .spacing([24.0, 9.0])
                 .show(ui, |ui| {
                     diagnostic_row(ui, "6119 状态", connection.badge);
+                    diagnostic_row(ui, "视觉识别", &self.vision_status);
+                    diagnostic_row(ui, "覆盖层捕获排除", &self.capture_exclusion_status);
                     diagnostic_row(
                         ui,
                         "会话",
@@ -671,6 +747,11 @@ impl DesktopApp {
                     );
                     diagnostic_row(ui, "地图", self.selected_map_name());
                     diagnostic_row(ui, "地图分支", &variant_name);
+                    diagnostic_row(
+                        ui,
+                        "分支来源",
+                        self.controller.variant_selection_source_label(),
+                    );
                     diagnostic_row(ui, "数据快照", self.controller.snapshot_batch());
                     diagnostic_row(ui, "播放接口", self.controller.player_status());
                     diagnostic_row(ui, "托盘", self.platform.tray_status());
@@ -762,6 +843,7 @@ impl DesktopApp {
         let variants = map.variants.clone();
         let current = self.controller.view().variant_id.clone();
         let mut requested = current.clone();
+        let mut selection_clicked = false;
         let selected_name = current
             .as_deref()
             .and_then(|id| variants.iter().find(|variant| variant.id == id))
@@ -770,12 +852,16 @@ impl DesktopApp {
         egui::ComboBox::from_label("地图分支 / 条件")
             .selected_text(selected_name)
             .show_ui(ui, |ui| {
-                ui.selectable_value(&mut requested, None, "不选择");
+                selection_clicked |= ui
+                    .selectable_value(&mut requested, None, "不选择")
+                    .clicked();
                 for variant in variants {
-                    ui.selectable_value(&mut requested, Some(variant.id), variant.display_name);
+                    selection_clicked |= ui
+                        .selectable_value(&mut requested, Some(variant.id), variant.display_name)
+                        .clicked();
                 }
             });
-        if requested != current {
+        if selection_clicked {
             let update = self.controller.select_variant(requested);
             self.apply_controller_update(update);
         }
@@ -1192,6 +1278,7 @@ fn connection_presentation(connection: ConnectionState) -> ConnectionPresentatio
 impl eframe::App for DesktopApp {
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         self.poll_sources();
+        self.refresh_capture_exclusion();
         if self.quitting {
             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
             return;

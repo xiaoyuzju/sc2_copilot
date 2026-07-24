@@ -37,6 +37,7 @@ pub struct LocalSc2HttpClient {
 impl LocalSc2HttpClient {
     pub fn new(timeout: Duration) -> Result<Self, Sc2EndpointError> {
         let client = reqwest::blocking::Client::builder()
+            .no_proxy()
             .timeout(timeout)
             .build()
             .map_err(|error| Sc2EndpointError::ClientBuild(error.to_string()))?;

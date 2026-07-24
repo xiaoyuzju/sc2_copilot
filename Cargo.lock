@@ -3449,6 +3449,8 @@ version = "0.1.0"
 dependencies = [
  "eframe",
  "global-hotkey",
+ "half",
+ "image",
  "reqwest",
  "sc2-copilot-core",
  "sc2-copilot-vision",
@@ -3458,6 +3460,7 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "tray-icon",
+ "windows",
  "windows-sys 0.61.2",
 ]
 

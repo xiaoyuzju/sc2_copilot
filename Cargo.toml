@@ -21,6 +21,8 @@ reqwest = { version = "0.13", default-features = false, features = ["blocking"] 
 eframe = { version = "0.35", default-features = false, features = ["accesskit", "default_fonts", "wgpu"] }
 image = { version = "0.25", default-features = false }
 imageproc = { version = "0.27", default-features = false }
+half = "2.7"
+windows = "0.62"
 
 [workspace.dependencies.global-hotkey]
 version = "0.8"

@@ -1,5 +1,7 @@
 use image::{Rgb, RgbImage};
-use sc2_copilot_vision::{MinimapPingRecognizer, PingFrame, PingObservation, UnavailableReason};
+use sc2_copilot_vision::{
+    MinimapPingRecognizer, NormalizedRect, PingFrame, PingObservation, UnavailableReason,
+};
 
 #[test]
 fn a_single_ping_frame_with_a_disconnected_center_core_is_only_a_candidate() {
@@ -7,7 +9,18 @@ fn a_single_ping_frame_with_a_disconnected_center_core_is_only_a_candidate() {
     let observation =
         MinimapPingRecognizer::default().observe(PingFrame::available("session-1", 1, &frame));
 
-    assert!(matches!(observation, PingObservation::Candidate { .. }));
+    assert!(matches!(
+        observation,
+        PingObservation::Candidate {
+            core_bounds: NormalizedRect {
+                left: 0.46875,
+                top: 0.4375,
+                right: 0.546875,
+                bottom: 0.515625,
+            },
+            ..
+        }
+    ));
 }
 
 #[test]

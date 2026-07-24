@@ -130,9 +130,14 @@ fn controller_defaults_temple_of_the_past_to_schedule_b_per_session() {
         1_000,
     ));
     assert_eq!(controller.view().variant_id.as_deref(), Some("layout-b"));
+    assert_eq!(controller.variant_selection_source_label(), "目录默认");
     assert!(!controller.view().upcoming_events.is_empty());
 
+    controller.select_variant(Some("layout-b".to_owned()));
+    assert_eq!(controller.variant_selection_source_label(), "用户手动");
+
     controller.select_variant(Some("layout-a".to_owned()));
+    assert_eq!(controller.variant_selection_source_label(), "用户手动");
     controller.handle_poll(in_game(
         "temple-session-1",
         Some("temple-of-the-past"),
@@ -160,6 +165,7 @@ fn controller_applies_a_stable_visual_variant_for_the_current_session() {
     ));
 
     assert_eq!(controller.view().variant_id.as_deref(), Some("layout-a"));
+    assert_eq!(controller.variant_selection_source_label(), "视觉识别");
 }
 
 #[test]
